@@ -37,7 +37,7 @@ extension $MainPageRouteDataExtension on MainPageRouteData {
 // RiverpodGenerator
 // **************************************************************************
 
-String _$routerHash() => r'36ae69802f13492c52f8fdbd966b3c5c6393750d';
+String _$routerHash() => r'b0926d8ed05a078f4925d6593eb5d2aad24d56b2';
 
 /// See also [router].
 @ProviderFor(router)
