@@ -36,6 +36,7 @@ dependencies:
   go_router: ^12.1.1
   sqflite: ^2.3.0
   path: ^1.8.3
+  table_calendar: ^3.0.9
 
 
   # The following adds the Cupertino Icons font to your application.
