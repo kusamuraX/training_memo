@@ -8,6 +8,7 @@ part of 'router.dart';
 
 List<RouteBase> get $appRoutes => [
       $mainPageRouteData,
+      $trainingSelectPageData,
     ];
 
 RouteBase get $mainPageRouteData => GoRouteData.$route(
@@ -33,11 +34,34 @@ extension $MainPageRouteDataExtension on MainPageRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
+RouteBase get $trainingSelectPageData => GoRouteData.$route(
+      path: '/tselect',
+      factory: $TrainingSelectPageDataExtension._fromState,
+    );
+
+extension $TrainingSelectPageDataExtension on TrainingSelectPageData {
+  static TrainingSelectPageData _fromState(GoRouterState state) =>
+      const TrainingSelectPageData();
+
+  String get location => GoRouteData.$location(
+        '/tselect',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$routerHash() => r'b0926d8ed05a078f4925d6593eb5d2aad24d56b2';
+String _$routerHash() => r'7a148586d383d01203f906b7c59e315d16a0eb57';
 
 /// See also [router].
 @ProviderFor(router)

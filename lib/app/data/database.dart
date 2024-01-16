@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'package:path/path.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:training_memo/app/repository/parts_training_info_repository.dart';
 
 import '../repository/body_parts_mst_repository.dart';
 
@@ -20,19 +21,19 @@ part 'database.g.dart';
 //   }
 // }
 
-class PartsTrainingInfo {
-  final int partsTrainingId;
-  final int partsId;
-  final String trainingName;
-  const PartsTrainingInfo({required this.partsTrainingId, required this.partsId, required this.trainingName});
-  Map<String, dynamic> toMap() {
-    return {
-      'parts_training_id': partsTrainingId,
-      'parts_id': partsId,
-      'training_name': trainingName,
-    };
-  }
-}
+// class PartsTrainingInfo {
+//   final int partsTrainingId;
+//   final int partsId;
+//   final String trainingName;
+//   const PartsTrainingInfo({required this.partsTrainingId, required this.partsId, required this.trainingName});
+//   Map<String, dynamic> toMap() {
+//     return {
+//       'parts_training_id': partsTrainingId,
+//       'parts_id': partsId,
+//       'training_name': trainingName,
+//     };
+//   }
+// }
 
 class TrainingDataInfo {
   final int trainingId;
@@ -65,10 +66,11 @@ class AppDataBase {
 
   Future<Database> _init() async {
     return await openDatabase(join(await getDatabasesPath(), 'training_memo.db'), onCreate: (db, version) async {
-      await db.execute('CREATE TABLE body_parts_mst (parts_id INTEGER PRIMARY KEY, parts_name TEXT)');
-      await db.execute('CREATE TABLE parts_training_info (parts_training_id INTEGER PRIMARY KEY, parts_id INTEGER, training_name TEXT)');
+      await db.execute('CREATE TABLE body_parts_mst (partsId INTEGER PRIMARY KEY, partsName TEXT)');
       await db.execute(
-          'CREATE TABLE training_data_info (training_id INTEGER PRIMARY KEY, parts_training_id INTEGER, date TEXT, weight REAL, count INTEGER, memo TEXT)');
+          'CREATE TABLE parts_training_info (partsId INTEGER NOT NULL, partsTrainingId INTEGER NOT NULL, trainingName TEXT, PRIMARY KEY("partsId", "partsTrainingId"))');
+      await db.execute(
+          'CREATE TABLE training_data_info (partsTrainingId INTEGER, date TEXT, weight REAL, count INTEGER, memo TEXT, PRIMARY KEY("partsTrainingId", "date"))');
     }, version: 1);
   }
 
@@ -84,6 +86,18 @@ class AppDataBase {
     return bodyPartsMstList;
   }
 
+  Future<List<PartsTrainingInfo>> insertPartsTrainingInfo(Database db, int tgtPartsId) async {
+    Map<int, List<String>> trainingMap = {0: []};
+    List<PartsTrainingInfo> partsTrainingInfoList = [];
+    // bodyPartsList.asMap().forEach((index, value) {
+    //   partsTrainingInfoList.add(PartsTrainingInfo(partsId: tgtPartsId, partsTrainingId: index, trainingName: value));
+    // });
+    // for (var partsTrainingInfo in partsTrainingInfoList) {
+    //   db.insert('parts_training_info', partsTrainingInfo.toJson(), conflictAlgorithm: ConflictAlgorithm.abort);
+    // }
+    return partsTrainingInfoList;
+  }
+
   Future<List<BodyPartsMst>> retrieveBodyPartsMstList() async {
     final db = await database;
     final List<Map<String, dynamic>> maps = await db.query("body_parts_mst");
@@ -92,8 +106,24 @@ class AppDataBase {
     } else {
       return List.generate(maps.length, (i) {
         return BodyPartsMst(
-          partsId: maps[i]['parts_id'] as int,
-          partsName: maps[i]['parts_name'] as String,
+          partsId: maps[i]['partsId'] as int,
+          partsName: maps[i]['partsName'] as String,
+        );
+      });
+    }
+  }
+
+  Future<List<PartsTrainingInfo>> retrievePartTrainingList(int tgtPartsId) async {
+    final db = await database;
+    final List<Map<String, dynamic>> maps = await db.query("parts_training_info", where: "partsId=?", whereArgs: [tgtPartsId]);
+    if (maps.isEmpty) {
+      return insertPartsTrainingInfo(db, tgtPartsId);
+    } else {
+      return List.generate(maps.length, (i) {
+        return PartsTrainingInfo(
+          partsId: maps[i]['partsId'] as int,
+          partsTrainingId: maps[i]['partsTrainingId'] as int,
+          trainingName: maps[i]['trainingName'] as String,
         );
       });
     }
