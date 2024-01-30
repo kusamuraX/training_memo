@@ -23,6 +23,7 @@ mixin _$PartsTrainingInfo {
   int get partsId => throw _privateConstructorUsedError;
   int get partsTrainingId => throw _privateConstructorUsedError;
   String get trainingName => throw _privateConstructorUsedError;
+  int? get maxRm => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +37,8 @@ abstract class $PartsTrainingInfoCopyWith<$Res> {
           PartsTrainingInfo value, $Res Function(PartsTrainingInfo) then) =
       _$PartsTrainingInfoCopyWithImpl<$Res, PartsTrainingInfo>;
   @useResult
-  $Res call({int partsId, int partsTrainingId, String trainingName});
+  $Res call(
+      {int partsId, int partsTrainingId, String trainingName, int? maxRm});
 }
 
 /// @nodoc
@@ -55,6 +57,7 @@ class _$PartsTrainingInfoCopyWithImpl<$Res, $Val extends PartsTrainingInfo>
     Object? partsId = null,
     Object? partsTrainingId = null,
     Object? trainingName = null,
+    Object? maxRm = freezed,
   }) {
     return _then(_value.copyWith(
       partsId: null == partsId
@@ -69,6 +72,10 @@ class _$PartsTrainingInfoCopyWithImpl<$Res, $Val extends PartsTrainingInfo>
           ? _value.trainingName
           : trainingName // ignore: cast_nullable_to_non_nullable
               as String,
+      maxRm: freezed == maxRm
+          ? _value.maxRm
+          : maxRm // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -81,7 +88,8 @@ abstract class _$$PartsTrainingInfoImplCopyWith<$Res>
       __$$PartsTrainingInfoImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int partsId, int partsTrainingId, String trainingName});
+  $Res call(
+      {int partsId, int partsTrainingId, String trainingName, int? maxRm});
 }
 
 /// @nodoc
@@ -98,6 +106,7 @@ class __$$PartsTrainingInfoImplCopyWithImpl<$Res>
     Object? partsId = null,
     Object? partsTrainingId = null,
     Object? trainingName = null,
+    Object? maxRm = freezed,
   }) {
     return _then(_$PartsTrainingInfoImpl(
       partsId: null == partsId
@@ -112,6 +121,10 @@ class __$$PartsTrainingInfoImplCopyWithImpl<$Res>
           ? _value.trainingName
           : trainingName // ignore: cast_nullable_to_non_nullable
               as String,
+      maxRm: freezed == maxRm
+          ? _value.maxRm
+          : maxRm // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -122,7 +135,8 @@ class _$PartsTrainingInfoImpl implements _PartsTrainingInfo {
   const _$PartsTrainingInfoImpl(
       {required this.partsId,
       required this.partsTrainingId,
-      required this.trainingName});
+      required this.trainingName,
+      this.maxRm});
 
   factory _$PartsTrainingInfoImpl.fromJson(Map<String, dynamic> json) =>
       _$$PartsTrainingInfoImplFromJson(json);
@@ -133,10 +147,12 @@ class _$PartsTrainingInfoImpl implements _PartsTrainingInfo {
   final int partsTrainingId;
   @override
   final String trainingName;
+  @override
+  final int? maxRm;
 
   @override
   String toString() {
-    return 'PartsTrainingInfo(partsId: $partsId, partsTrainingId: $partsTrainingId, trainingName: $trainingName)';
+    return 'PartsTrainingInfo(partsId: $partsId, partsTrainingId: $partsTrainingId, trainingName: $trainingName, maxRm: $maxRm)';
   }
 
   @override
@@ -148,13 +164,14 @@ class _$PartsTrainingInfoImpl implements _PartsTrainingInfo {
             (identical(other.partsTrainingId, partsTrainingId) ||
                 other.partsTrainingId == partsTrainingId) &&
             (identical(other.trainingName, trainingName) ||
-                other.trainingName == trainingName));
+                other.trainingName == trainingName) &&
+            (identical(other.maxRm, maxRm) || other.maxRm == maxRm));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, partsId, partsTrainingId, trainingName);
+      Object.hash(runtimeType, partsId, partsTrainingId, trainingName, maxRm);
 
   @JsonKey(ignore: true)
   @override
@@ -175,7 +192,8 @@ abstract class _PartsTrainingInfo implements PartsTrainingInfo {
   const factory _PartsTrainingInfo(
       {required final int partsId,
       required final int partsTrainingId,
-      required final String trainingName}) = _$PartsTrainingInfoImpl;
+      required final String trainingName,
+      final int? maxRm}) = _$PartsTrainingInfoImpl;
 
   factory _PartsTrainingInfo.fromJson(Map<String, dynamic> json) =
       _$PartsTrainingInfoImpl.fromJson;
@@ -186,6 +204,8 @@ abstract class _PartsTrainingInfo implements PartsTrainingInfo {
   int get partsTrainingId;
   @override
   String get trainingName;
+  @override
+  int? get maxRm;
   @override
   @JsonKey(ignore: true)
   _$$PartsTrainingInfoImplCopyWith<_$PartsTrainingInfoImpl> get copyWith =>

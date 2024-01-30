@@ -10,10 +10,12 @@ _$BodyPartsMstImpl _$$BodyPartsMstImplFromJson(Map<String, dynamic> json) =>
     _$BodyPartsMstImpl(
       partsId: json['partsId'] as int,
       partsName: json['partsName'] as String,
+      lastTrainingDate: json['lastTrainingDate'] as String?,
     );
 
 Map<String, dynamic> _$$BodyPartsMstImplToJson(_$BodyPartsMstImpl instance) =>
     <String, dynamic>{
       'partsId': instance.partsId,
       'partsName': instance.partsName,
+      'lastTrainingDate': instance.lastTrainingDate,
     };

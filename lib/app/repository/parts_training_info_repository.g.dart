@@ -12,6 +12,7 @@ _$PartsTrainingInfoImpl _$$PartsTrainingInfoImplFromJson(
       partsId: json['partsId'] as int,
       partsTrainingId: json['partsTrainingId'] as int,
       trainingName: json['trainingName'] as String,
+      maxRm: json['maxRm'] as int?,
     );
 
 Map<String, dynamic> _$$PartsTrainingInfoImplToJson(
@@ -20,4 +21,5 @@ Map<String, dynamic> _$$PartsTrainingInfoImplToJson(
       'partsId': instance.partsId,
       'partsTrainingId': instance.partsTrainingId,
       'trainingName': instance.trainingName,
+      'maxRm': instance.maxRm,
     };

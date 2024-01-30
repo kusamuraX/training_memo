@@ -9,6 +9,7 @@ part of 'router.dart';
 List<RouteBase> get $appRoutes => [
       $mainPageRouteData,
       $trainingSelectPageData,
+      $trainingPageData,
     ];
 
 RouteBase get $mainPageRouteData => GoRouteData.$route(
@@ -45,6 +46,29 @@ extension $TrainingSelectPageDataExtension on TrainingSelectPageData {
 
   String get location => GoRouteData.$location(
         '/tselect',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $trainingPageData => GoRouteData.$route(
+      path: '/training',
+      factory: $TrainingPageDataExtension._fromState,
+    );
+
+extension $TrainingPageDataExtension on TrainingPageData {
+  static TrainingPageData _fromState(GoRouterState state) =>
+      const TrainingPageData();
+
+  String get location => GoRouteData.$location(
+        '/training',
       );
 
   void go(BuildContext context) => context.go(location);

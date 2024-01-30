@@ -6,7 +6,7 @@ part of 'select_parts.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$selectPartsHash() => r'00a3caaa5f1c4b76e40c7ca9ba8ed9786e125e1e';
+String _$selectPartsHash() => r'53d2056b54507299b0a5b1eaee561624ad16a958';
 
 /// See also [SelectParts].
 @ProviderFor(SelectParts)

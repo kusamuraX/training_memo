@@ -22,6 +22,7 @@ BodyPartsMst _$BodyPartsMstFromJson(Map<String, dynamic> json) {
 mixin _$BodyPartsMst {
   int get partsId => throw _privateConstructorUsedError;
   String get partsName => throw _privateConstructorUsedError;
+  String? get lastTrainingDate => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +36,7 @@ abstract class $BodyPartsMstCopyWith<$Res> {
           BodyPartsMst value, $Res Function(BodyPartsMst) then) =
       _$BodyPartsMstCopyWithImpl<$Res, BodyPartsMst>;
   @useResult
-  $Res call({int partsId, String partsName});
+  $Res call({int partsId, String partsName, String? lastTrainingDate});
 }
 
 /// @nodoc
@@ -53,6 +54,7 @@ class _$BodyPartsMstCopyWithImpl<$Res, $Val extends BodyPartsMst>
   $Res call({
     Object? partsId = null,
     Object? partsName = null,
+    Object? lastTrainingDate = freezed,
   }) {
     return _then(_value.copyWith(
       partsId: null == partsId
@@ -63,6 +65,10 @@ class _$BodyPartsMstCopyWithImpl<$Res, $Val extends BodyPartsMst>
           ? _value.partsName
           : partsName // ignore: cast_nullable_to_non_nullable
               as String,
+      lastTrainingDate: freezed == lastTrainingDate
+          ? _value.lastTrainingDate
+          : lastTrainingDate // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -75,7 +81,7 @@ abstract class _$$BodyPartsMstImplCopyWith<$Res>
       __$$BodyPartsMstImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int partsId, String partsName});
+  $Res call({int partsId, String partsName, String? lastTrainingDate});
 }
 
 /// @nodoc
@@ -91,6 +97,7 @@ class __$$BodyPartsMstImplCopyWithImpl<$Res>
   $Res call({
     Object? partsId = null,
     Object? partsName = null,
+    Object? lastTrainingDate = freezed,
   }) {
     return _then(_$BodyPartsMstImpl(
       partsId: null == partsId
@@ -101,6 +108,10 @@ class __$$BodyPartsMstImplCopyWithImpl<$Res>
           ? _value.partsName
           : partsName // ignore: cast_nullable_to_non_nullable
               as String,
+      lastTrainingDate: freezed == lastTrainingDate
+          ? _value.lastTrainingDate
+          : lastTrainingDate // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -108,7 +119,8 @@ class __$$BodyPartsMstImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$BodyPartsMstImpl implements _BodyPartsMst {
-  const _$BodyPartsMstImpl({required this.partsId, required this.partsName});
+  const _$BodyPartsMstImpl(
+      {required this.partsId, required this.partsName, this.lastTrainingDate});
 
   factory _$BodyPartsMstImpl.fromJson(Map<String, dynamic> json) =>
       _$$BodyPartsMstImplFromJson(json);
@@ -117,10 +129,12 @@ class _$BodyPartsMstImpl implements _BodyPartsMst {
   final int partsId;
   @override
   final String partsName;
+  @override
+  final String? lastTrainingDate;
 
   @override
   String toString() {
-    return 'BodyPartsMst(partsId: $partsId, partsName: $partsName)';
+    return 'BodyPartsMst(partsId: $partsId, partsName: $partsName, lastTrainingDate: $lastTrainingDate)';
   }
 
   @override
@@ -130,12 +144,15 @@ class _$BodyPartsMstImpl implements _BodyPartsMst {
             other is _$BodyPartsMstImpl &&
             (identical(other.partsId, partsId) || other.partsId == partsId) &&
             (identical(other.partsName, partsName) ||
-                other.partsName == partsName));
+                other.partsName == partsName) &&
+            (identical(other.lastTrainingDate, lastTrainingDate) ||
+                other.lastTrainingDate == lastTrainingDate));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, partsId, partsName);
+  int get hashCode =>
+      Object.hash(runtimeType, partsId, partsName, lastTrainingDate);
 
   @JsonKey(ignore: true)
   @override
@@ -154,7 +171,8 @@ class _$BodyPartsMstImpl implements _BodyPartsMst {
 abstract class _BodyPartsMst implements BodyPartsMst {
   const factory _BodyPartsMst(
       {required final int partsId,
-      required final String partsName}) = _$BodyPartsMstImpl;
+      required final String partsName,
+      final String? lastTrainingDate}) = _$BodyPartsMstImpl;
 
   factory _BodyPartsMst.fromJson(Map<String, dynamic> json) =
       _$BodyPartsMstImpl.fromJson;
@@ -163,6 +181,8 @@ abstract class _BodyPartsMst implements BodyPartsMst {
   int get partsId;
   @override
   String get partsName;
+  @override
+  String? get lastTrainingDate;
   @override
   @JsonKey(ignore: true)
   _$$BodyPartsMstImplCopyWith<_$BodyPartsMstImpl> get copyWith =>

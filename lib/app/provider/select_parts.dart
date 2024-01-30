@@ -7,7 +7,7 @@ part 'select_parts.g.dart';
 @riverpod
 class SelectParts extends _$SelectParts {
   @override
-  BodyPartsMst build() => BodyPartsMst(partsId: 0, partsName: '');
+  BodyPartsMst build() => BodyPartsMst(partsId: 0, partsName: '', lastTrainingDate: '-');
 
   void setParts(selectParts) => state = selectParts;
 }
