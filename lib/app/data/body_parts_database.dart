@@ -39,7 +39,7 @@ class BodyPartsDataBase {
     for (var parts in maps) {
       final int partsId = parts['partsId'] as int;
       final List<Map<String, dynamic>> trainingMaps =
-          await db.query("training_data_info", where: "partsId=?", whereArgs: [partsId], orderBy: "date DESC");
+          await db.query("training_data_info", where: "partsId=? AND rm IS NOT NULL", whereArgs: [partsId], orderBy: "date DESC", limit: 1);
       if (trainingMaps.isEmpty) {
         lastTrainingDateMaps[partsId] = '-';
       } else {

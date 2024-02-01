@@ -2,6 +2,8 @@
 made with Flutter + riverpod + sqlite
 
 ## TODO
+- 全体
+  - 色
 - メイン
   - サマリ情報表示
 - 履歴

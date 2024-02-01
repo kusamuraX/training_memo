@@ -44,6 +44,9 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       title: Text(title),
+      bottomOpacity: 0.0,
+      elevation: 0.0,
+      backgroundColor: Theme.of(context).primaryColor,
     );
   }
 
@@ -72,10 +75,13 @@ class _PartsSelectWidget extends ConsumerWidget {
             children: [
               Container(
                 padding: EdgeInsets.all(8),
-                color: Color.fromARGB(255, 119, 180, 255),
+                color: Theme.of(context).primaryColor,
                 height: 250,
                 width: double.infinity,
-                child: Text("本日：$todayStr"),
+                child: Text(
+                  "本日：$todayStr",
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
               Expanded(
                 child: Padding(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:training_memo/app/data/parts_training_database.dart';
+import 'package:training_memo/app/provider/prev_training_data.dart';
 import 'package:training_memo/app/provider/training_data.dart';
 import 'package:training_memo/app/repository/body_parts_mst_repository.dart';
 
@@ -29,6 +30,9 @@ class TrainingSelectPageAppBar extends StatelessWidget implements PreferredSizeW
   Widget build(BuildContext context) {
     return AppBar(
       title: Text("$partsNameトレーニング"),
+      bottomOpacity: 0.0,
+      elevation: 0.0,
+      backgroundColor: Theme.of(context).primaryColor,
     );
   }
 
@@ -54,7 +58,6 @@ class _TrainingSelectWidget extends ConsumerWidget {
                 child: Container(
                   padding: EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 24, 52, 76),
                     border: Border(
                       bottom: BorderSide(width: 1.0, color: Colors.grey),
                     ),
@@ -64,11 +67,11 @@ class _TrainingSelectWidget extends ConsumerWidget {
                       children: [
                         Text(
                           dataSnapshot.data![index].trainingName,
-                          style: TextStyle(fontSize: 22, color: Colors.white),
+                          style: TextStyle(fontSize: 22, color: Colors.black),
                         ),
                         Text(
                           "最大RM：${dataSnapshot.data![index].maxRm ?? "-"}㎏",
-                          style: TextStyle(fontSize: 12, color: Colors.white),
+                          style: TextStyle(fontSize: 12, color: Colors.black),
                         ),
                       ],
                     ),
@@ -76,6 +79,9 @@ class _TrainingSelectWidget extends ConsumerWidget {
                 ),
                 onTap: () {
                   ref.watch(trainingDataProvider.notifier).getAll(dataSnapshot.data![index].partsId, dataSnapshot.data![index].partsTrainingId, date);
+                  ref
+                      .watch(prevTrainingDataProvider.notifier)
+                      .getAll(dataSnapshot.data![index].partsId, dataSnapshot.data![index].partsTrainingId, date);
                   GoRouter.of(context).push('/training', extra: {'training': dataSnapshot.data![index], 'date': date});
                 },
               );

@@ -70,7 +70,7 @@ class PartsTrainingDataBase {
     if (maps.isEmpty) {
       return initPartsTrainingInfo(db, tgtPartsId);
     } else {
-      return List.generate(maps.length, (i) {
+      final partsTrainingInfoList = List.generate(maps.length, (i) {
         final int partsTrainingId = maps[i]['partsTrainingId'] as int;
         return PartsTrainingInfo(
           partsId: maps[i]['partsId'] as int,
@@ -79,6 +79,8 @@ class PartsTrainingDataBase {
           maxRm: maxRmMaps[partsTrainingId],
         );
       });
+      partsTrainingInfoList.sort(((a, b) => a.maxRm == null ? 1 : 0));
+      return partsTrainingInfoList;
     }
   }
 }

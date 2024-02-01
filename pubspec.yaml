@@ -94,6 +94,10 @@ flutter:
   #       - asset: fonts/Schyler-Regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
+    - family: NotoSerifJP
+      fonts:
+        - asset: assets/fonts/NotoSerifJP-Regular.otf
+          weight: 400
     - family: ReggaeOne
       fonts:
         - asset: assets/fonts/ReggaeOne-Regular.ttf

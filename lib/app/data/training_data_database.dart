@@ -102,4 +102,30 @@ class TrainingDataBase {
           memo: maps[i]['memo'] as String?);
     });
   }
+
+  /// 前回のトレーニング取得
+  Future<List<TrainingInfo>> retrievePrevTrainingList(int tgtPartsId, int tgtPartsTrainingId, String tgtDate) async {
+    final db = await database;
+    final List<Map<String, dynamic>> prevDataMaps = await db.query("training_data_info",
+        where: "partsId=? AND partsTrainingId=? AND date<? AND rm IS NOT NULL",
+        whereArgs: [tgtPartsId, tgtPartsTrainingId, tgtDate],
+        limit: 1,
+        orderBy: "date DESC");
+    if (prevDataMaps.isEmpty) {
+      return [];
+    }
+    final List<Map<String, dynamic>> maps = await db.query("training_data_info",
+        where: "partsId=? AND partsTrainingId=? AND date=? AND rm IS NOT NULL", whereArgs: [tgtPartsId, tgtPartsTrainingId, prevDataMaps[0]['date']]);
+    return List.generate(maps.length, (i) {
+      return TrainingInfo(
+          partsId: maps[i]['partsId'] as int,
+          partsTrainingId: maps[i]['partsTrainingId'] as int,
+          date: maps[i]['date'] as String,
+          trainingId: maps[i]['trainingId'] as int,
+          weight: maps[i]['weight'] as double?,
+          count: maps[i]['count'] as int?,
+          rm: maps[i]['rm'] as int?,
+          memo: maps[i]['memo'] as String?);
+    });
+  }
 }

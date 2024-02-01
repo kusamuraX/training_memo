@@ -12,7 +12,7 @@ class App extends ConsumerWidget {
     final router = ref.watch(routerProvider);
     return MaterialApp.router(
       title: 'Muscular',
-      theme: ThemeData(fontFamily: 'ReggaeOne'),
+      theme: ThemeData(fontFamily: 'NotoSerifJP'),
       routerConfig: router,
     );
   }
