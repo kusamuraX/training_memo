@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
-import 'package:table_calendar/table_calendar.dart';
 import 'package:training_memo/app/data/body_parts_database.dart';
+import 'package:training_memo/app/history_page.dart';
 import 'package:training_memo/app/provider/tab_index.dart';
 
 class MainPage extends ConsumerWidget {
@@ -139,22 +139,6 @@ class _PartsSelectWidget extends ConsumerWidget {
           );
         }
       },
-    );
-  }
-}
-
-class HistoryBody extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return TableCalendar(
-      locale: 'ja_JP',
-      firstDay: DateTime.utc(2023, 1, 1),
-      lastDay: DateTime.utc(2030, 12, 31),
-      focusedDay: DateTime.now(),
-      headerStyle: HeaderStyle(
-        formatButtonVisible: false,
-        titleCentered: true,
-      ),
     );
   }
 }
