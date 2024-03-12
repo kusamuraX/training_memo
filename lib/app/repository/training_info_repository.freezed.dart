@@ -23,7 +23,7 @@ mixin _$TrainingInfo {
   int get partsId => throw _privateConstructorUsedError;
   int get partsTrainingId => throw _privateConstructorUsedError;
   int get trainingId => throw _privateConstructorUsedError;
-  String get date => throw _privateConstructorUsedError;
+  DateTime get date => throw _privateConstructorUsedError;
   double? get weight => throw _privateConstructorUsedError;
   int? get count => throw _privateConstructorUsedError;
   int? get rm => throw _privateConstructorUsedError;
@@ -45,7 +45,7 @@ abstract class $TrainingInfoCopyWith<$Res> {
       {int partsId,
       int partsTrainingId,
       int trainingId,
-      String date,
+      DateTime date,
       double? weight,
       int? count,
       int? rm,
@@ -90,7 +90,7 @@ class _$TrainingInfoCopyWithImpl<$Res, $Val extends TrainingInfo>
       date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTime,
       weight: freezed == weight
           ? _value.weight
           : weight // ignore: cast_nullable_to_non_nullable
@@ -123,7 +123,7 @@ abstract class _$$TrainingInfoImplCopyWith<$Res>
       {int partsId,
       int partsTrainingId,
       int trainingId,
-      String date,
+      DateTime date,
       double? weight,
       int? count,
       int? rm,
@@ -166,7 +166,7 @@ class __$$TrainingInfoImplCopyWithImpl<$Res>
       date: null == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTime,
       weight: freezed == weight
           ? _value.weight
           : weight // ignore: cast_nullable_to_non_nullable
@@ -210,7 +210,7 @@ class _$TrainingInfoImpl implements _TrainingInfo {
   @override
   final int trainingId;
   @override
-  final String date;
+  final DateTime date;
   @override
   final double? weight;
   @override
@@ -266,7 +266,7 @@ abstract class _TrainingInfo implements TrainingInfo {
       {required final int partsId,
       required final int partsTrainingId,
       required final int trainingId,
-      required final String date,
+      required final DateTime date,
       final double? weight,
       final int? count,
       final int? rm,
@@ -282,7 +282,7 @@ abstract class _TrainingInfo implements TrainingInfo {
   @override
   int get trainingId;
   @override
-  String get date;
+  DateTime get date;
   @override
   double? get weight;
   @override

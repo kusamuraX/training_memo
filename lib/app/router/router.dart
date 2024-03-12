@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:training_memo/app/data/database.dart';
 import 'package:training_memo/app/main_page.dart';
 import 'package:training_memo/app/repository/body_parts_mst_repository.dart';
 import 'package:training_memo/app/repository/parts_training_info_repository.dart';
+import 'package:training_memo/app/settings_page.dart';
 import 'package:training_memo/app/training_page.dart';
 import 'package:training_memo/app/training_select_page.dart';
 
@@ -35,7 +37,7 @@ class TrainingSelectPageData extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     Map<String, Object> argMap = state.extra as Map<String, Object>;
-    return TrainingSelectPage(argMap['parts'] as BodyPartsMst, argMap['date'] as String);
+    return TrainingSelectPage(argMap['parts'] as BodyPartsMst, argMap['date'] as DateTime);
   }
 }
 
@@ -46,6 +48,28 @@ class TrainingPageData extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     Map<String, Object> argMap = state.extra as Map<String, Object>;
-    return TrainingPage(argMap['training'] as PartsTrainingInfo, argMap['date'] as String);
+    return TrainingPage(argMap['training'] as PartsTrainingMenuInfo, argMap['date'] as DateTime);
+  }
+}
+
+@TypedGoRoute<SettingPartsSelectPageData>(path: '/setting-parts-select')
+class SettingPartsSelectPageData extends GoRouteData {
+  const SettingPartsSelectPageData();
+  // 設定 - 部位選択
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return SettingPartsSelectPage();
+  }
+}
+
+@TypedGoRoute<SettingTrainingPageData>(path: '/edit-training')
+class SettingTrainingPageData extends GoRouteData {
+  const SettingTrainingPageData();
+  // 設定 - トレーニング編集
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    Map<String, Object> argMap = state.extra as Map<String, Object>;
+    final partsInfo = argMap['partsInfo'] as BodyPartsInfoData;
+    return EditTrainingPage(partsInfo.partsId, partsInfo.partsName);
   }
 }

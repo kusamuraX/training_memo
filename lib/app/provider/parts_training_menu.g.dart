@@ -1,12 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'prev_training_data.dart';
+part of 'parts_training_menu.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$prevTrainingDataHash() => r'06af6f2a7ec4275f46739bf575d3328180b353bd';
+String _$partsTrainingMenuListHash() =>
+    r'b28303fdbc013dff0d17db81a6f8926f234bdb82';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -29,39 +30,34 @@ class _SystemHash {
   }
 }
 
-/// See also [prevTrainingData].
-@ProviderFor(prevTrainingData)
-const prevTrainingDataProvider = PrevTrainingDataFamily();
+/// See also [partsTrainingMenuList].
+@ProviderFor(partsTrainingMenuList)
+const partsTrainingMenuListProvider = PartsTrainingMenuListFamily();
 
-/// See also [prevTrainingData].
-class PrevTrainingDataFamily extends Family<AsyncValue<List<TrainingInfo>>> {
-  /// See also [prevTrainingData].
-  const PrevTrainingDataFamily();
+/// See also [partsTrainingMenuList].
+class PartsTrainingMenuListFamily
+    extends Family<AsyncValue<List<PartsTrainingMenuInfo>>> {
+  /// See also [partsTrainingMenuList].
+  const PartsTrainingMenuListFamily();
 
-  /// See also [prevTrainingData].
-  PrevTrainingDataProvider call(
+  /// See also [partsTrainingMenuList].
+  PartsTrainingMenuListProvider call(
     AppDataBase database,
     int partsId,
-    int trainingId,
-    DateTime date,
   ) {
-    return PrevTrainingDataProvider(
+    return PartsTrainingMenuListProvider(
       database,
       partsId,
-      trainingId,
-      date,
     );
   }
 
   @override
-  PrevTrainingDataProvider getProviderOverride(
-    covariant PrevTrainingDataProvider provider,
+  PartsTrainingMenuListProvider getProviderOverride(
+    covariant PartsTrainingMenuListProvider provider,
   ) {
     return call(
       provider.database,
       provider.partsId,
-      provider.trainingId,
-      provider.date,
     );
   }
 
@@ -77,42 +73,36 @@ class PrevTrainingDataFamily extends Family<AsyncValue<List<TrainingInfo>>> {
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'prevTrainingDataProvider';
+  String? get name => r'partsTrainingMenuListProvider';
 }
 
-/// See also [prevTrainingData].
-class PrevTrainingDataProvider
-    extends AutoDisposeFutureProvider<List<TrainingInfo>> {
-  /// See also [prevTrainingData].
-  PrevTrainingDataProvider(
+/// See also [partsTrainingMenuList].
+class PartsTrainingMenuListProvider
+    extends AutoDisposeFutureProvider<List<PartsTrainingMenuInfo>> {
+  /// See also [partsTrainingMenuList].
+  PartsTrainingMenuListProvider(
     AppDataBase database,
     int partsId,
-    int trainingId,
-    DateTime date,
   ) : this._internal(
-          (ref) => prevTrainingData(
-            ref as PrevTrainingDataRef,
+          (ref) => partsTrainingMenuList(
+            ref as PartsTrainingMenuListRef,
             database,
             partsId,
-            trainingId,
-            date,
           ),
-          from: prevTrainingDataProvider,
-          name: r'prevTrainingDataProvider',
+          from: partsTrainingMenuListProvider,
+          name: r'partsTrainingMenuListProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$prevTrainingDataHash,
-          dependencies: PrevTrainingDataFamily._dependencies,
+                  : _$partsTrainingMenuListHash,
+          dependencies: PartsTrainingMenuListFamily._dependencies,
           allTransitiveDependencies:
-              PrevTrainingDataFamily._allTransitiveDependencies,
+              PartsTrainingMenuListFamily._allTransitiveDependencies,
           database: database,
           partsId: partsId,
-          trainingId: trainingId,
-          date: date,
         );
 
-  PrevTrainingDataProvider._internal(
+  PartsTrainingMenuListProvider._internal(
     super._createNotifier, {
     required super.name,
     required super.dependencies,
@@ -121,23 +111,21 @@ class PrevTrainingDataProvider
     required super.from,
     required this.database,
     required this.partsId,
-    required this.trainingId,
-    required this.date,
   }) : super.internal();
 
   final AppDataBase database;
   final int partsId;
-  final int trainingId;
-  final DateTime date;
 
   @override
   Override overrideWith(
-    FutureOr<List<TrainingInfo>> Function(PrevTrainingDataRef provider) create,
+    FutureOr<List<PartsTrainingMenuInfo>> Function(
+            PartsTrainingMenuListRef provider)
+        create,
   ) {
     return ProviderOverride(
       origin: this,
-      override: PrevTrainingDataProvider._internal(
-        (ref) => create(ref as PrevTrainingDataRef),
+      override: PartsTrainingMenuListProvider._internal(
+        (ref) => create(ref as PartsTrainingMenuListRef),
         from: from,
         name: null,
         dependencies: null,
@@ -145,24 +133,21 @@ class PrevTrainingDataProvider
         debugGetCreateSourceHash: null,
         database: database,
         partsId: partsId,
-        trainingId: trainingId,
-        date: date,
       ),
     );
   }
 
   @override
-  AutoDisposeFutureProviderElement<List<TrainingInfo>> createElement() {
-    return _PrevTrainingDataProviderElement(this);
+  AutoDisposeFutureProviderElement<List<PartsTrainingMenuInfo>>
+      createElement() {
+    return _PartsTrainingMenuListProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is PrevTrainingDataProvider &&
+    return other is PartsTrainingMenuListProvider &&
         other.database == database &&
-        other.partsId == partsId &&
-        other.trainingId == trainingId &&
-        other.date == date;
+        other.partsId == partsId;
   }
 
   @override
@@ -170,40 +155,30 @@ class PrevTrainingDataProvider
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
     hash = _SystemHash.combine(hash, database.hashCode);
     hash = _SystemHash.combine(hash, partsId.hashCode);
-    hash = _SystemHash.combine(hash, trainingId.hashCode);
-    hash = _SystemHash.combine(hash, date.hashCode);
 
     return _SystemHash.finish(hash);
   }
 }
 
-mixin PrevTrainingDataRef on AutoDisposeFutureProviderRef<List<TrainingInfo>> {
+mixin PartsTrainingMenuListRef
+    on AutoDisposeFutureProviderRef<List<PartsTrainingMenuInfo>> {
   /// The parameter `database` of this provider.
   AppDataBase get database;
 
   /// The parameter `partsId` of this provider.
   int get partsId;
-
-  /// The parameter `trainingId` of this provider.
-  int get trainingId;
-
-  /// The parameter `date` of this provider.
-  DateTime get date;
 }
 
-class _PrevTrainingDataProviderElement
-    extends AutoDisposeFutureProviderElement<List<TrainingInfo>>
-    with PrevTrainingDataRef {
-  _PrevTrainingDataProviderElement(super.provider);
+class _PartsTrainingMenuListProviderElement
+    extends AutoDisposeFutureProviderElement<List<PartsTrainingMenuInfo>>
+    with PartsTrainingMenuListRef {
+  _PartsTrainingMenuListProviderElement(super.provider);
 
   @override
-  AppDataBase get database => (origin as PrevTrainingDataProvider).database;
+  AppDataBase get database =>
+      (origin as PartsTrainingMenuListProvider).database;
   @override
-  int get partsId => (origin as PrevTrainingDataProvider).partsId;
-  @override
-  int get trainingId => (origin as PrevTrainingDataProvider).trainingId;
-  @override
-  DateTime get date => (origin as PrevTrainingDataProvider).date;
+  int get partsId => (origin as PartsTrainingMenuListProvider).partsId;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

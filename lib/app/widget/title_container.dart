@@ -3,10 +3,20 @@ import 'package:flutter/material.dart';
 class TitleContaier extends StatelessWidget {
   final String title;
   final Widget child;
-  final double padding;
+  final EdgeInsetsGeometry padding;
   final Color bgColor;
+  final BoxDecoration? decoration;
+  final Color titleTextColor;
 
-  const TitleContaier({super.key, required this.title, required this.child, this.padding = 8, this.bgColor = Colors.blueAccent});
+  const TitleContaier({
+    super.key,
+    required this.title,
+    required this.child,
+    this.padding = const EdgeInsets.all(8),
+    this.bgColor = Colors.blueAccent,
+    this.decoration,
+    this.titleTextColor = Colors.white,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,11 +24,12 @@ class TitleContaier extends StatelessWidget {
       children: [
         Container(
           margin: EdgeInsets.only(top: 10),
-          padding: EdgeInsets.all(padding),
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.white, width: 1),
-            borderRadius: BorderRadius.circular(4.0),
-          ),
+          padding: padding,
+          decoration: decoration ??
+              BoxDecoration(
+                border: Border.all(color: Colors.white, width: 1),
+                borderRadius: BorderRadius.circular(4.0),
+              ),
           child: child,
         ),
         Positioned(
@@ -32,7 +43,7 @@ class TitleContaier extends StatelessWidget {
               color: bgColor,
               child: Text(
                 title,
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: titleTextColor),
               ),
             ),
           ),

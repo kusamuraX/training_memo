@@ -6,7 +6,7 @@ part 'select_date.g.dart';
 @riverpod
 class SelectDate extends _$SelectDate {
   @override
-  DateTime build() => DateTime.now().add(Duration(days: 1));
+  DateTime build() => DateTime.now();
 
   void changeDate(DateTime newDate) => state = newDate;
 }

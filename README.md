@@ -1,5 +1,5 @@
 # 筋トレ記録アプリ
-made with Flutter + riverpod + sqlite
+used (riverpod + go_router + drift)
 
 ## TODO
 - 全体

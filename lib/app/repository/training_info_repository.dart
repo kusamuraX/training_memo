@@ -9,7 +9,7 @@ class TrainingInfo with _$TrainingInfo {
       {required int partsId,
       required int partsTrainingId,
       required int trainingId,
-      required String date,
+      required DateTime date,
       double? weight,
       int? count,
       int? rm,

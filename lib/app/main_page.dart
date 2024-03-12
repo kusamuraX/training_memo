@@ -1,10 +1,12 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:intl/intl.dart';
-import 'package:training_memo/app/data/body_parts_database.dart';
+import 'package:training_memo/app/data/database.dart';
 import 'package:training_memo/app/history_page.dart';
+import 'package:training_memo/app/provider/main_page_data.dart';
 import 'package:training_memo/app/provider/tab_index.dart';
+import 'package:training_memo/app/settings_page.dart';
 
 class MainPage extends ConsumerWidget {
   @override
@@ -30,7 +32,9 @@ class MainPage extends ConsumerWidget {
           ),
         ],
         currentIndex: ref.watch(tabIndexProvider),
-        onTap: (value) => ref.read(tabIndexProvider.notifier).setIndex(value),
+        onTap: (value) async {
+          ref.read(tabIndexProvider.notifier).setIndex(value);
+        },
       ),
     );
   }
@@ -43,10 +47,12 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text(title),
+      title: Text(
+        title,
+        style: TextStyle(color: Colors.white),
+      ),
       bottomOpacity: 0.0,
       elevation: 0.0,
-      backgroundColor: Theme.of(context).primaryColor,
     );
   }
 
@@ -64,37 +70,98 @@ class MainBody extends StatelessWidget {
 class _PartsSelectWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final today = DateTime.now();
-    final todayStr = DateFormat('yyyy-MM-dd').format(today);
-    final databaseProvider = ref.watch(bodyPartsDataBaseProvider);
-    return FutureBuilder(
-      future: databaseProvider.retrieveBodyPartsMstList(today),
-      builder: (ctx, dataSnapshot) {
-        if (dataSnapshot.connectionState == ConnectionState.done) {
-          return Column(
-            children: [
-              Container(
-                padding: EdgeInsets.all(8),
-                color: Theme.of(context).primaryColor,
-                height: 250,
-                width: double.infinity,
-                child: Text(
-                  "本日：$todayStr",
+    final today = DateUtils.dateOnly(DateTime.now());
+    final db = ref.watch(appDataBaseProvider);
+    final mainPageDataAsyncValue = ref.watch(mainPageDataProvider.call(db, today));
+    return Column(
+      children: [
+        Container(
+          padding: EdgeInsets.all(8),
+          color: Theme.of(context).primaryColor,
+          height: 280,
+          width: double.infinity,
+          child: mainPageDataAsyncValue.when(
+            data: (data) {
+              return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Text(
+                  "今週の総挙上重量：${data.weekWeightList[0].totalWeight()} t",
                   style: TextStyle(color: Colors.white),
                 ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: EdgeInsets.all(4),
-                  child: GridView.count(
-                    crossAxisCount: 3,
-                    crossAxisSpacing: 4,
-                    mainAxisSpacing: 4,
-                    children: List.generate(dataSnapshot.data!.length, (index) {
+                Text(
+                  "先週の総挙上重量：${data.weekWeightList[1].totalWeight()} t",
+                  style: TextStyle(color: Colors.white70, fontSize: 12),
+                ),
+                SizedBox(
+                  height: 12,
+                ),
+                Container(
+                  height: 200,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.white, width: 1),
+                    borderRadius: BorderRadius.circular(4.0),
+                  ),
+                  child: BarChart(
+                    BarChartData(
+                      maxY: data.maxScale,
+                      titlesData: titlesData,
+                      borderData: FlBorderData(show: false),
+                      gridData: const FlGridData(show: true),
+                      alignment: BarChartAlignment.spaceAround,
+                      barGroups: List.generate(
+                        bodyPartsList.length,
+                        (index) {
+                          return BarChartGroupData(
+                            x: index,
+                            barRods: [
+                              BarChartRodData(toY: data.weekWeightList[1].valueOfindex(index), color: Colors.blue),
+                              BarChartRodData(toY: data.weekWeightList[0].valueOfindex(index), color: Colors.cyanAccent, width: 14),
+                            ],
+                            showingTooltipIndicators: [1],
+                          );
+                        },
+                      ),
+                      barTouchData: BarTouchData(
+                        enabled: true,
+                        touchTooltipData: BarTouchTooltipData(
+                          tooltipBgColor: Colors.transparent,
+                          tooltipPadding: const EdgeInsets.only(left: 4, right: 4, top: 4),
+                          tooltipMargin: 2,
+                          getTooltipItem: (group, groupIndex, rod, rodIndex) {
+                            return BarTooltipItem(
+                              '${rod.toY.toString()} t',
+                              const TextStyle(fontSize: 12),
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ]);
+            },
+            error: (error, stackTrace) => Text('Error: $error'),
+            loading: () => Text(
+              "今週の総重量：0 kg",
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        ),
+        Expanded(
+          child: Padding(
+            padding: EdgeInsets.all(4),
+            child: mainPageDataAsyncValue.when(
+              data: (mainPageData) {
+                return GridView.count(
+                  crossAxisCount: 3,
+                  crossAxisSpacing: 4,
+                  mainAxisSpacing: 4,
+                  children: List.generate(
+                    mainPageData.bodyPartsList.length,
+                    (index) {
                       return GestureDetector(
                         child: Container(
                           decoration: BoxDecoration(
-                            color: Colors.blueGrey,
+                            color: Theme.of(context).primaryColor,
                             border: Border.all(width: 1.0, color: Colors.grey),
                             borderRadius: BorderRadius.circular(8),
                           ),
@@ -104,93 +171,68 @@ class _PartsSelectWidget extends ConsumerWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  dataSnapshot.data![index].partsName,
+                                  mainPageData.bodyPartsList[index].partsName,
                                   style: TextStyle(
                                     fontSize: 32,
-                                    color: Colors.white,
                                   ),
                                 ),
                                 Text(
-                                  "前回：${dataSnapshot.data![index].lastTrainingDate ?? "-"}",
+                                  "前回：${mainPageData.bodyPartsList[index].lastTrainingDate ?? "-"}",
                                   style: TextStyle(
                                     fontSize: 12,
-                                    color: Colors.white,
                                   ),
                                 ),
                               ],
                             ),
                           ),
                         ),
-                        onTap: () => GoRouter.of(context).push('/tselect', extra: {'parts': dataSnapshot.data![index], 'date': todayStr}),
+                        onTap: () => GoRouter.of(context).push('/tselect', extra: {'parts': mainPageData.bodyPartsList[index], 'date': today}),
                       );
-                    }),
+                    },
                   ),
-                ),
+                );
+              },
+              loading: () => Center(
+                child: CircularProgressIndicator(),
               ),
-            ],
-          );
-        } else if (dataSnapshot.connectionState == ConnectionState.waiting) {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        } else {
-          return Center(
-            child: Text('error'),
-          );
-        }
-      },
+              error: (error, stackTrace) => Text('Error: $error'),
+            ),
+          ),
+        ),
+      ],
     );
   }
-}
 
-class SettingBody extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return _SettingSelectWidget();
-  }
-}
+  FlTitlesData get titlesData => FlTitlesData(
+        show: true,
+        bottomTitles: AxisTitles(
+          sideTitles: SideTitles(
+            showTitles: true,
+            reservedSize: 30,
+            getTitlesWidget: getTitles,
+          ),
+        ),
+        leftTitles: const AxisTitles(
+          sideTitles: SideTitles(showTitles: false),
+        ),
+        topTitles: const AxisTitles(
+          sideTitles: SideTitles(showTitles: false),
+        ),
+        rightTitles: const AxisTitles(
+          sideTitles: SideTitles(showTitles: false),
+        ),
+      );
 
-class _SettingSelectWidget extends ConsumerWidget {
-  final formKey = GlobalKey<FormState>();
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return TextButton(
-      onPressed: () {
-        showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: const Text('部位名'),
-              content: Form(
-                key: formKey,
-                child: TextFormField(
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return '必須です';
-                    }
-                    return null;
-                  },
-                ),
-              ),
-              actions: [
-                TextButton(
-                  child: Text("キャンセル"),
-                  onPressed: () => Navigator.pop(context),
-                ),
-                TextButton(
-                  child: Text("追加"),
-                  onPressed: () {
-                    if (formKey.currentState!.validate()) {
-                      Navigator.pop(context);
-                    }
-                  },
-                ),
-              ],
-            );
-          },
-        );
-      },
-      child: Text('setting'),
+  Widget getTitles(double value, TitleMeta meta) {
+    final style = TextStyle(
+      fontWeight: FontWeight.bold,
+      fontSize: 14,
+    );
+    String text = bodyPartsList[value.toInt()];
+    return SideTitleWidget(
+      axisSide: meta.axisSide,
+      space: 4,
+      child: Text(text, style: style),
     );
   }
 }

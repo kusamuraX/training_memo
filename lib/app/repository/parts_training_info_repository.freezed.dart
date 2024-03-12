@@ -14,12 +14,13 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-PartsTrainingInfo _$PartsTrainingInfoFromJson(Map<String, dynamic> json) {
+PartsTrainingMenuInfo _$PartsTrainingMenuInfoFromJson(
+    Map<String, dynamic> json) {
   return _PartsTrainingInfo.fromJson(json);
 }
 
 /// @nodoc
-mixin _$PartsTrainingInfo {
+mixin _$PartsTrainingMenuInfo {
   int get partsId => throw _privateConstructorUsedError;
   int get partsTrainingId => throw _privateConstructorUsedError;
   String get trainingName => throw _privateConstructorUsedError;
@@ -27,24 +28,25 @@ mixin _$PartsTrainingInfo {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $PartsTrainingInfoCopyWith<PartsTrainingInfo> get copyWith =>
+  $PartsTrainingMenuInfoCopyWith<PartsTrainingMenuInfo> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $PartsTrainingInfoCopyWith<$Res> {
-  factory $PartsTrainingInfoCopyWith(
-          PartsTrainingInfo value, $Res Function(PartsTrainingInfo) then) =
-      _$PartsTrainingInfoCopyWithImpl<$Res, PartsTrainingInfo>;
+abstract class $PartsTrainingMenuInfoCopyWith<$Res> {
+  factory $PartsTrainingMenuInfoCopyWith(PartsTrainingMenuInfo value,
+          $Res Function(PartsTrainingMenuInfo) then) =
+      _$PartsTrainingMenuInfoCopyWithImpl<$Res, PartsTrainingMenuInfo>;
   @useResult
   $Res call(
       {int partsId, int partsTrainingId, String trainingName, int? maxRm});
 }
 
 /// @nodoc
-class _$PartsTrainingInfoCopyWithImpl<$Res, $Val extends PartsTrainingInfo>
-    implements $PartsTrainingInfoCopyWith<$Res> {
-  _$PartsTrainingInfoCopyWithImpl(this._value, this._then);
+class _$PartsTrainingMenuInfoCopyWithImpl<$Res,
+        $Val extends PartsTrainingMenuInfo>
+    implements $PartsTrainingMenuInfoCopyWith<$Res> {
+  _$PartsTrainingMenuInfoCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -82,7 +84,7 @@ class _$PartsTrainingInfoCopyWithImpl<$Res, $Val extends PartsTrainingInfo>
 
 /// @nodoc
 abstract class _$$PartsTrainingInfoImplCopyWith<$Res>
-    implements $PartsTrainingInfoCopyWith<$Res> {
+    implements $PartsTrainingMenuInfoCopyWith<$Res> {
   factory _$$PartsTrainingInfoImplCopyWith(_$PartsTrainingInfoImpl value,
           $Res Function(_$PartsTrainingInfoImpl) then) =
       __$$PartsTrainingInfoImplCopyWithImpl<$Res>;
@@ -94,7 +96,7 @@ abstract class _$$PartsTrainingInfoImplCopyWith<$Res>
 
 /// @nodoc
 class __$$PartsTrainingInfoImplCopyWithImpl<$Res>
-    extends _$PartsTrainingInfoCopyWithImpl<$Res, _$PartsTrainingInfoImpl>
+    extends _$PartsTrainingMenuInfoCopyWithImpl<$Res, _$PartsTrainingInfoImpl>
     implements _$$PartsTrainingInfoImplCopyWith<$Res> {
   __$$PartsTrainingInfoImplCopyWithImpl(_$PartsTrainingInfoImpl _value,
       $Res Function(_$PartsTrainingInfoImpl) _then)
@@ -152,7 +154,7 @@ class _$PartsTrainingInfoImpl implements _PartsTrainingInfo {
 
   @override
   String toString() {
-    return 'PartsTrainingInfo(partsId: $partsId, partsTrainingId: $partsTrainingId, trainingName: $trainingName, maxRm: $maxRm)';
+    return 'PartsTrainingMenuInfo(partsId: $partsId, partsTrainingId: $partsTrainingId, trainingName: $trainingName, maxRm: $maxRm)';
   }
 
   @override
@@ -188,7 +190,7 @@ class _$PartsTrainingInfoImpl implements _PartsTrainingInfo {
   }
 }
 
-abstract class _PartsTrainingInfo implements PartsTrainingInfo {
+abstract class _PartsTrainingInfo implements PartsTrainingMenuInfo {
   const factory _PartsTrainingInfo(
       {required final int partsId,
       required final int partsTrainingId,

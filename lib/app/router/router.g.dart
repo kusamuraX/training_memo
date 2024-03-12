@@ -10,6 +10,8 @@ List<RouteBase> get $appRoutes => [
       $mainPageRouteData,
       $trainingSelectPageData,
       $trainingPageData,
+      $settingPartsSelectPageData,
+      $settingTrainingPageData,
     ];
 
 RouteBase get $mainPageRouteData => GoRouteData.$route(
@@ -69,6 +71,52 @@ extension $TrainingPageDataExtension on TrainingPageData {
 
   String get location => GoRouteData.$location(
         '/training',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $settingPartsSelectPageData => GoRouteData.$route(
+      path: '/setting-parts-select',
+      factory: $SettingPartsSelectPageDataExtension._fromState,
+    );
+
+extension $SettingPartsSelectPageDataExtension on SettingPartsSelectPageData {
+  static SettingPartsSelectPageData _fromState(GoRouterState state) =>
+      const SettingPartsSelectPageData();
+
+  String get location => GoRouteData.$location(
+        '/setting-parts-select',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+RouteBase get $settingTrainingPageData => GoRouteData.$route(
+      path: '/edit-training',
+      factory: $SettingTrainingPageDataExtension._fromState,
+    );
+
+extension $SettingTrainingPageDataExtension on SettingTrainingPageData {
+  static SettingTrainingPageData _fromState(GoRouterState state) =>
+      const SettingTrainingPageData();
+
+  String get location => GoRouteData.$location(
+        '/edit-training',
       );
 
   void go(BuildContext context) => context.go(location);
