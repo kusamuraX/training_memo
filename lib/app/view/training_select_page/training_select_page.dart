@@ -55,7 +55,7 @@ class _TrainingSelectWidget extends ConsumerWidget {
           children: List.generate(menuList.length, (index) {
             return GestureDetector(
               child: Container(
-                padding: EdgeInsets.only(top: 12, bottom: 12),
+                padding: EdgeInsets.symmetric(vertical: 12),
                 decoration: BoxDecoration(
                   border: Border(
                     bottom: BorderSide(width: 1.0, color: Colors.grey),
