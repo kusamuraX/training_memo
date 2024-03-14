@@ -73,16 +73,17 @@ class _PartsSelectWidget extends ConsumerWidget {
     final today = DateUtils.dateOnly(DateTime.now());
     final db = ref.watch(appDataBaseProvider);
     final mainPageDataAsyncValue = ref.watch(mainPageDataProvider.call(db, today));
+    Size screenSize = MediaQuery.of(context).size;
     return Column(
       children: [
         Container(
           padding: EdgeInsets.all(8),
           color: Theme.of(context).primaryColor,
-          height: 280,
+          height: screenSize.height / 2,
           width: double.infinity,
           child: mainPageDataAsyncValue.when(
             data: (data) {
-              return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              return Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.start, children: [
                 Text(
                   "今週の総挙上重量：${data.weekWeightList[0].totalWeight()} t",
                   style: TextStyle(color: Colors.white),

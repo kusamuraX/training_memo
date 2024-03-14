@@ -7,7 +7,7 @@ part of 'parts_training_menu.dart';
 // **************************************************************************
 
 String _$partsTrainingMenuListHash() =>
-    r'b28303fdbc013dff0d17db81a6f8926f234bdb82';
+    r'd05bc84427c03fa3913ca4200c3d22f711955161';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -78,7 +78,7 @@ class PartsTrainingMenuListFamily
 
 /// See also [partsTrainingMenuList].
 class PartsTrainingMenuListProvider
-    extends AutoDisposeFutureProvider<List<PartsTrainingMenuInfo>> {
+    extends AutoDisposeStreamProvider<List<PartsTrainingMenuInfo>> {
   /// See also [partsTrainingMenuList].
   PartsTrainingMenuListProvider(
     AppDataBase database,
@@ -118,7 +118,7 @@ class PartsTrainingMenuListProvider
 
   @override
   Override overrideWith(
-    FutureOr<List<PartsTrainingMenuInfo>> Function(
+    Stream<List<PartsTrainingMenuInfo>> Function(
             PartsTrainingMenuListRef provider)
         create,
   ) {
@@ -138,7 +138,7 @@ class PartsTrainingMenuListProvider
   }
 
   @override
-  AutoDisposeFutureProviderElement<List<PartsTrainingMenuInfo>>
+  AutoDisposeStreamProviderElement<List<PartsTrainingMenuInfo>>
       createElement() {
     return _PartsTrainingMenuListProviderElement(this);
   }
@@ -161,7 +161,7 @@ class PartsTrainingMenuListProvider
 }
 
 mixin PartsTrainingMenuListRef
-    on AutoDisposeFutureProviderRef<List<PartsTrainingMenuInfo>> {
+    on AutoDisposeStreamProviderRef<List<PartsTrainingMenuInfo>> {
   /// The parameter `database` of this provider.
   AppDataBase get database;
 
@@ -170,7 +170,7 @@ mixin PartsTrainingMenuListRef
 }
 
 class _PartsTrainingMenuListProviderElement
-    extends AutoDisposeFutureProviderElement<List<PartsTrainingMenuInfo>>
+    extends AutoDisposeStreamProviderElement<List<PartsTrainingMenuInfo>>
     with PartsTrainingMenuListRef {
   _PartsTrainingMenuListProviderElement(super.provider);
 

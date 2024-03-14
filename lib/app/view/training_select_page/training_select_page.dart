@@ -64,10 +64,7 @@ class _TrainingSelectWidget extends ConsumerWidget {
                 child: Center(
                   child: Column(
                     children: [
-                      Text(
-                        menuList[index].trainingName,
-                        style: TextStyle(fontSize: 18),
-                      ),
+                      Text(menuList[index].trainingName, style: TextStyle(fontSize: 18), overflow: TextOverflow.ellipsis),
                       Text(
                         "最大RM：${menuList[index].maxRm ?? "-"} ㎏",
                         style: TextStyle(fontSize: 12),
@@ -88,55 +85,5 @@ class _TrainingSelectWidget extends ConsumerWidget {
       ),
       error: (error, stackTrace) => Text('Error: $error'),
     );
-    // return FutureBuilder(
-    //   future: databaseProvider.retrievePartTrainingList(partsId),
-    //   builder: (ctx, dataSnapshot) {
-    //     if (dataSnapshot.connectionState == ConnectionState.done) {
-    //       return ListView(
-    //         children: List.generate(dataSnapshot.data!.length, (index) {
-    //           return GestureDetector(
-    //             child: Container(
-    //               padding: EdgeInsets.all(12),
-    //               decoration: BoxDecoration(
-    //                 border: Border(
-    //                   bottom: BorderSide(width: 1.0, color: Colors.grey),
-    //                 ),
-    //               ),
-    //               child: Center(
-    //                 child: Column(
-    //                   children: [
-    //                     Text(
-    //                       dataSnapshot.data![index].trainingName,
-    //                       style: TextStyle(fontSize: 22, color: Colors.black),
-    //                     ),
-    //                     Text(
-    //                       "最大RM：${dataSnapshot.data![index].maxRm ?? "-"}㎏",
-    //                       style: TextStyle(fontSize: 12, color: Colors.black),
-    //                     ),
-    //                   ],
-    //                 ),
-    //               ),
-    //             ),
-    //             onTap: () {
-    //               ref.watch(trainingDataProvider.notifier).getAll(dataSnapshot.data![index].partsId, dataSnapshot.data![index].partsTrainingId, date);
-    //               ref
-    //                   .watch(prevTrainingDataProvider.notifier)
-    //                   .getAll(dataSnapshot.data![index].partsId, dataSnapshot.data![index].partsTrainingId, date);
-    //               GoRouter.of(context).push('/training', extra: {'training': dataSnapshot.data![index], 'date': date});
-    //             },
-    //           );
-    //         }),
-    //       );
-    //     } else if (dataSnapshot.connectionState == ConnectionState.waiting) {
-    //       return Center(
-    //         child: CircularProgressIndicator(),
-    //       );
-    //     } else {
-    //       return Center(
-    //         child: Text('error'),
-    //       );
-    //     }
-    //   },
-    // );
   }
 }

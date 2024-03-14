@@ -7,7 +7,7 @@ import 'package:training_memo/app/repository/body_parts_mst_repository.dart';
 import 'package:training_memo/app/repository/parts_training_info_repository.dart';
 import 'package:training_memo/app/settings_page.dart';
 import 'package:training_memo/app/training_page.dart';
-import 'package:training_memo/app/training_select_page.dart';
+import 'package:training_memo/app/view/training_select_page/training_select_page.dart';
 
 part 'router.g.dart';
 
