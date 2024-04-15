@@ -152,7 +152,7 @@ class _PartsSelectWidget extends ConsumerWidget {
           ),
         ),
         Container(
-          height: 240,
+          height: 300,
           padding: EdgeInsets.all(4),
           child: mainPageDataAsyncValue.when(
             data: (mainPageData) {
