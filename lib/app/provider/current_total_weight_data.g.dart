@@ -1,12 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'training_data.dart';
+part of 'current_total_weight_data.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$trainingDataHash() => r'3917914656e51b5784c9934fa13cd12ea877e4a9';
+String _$currentTotalWeightDataHash() =>
+    r'869765ae360467027b739321e4b5031163372507';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -29,14 +30,14 @@ class _SystemHash {
   }
 }
 
-abstract class _$TrainingData
-    extends BuildlessAutoDisposeStreamNotifier<List<TrainingInfo>> {
+abstract class _$CurrentTotalWeightData
+    extends BuildlessAutoDisposeStreamNotifier<double> {
   late final AppDataBase database;
   late final int partsId;
   late final int partsTrainingId;
   late final DateTime date;
 
-  Stream<List<TrainingInfo>> build(
+  Stream<double> build(
     AppDataBase database,
     int partsId,
     int partsTrainingId,
@@ -44,23 +45,23 @@ abstract class _$TrainingData
   );
 }
 
-/// See also [TrainingData].
-@ProviderFor(TrainingData)
-const trainingDataProvider = TrainingDataFamily();
+/// See also [CurrentTotalWeightData].
+@ProviderFor(CurrentTotalWeightData)
+const currentTotalWeightDataProvider = CurrentTotalWeightDataFamily();
 
-/// See also [TrainingData].
-class TrainingDataFamily extends Family<AsyncValue<List<TrainingInfo>>> {
-  /// See also [TrainingData].
-  const TrainingDataFamily();
+/// See also [CurrentTotalWeightData].
+class CurrentTotalWeightDataFamily extends Family<AsyncValue<double>> {
+  /// See also [CurrentTotalWeightData].
+  const CurrentTotalWeightDataFamily();
 
-  /// See also [TrainingData].
-  TrainingDataProvider call(
+  /// See also [CurrentTotalWeightData].
+  CurrentTotalWeightDataProvider call(
     AppDataBase database,
     int partsId,
     int partsTrainingId,
     DateTime date,
   ) {
-    return TrainingDataProvider(
+    return CurrentTotalWeightDataProvider(
       database,
       partsId,
       partsTrainingId,
@@ -69,8 +70,8 @@ class TrainingDataFamily extends Family<AsyncValue<List<TrainingInfo>>> {
   }
 
   @override
-  TrainingDataProvider getProviderOverride(
-    covariant TrainingDataProvider provider,
+  CurrentTotalWeightDataProvider getProviderOverride(
+    covariant CurrentTotalWeightDataProvider provider,
   ) {
     return call(
       provider.database,
@@ -92,40 +93,41 @@ class TrainingDataFamily extends Family<AsyncValue<List<TrainingInfo>>> {
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'trainingDataProvider';
+  String? get name => r'currentTotalWeightDataProvider';
 }
 
-/// See also [TrainingData].
-class TrainingDataProvider extends AutoDisposeStreamNotifierProviderImpl<
-    TrainingData, List<TrainingInfo>> {
-  /// See also [TrainingData].
-  TrainingDataProvider(
+/// See also [CurrentTotalWeightData].
+class CurrentTotalWeightDataProvider
+    extends AutoDisposeStreamNotifierProviderImpl<CurrentTotalWeightData,
+        double> {
+  /// See also [CurrentTotalWeightData].
+  CurrentTotalWeightDataProvider(
     AppDataBase database,
     int partsId,
     int partsTrainingId,
     DateTime date,
   ) : this._internal(
-          () => TrainingData()
+          () => CurrentTotalWeightData()
             ..database = database
             ..partsId = partsId
             ..partsTrainingId = partsTrainingId
             ..date = date,
-          from: trainingDataProvider,
-          name: r'trainingDataProvider',
+          from: currentTotalWeightDataProvider,
+          name: r'currentTotalWeightDataProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$trainingDataHash,
-          dependencies: TrainingDataFamily._dependencies,
+                  : _$currentTotalWeightDataHash,
+          dependencies: CurrentTotalWeightDataFamily._dependencies,
           allTransitiveDependencies:
-              TrainingDataFamily._allTransitiveDependencies,
+              CurrentTotalWeightDataFamily._allTransitiveDependencies,
           database: database,
           partsId: partsId,
           partsTrainingId: partsTrainingId,
           date: date,
         );
 
-  TrainingDataProvider._internal(
+  CurrentTotalWeightDataProvider._internal(
     super._createNotifier, {
     required super.name,
     required super.dependencies,
@@ -144,8 +146,8 @@ class TrainingDataProvider extends AutoDisposeStreamNotifierProviderImpl<
   final DateTime date;
 
   @override
-  Stream<List<TrainingInfo>> runNotifierBuild(
-    covariant TrainingData notifier,
+  Stream<double> runNotifierBuild(
+    covariant CurrentTotalWeightData notifier,
   ) {
     return notifier.build(
       database,
@@ -156,10 +158,10 @@ class TrainingDataProvider extends AutoDisposeStreamNotifierProviderImpl<
   }
 
   @override
-  Override overrideWith(TrainingData Function() create) {
+  Override overrideWith(CurrentTotalWeightData Function() create) {
     return ProviderOverride(
       origin: this,
-      override: TrainingDataProvider._internal(
+      override: CurrentTotalWeightDataProvider._internal(
         () => create()
           ..database = database
           ..partsId = partsId
@@ -179,14 +181,14 @@ class TrainingDataProvider extends AutoDisposeStreamNotifierProviderImpl<
   }
 
   @override
-  AutoDisposeStreamNotifierProviderElement<TrainingData, List<TrainingInfo>>
+  AutoDisposeStreamNotifierProviderElement<CurrentTotalWeightData, double>
       createElement() {
-    return _TrainingDataProviderElement(this);
+    return _CurrentTotalWeightDataProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is TrainingDataProvider &&
+    return other is CurrentTotalWeightDataProvider &&
         other.database == database &&
         other.partsId == partsId &&
         other.partsTrainingId == partsTrainingId &&
@@ -205,8 +207,8 @@ class TrainingDataProvider extends AutoDisposeStreamNotifierProviderImpl<
   }
 }
 
-mixin TrainingDataRef
-    on AutoDisposeStreamNotifierProviderRef<List<TrainingInfo>> {
+mixin CurrentTotalWeightDataRef
+    on AutoDisposeStreamNotifierProviderRef<double> {
   /// The parameter `database` of this provider.
   AppDataBase get database;
 
@@ -220,19 +222,21 @@ mixin TrainingDataRef
   DateTime get date;
 }
 
-class _TrainingDataProviderElement
-    extends AutoDisposeStreamNotifierProviderElement<TrainingData,
-        List<TrainingInfo>> with TrainingDataRef {
-  _TrainingDataProviderElement(super.provider);
+class _CurrentTotalWeightDataProviderElement
+    extends AutoDisposeStreamNotifierProviderElement<CurrentTotalWeightData,
+        double> with CurrentTotalWeightDataRef {
+  _CurrentTotalWeightDataProviderElement(super.provider);
 
   @override
-  AppDataBase get database => (origin as TrainingDataProvider).database;
+  AppDataBase get database =>
+      (origin as CurrentTotalWeightDataProvider).database;
   @override
-  int get partsId => (origin as TrainingDataProvider).partsId;
+  int get partsId => (origin as CurrentTotalWeightDataProvider).partsId;
   @override
-  int get partsTrainingId => (origin as TrainingDataProvider).partsTrainingId;
+  int get partsTrainingId =>
+      (origin as CurrentTotalWeightDataProvider).partsTrainingId;
   @override
-  DateTime get date => (origin as TrainingDataProvider).date;
+  DateTime get date => (origin as CurrentTotalWeightDataProvider).date;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

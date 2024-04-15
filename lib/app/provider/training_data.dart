@@ -1,4 +1,5 @@
 import 'package:drift/drift.dart';
+import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:training_memo/app/data/database.dart';
 import 'package:training_memo/app/repository/training_info_repository.dart';
@@ -13,14 +14,14 @@ class TrainingData extends _$TrainingData {
   }
 
   Stream<List<TrainingInfo>> getStream() {
-    final stDate = date.copyWith(hour: 0, minute: 0, second: 0, millisecond: 0, microsecond: 0);
-    final edDate = date.copyWith(hour: 23, minute: 59, second: 59, millisecond: 999, microsecond: 999);
+    final stDate = DateUtils.dateOnly(date);
+    final edDate = DateUtils.dateOnly(date.add(Duration(days: 1)));
     return (database.select(database.trainingDataInfo)
           ..where((tbl) =>
               tbl.bodyPartsInfo.equals(partsId) &
               tbl.partsTrainingInfo.equals(partsTrainingId) &
               tbl.trainingDate.isBiggerOrEqualValue(stDate) &
-              tbl.trainingDate.isSmallerOrEqualValue(edDate)))
+              tbl.trainingDate.isSmallerThanValue(edDate)))
         .watch()
         .map((trainingDataInfoDataList) {
       List<TrainingInfo> trainingDataList = [];

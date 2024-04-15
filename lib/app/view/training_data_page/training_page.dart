@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:training_memo/app/repository/parts_training_info_repository.dart';
 import 'package:training_memo/app/view/training_data_page/current_training.dart';
+import 'package:training_memo/app/view/training_data_page/current_training_total_weight.dart';
 import 'package:training_memo/app/view/training_data_page/prev_training.dart';
 
 ///
@@ -16,7 +17,7 @@ class TrainingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TrainingPageAppBar(partsTrainingInfo.trainingName),
-      body: _TrainingWidget(partsTrainingInfo.partsId, partsTrainingInfo.partsTrainingId, tgtDate, partsTrainingInfo.maxRm ?? 0),
+      body: _TrainingWidget(partsTrainingInfo.partsId, partsTrainingInfo.partsTrainingId, tgtDate),
     );
   }
 }
@@ -44,8 +45,7 @@ class _TrainingWidget extends StatelessWidget {
   final int partsId;
   final int partsTrainingId;
   final DateTime date;
-  final int maxRm;
-  const _TrainingWidget(this.partsId, this.partsTrainingId, this.date, this.maxRm);
+  const _TrainingWidget(this.partsId, this.partsTrainingId, this.date);
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +55,11 @@ class _TrainingWidget extends StatelessWidget {
           partsTrainingId: partsTrainingId,
           partsId: partsId,
           date: date,
-          maxRm: maxRm,
+        ),
+        CurrentTrainingTotalWightWidget(
+          partsTrainingId: partsTrainingId,
+          partsId: partsId,
+          date: date,
         ),
         Expanded(
           child: CurrentTrainingWidget(

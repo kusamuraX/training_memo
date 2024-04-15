@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:training_memo/app/data/database.dart';
-import 'package:training_memo/app/main_page.dart';
 import 'package:training_memo/app/repository/body_parts_mst_repository.dart';
 import 'package:training_memo/app/repository/parts_training_info_repository.dart';
 import 'package:training_memo/app/settings_page.dart';
+import 'package:training_memo/app/view/main_page/main_page.dart';
 import 'package:training_memo/app/view/training_data_page/training_page.dart';
 import 'package:training_memo/app/view/training_select_page/training_select_page.dart';
 

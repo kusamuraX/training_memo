@@ -1,41 +1,51 @@
 import 'package:drift/drift.dart';
+import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:training_memo/app/data/database.dart';
-import 'package:training_memo/app/repository/training_info_repository.dart';
+import 'package:training_memo/app/vmodel/prev_training_data_model.dart';
 
 part 'prev_training_data.g.dart';
 
 @riverpod
-Future<List<TrainingInfo>> prevTrainingData(PrevTrainingDataRef ref, AppDataBase database, int partsId, int trainingId, DateTime date) async {
+Future<List<TrainingDateData>> prevTrainingData(PrevTrainingDataRef ref, AppDataBase database, int partsId, int trainingId, DateTime date) async {
   // 前回のトレーニングデータ
-  List<TrainingInfo> trainingDataList = [];
-  final prevTrainigInfo = await (database.select(database.trainingDataInfo)
-        ..where((tbl) => tbl.bodyPartsInfo.equals(partsId) & tbl.partsTrainingInfo.equals(trainingId) & tbl.trainingDate.isSmallerThanValue(date))
-        ..limit(1)
-        ..orderBy([(t) => OrderingTerm(expression: t.trainingDate, mode: OrderingMode.desc)]))
-      .get();
-  if (prevTrainigInfo.isNotEmpty) {
-    final prevDate = prevTrainigInfo[0].trainingDate;
-    final stDate = prevDate.copyWith(hour: 0, minute: 0, second: 0, millisecond: 0, microsecond: 0);
-    final edDate = prevDate.copyWith(hour: 23, minute: 59, second: 59, millisecond: 999, microsecond: 999);
-    final prevTrainingList = await (database.select(database.trainingDataInfo)
+  List<TrainingDateData> trainingDateDataList = [];
+  var startDate = date; // 起点の日付
+  for (var i = 0; i < 3; i++) {
+    final lastTrainigInfo = await (database.select(database.trainingDataInfo)
           ..where((tbl) =>
               tbl.bodyPartsInfo.equals(partsId) &
               tbl.partsTrainingInfo.equals(trainingId) &
-              tbl.trainingDate.isBiggerOrEqualValue(stDate) &
-              tbl.trainingDate.isSmallerOrEqualValue(edDate)))
+              tbl.trainingDate.isSmallerThanValue(startDate) &
+              tbl.rm.isNotNull())
+          ..limit(1)
+          ..orderBy([(t) => OrderingTerm(expression: t.trainingDate, mode: OrderingMode.desc)]))
         .get();
-    for (final trainingDataInfoData in prevTrainingList) {
-      trainingDataList.add(TrainingInfo(
-          partsId: trainingDataInfoData.bodyPartsInfo,
-          partsTrainingId: trainingDataInfoData.partsTrainingInfo,
-          trainingId: trainingDataInfoData.trainingId,
-          count: trainingDataInfoData.rep,
-          date: trainingDataInfoData.trainingDate,
-          memo: trainingDataInfoData.memo,
-          rm: trainingDataInfoData.rm,
-          weight: trainingDataInfoData.weight));
+    if (lastTrainigInfo.isNotEmpty) {
+      final prevDate = lastTrainigInfo[0].trainingDate;
+      final stDate = DateUtils.dateOnly(prevDate);
+      final edDate = DateUtils.dateOnly(stDate.add(Duration(days: 1)));
+      final prevTrainingList = await (database.select(database.trainingDataInfo)
+            ..where((tbl) =>
+                tbl.bodyPartsInfo.equals(partsId) &
+                tbl.partsTrainingInfo.equals(trainingId) &
+                tbl.trainingDate.isBiggerOrEqualValue(stDate) &
+                tbl.trainingDate.isSmallerOrEqualValue(edDate)))
+          .get();
+      double totalWeight = 0;
+      List<TrainingMinData> trainingList = [];
+      for (final trainingDataInfoData in prevTrainingList) {
+        if (trainingDataInfoData.weight != null && trainingDataInfoData.rep != null) {
+          totalWeight += (trainingDataInfoData.weight! * trainingDataInfoData.rep!);
+          trainingList.add(TrainingMinData(weight: trainingDataInfoData.weight!, rep: trainingDataInfoData.rep!));
+        }
+      }
+      trainingDateDataList.add(
+          TrainingDateData(trainingDate: prevDate, totalWeight: double.parse((totalWeight / 1000).toStringAsFixed(2)), trainingList: trainingList));
+      startDate = DateUtils.dateOnly(prevDate);
+    } else {
+      break;
     }
   }
-  return trainingDataList;
+  return trainingDateDataList;
 }

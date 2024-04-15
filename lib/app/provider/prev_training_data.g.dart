@@ -6,7 +6,7 @@ part of 'prev_training_data.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$prevTrainingDataHash() => r'06af6f2a7ec4275f46739bf575d3328180b353bd';
+String _$prevTrainingDataHash() => r'0a9dea5d7ee813faf76391f1276136481d929a9c';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -34,7 +34,8 @@ class _SystemHash {
 const prevTrainingDataProvider = PrevTrainingDataFamily();
 
 /// See also [prevTrainingData].
-class PrevTrainingDataFamily extends Family<AsyncValue<List<TrainingInfo>>> {
+class PrevTrainingDataFamily
+    extends Family<AsyncValue<List<TrainingDateData>>> {
   /// See also [prevTrainingData].
   const PrevTrainingDataFamily();
 
@@ -82,7 +83,7 @@ class PrevTrainingDataFamily extends Family<AsyncValue<List<TrainingInfo>>> {
 
 /// See also [prevTrainingData].
 class PrevTrainingDataProvider
-    extends AutoDisposeFutureProvider<List<TrainingInfo>> {
+    extends AutoDisposeFutureProvider<List<TrainingDateData>> {
   /// See also [prevTrainingData].
   PrevTrainingDataProvider(
     AppDataBase database,
@@ -132,7 +133,8 @@ class PrevTrainingDataProvider
 
   @override
   Override overrideWith(
-    FutureOr<List<TrainingInfo>> Function(PrevTrainingDataRef provider) create,
+    FutureOr<List<TrainingDateData>> Function(PrevTrainingDataRef provider)
+        create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -152,7 +154,7 @@ class PrevTrainingDataProvider
   }
 
   @override
-  AutoDisposeFutureProviderElement<List<TrainingInfo>> createElement() {
+  AutoDisposeFutureProviderElement<List<TrainingDateData>> createElement() {
     return _PrevTrainingDataProviderElement(this);
   }
 
@@ -177,7 +179,8 @@ class PrevTrainingDataProvider
   }
 }
 
-mixin PrevTrainingDataRef on AutoDisposeFutureProviderRef<List<TrainingInfo>> {
+mixin PrevTrainingDataRef
+    on AutoDisposeFutureProviderRef<List<TrainingDateData>> {
   /// The parameter `database` of this provider.
   AppDataBase get database;
 
@@ -192,7 +195,7 @@ mixin PrevTrainingDataRef on AutoDisposeFutureProviderRef<List<TrainingInfo>> {
 }
 
 class _PrevTrainingDataProviderElement
-    extends AutoDisposeFutureProviderElement<List<TrainingInfo>>
+    extends AutoDisposeFutureProviderElement<List<TrainingDateData>>
     with PrevTrainingDataRef {
   _PrevTrainingDataProviderElement(super.provider);
 

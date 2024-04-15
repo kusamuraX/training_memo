@@ -7,7 +7,7 @@ part of 'training_history_data.dart';
 // **************************************************************************
 
 String _$trainingHistoryDataHash() =>
-    r'70b7ec11007ef7f4d529418d0194caeeb4d909b8';
+    r'9be08b4756350e997c03a8b13a0b9128f46daff3';
 
 /// Copied from Dart SDK
 class _SystemHash {

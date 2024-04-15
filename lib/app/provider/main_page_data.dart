@@ -85,7 +85,7 @@ Future<MainPageModel> mainPageData(MainPageDataRef ref, AppDataBase database, Da
         absTotalWeight: absTotal,
         legTotalWeight: legTotal));
   }
-  double graphMaxScale = (maxValue + (maxValue * 0.3)).toInt().toDouble();
+  double graphMaxScale = (maxValue + (maxValue * 0.3)).toDouble();
   return MainPageModel(today: tgtDate, bodyPartsList: bodyPartsList, weekWeightList: weekData, maxScale: graphMaxScale);
 }
 
