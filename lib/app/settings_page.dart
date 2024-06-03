@@ -141,6 +141,7 @@ class _SettingTrainingPage extends ConsumerWidget {
   _SettingTrainingPage(this.partsId);
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    double screenWidth = MediaQuery.of(context).size.width;
     final FormGroup form = FormGroup({
       'menu': FormControl<String>(
         validators: [
@@ -166,24 +167,103 @@ class _SettingTrainingPage extends ConsumerWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      dataList[index].trainingName,
-                      style: TextStyle(fontSize: 16),
+                    SizedBox(
+                      width: screenWidth / 1.5,
+                      child: Text(
+                        dataList[index].trainingName,
+                        style: TextStyle(fontSize: 16),
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
-                    IconButton(
-                      onPressed: () async {
-                        final result =
-                            await ref.read(partsTrainingDataProvider.call(db, partsId).notifier).deleteMenu(dataList[index].partsTrainingId);
-                        if (!result && context.mounted) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              duration: const Duration(seconds: 1),
-                              content: const Text('データが存在するため削除できません'),
-                            ),
-                          );
-                        }
-                      },
-                      icon: Icon(Icons.delete_forever),
+                    Row(
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            form.control('menu').value = dataList[index].trainingName;
+                            showDialog<void>(
+                              context: context,
+                              builder: (_) {
+                                return AlertDialog(
+                                  content: ReactiveForm(
+                                    formGroup: form,
+                                    child: ReactiveTextField(
+                                      decoration: const InputDecoration(labelText: '種目名'),
+                                      formControlName: 'menu',
+                                      validationMessages: {
+                                        ValidationMessage.required: (error) => '種目名を入力してください',
+                                      },
+                                    ),
+                                  ),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      child: Text('キャンセル'),
+                                      onPressed: () {
+                                        form.control('menu').value = '';
+                                        Navigator.pop(context);
+                                      },
+                                    ),
+                                    TextButton(
+                                      child: Text('変更'),
+                                      onPressed: () {
+                                        if (form.valid) {
+                                          ref
+                                              .read(partsTrainingDataProvider.call(db, partsId).notifier)
+                                              .editMenu(dataList[index].partsTrainingId, form.control('menu').value);
+                                          form.control('menu').value = '';
+                                          Navigator.pop(context);
+                                        }
+                                      },
+                                    )
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                          icon: Icon(Icons.edit),
+                        ),
+                        const SizedBox(width: 8),
+                        IconButton(
+                          onPressed: () {
+                            showDialog<void>(
+                              context: context,
+                              builder: (_) {
+                                return AlertDialog(
+                                  content: Text('削除してよろしいでしょうか？'),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      child: Text('キャンセル'),
+                                      onPressed: () {
+                                        form.control('menu').value = '';
+                                        Navigator.pop(context);
+                                      },
+                                    ),
+                                    TextButton(
+                                      child: Text('削除'),
+                                      onPressed: () async {
+                                        final result = await ref
+                                            .read(partsTrainingDataProvider.call(db, partsId).notifier)
+                                            .deleteMenu(dataList[index].partsTrainingId);
+                                        if (context.mounted) {
+                                          Navigator.pop(context);
+                                        }
+                                        if (!result && context.mounted) {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              duration: const Duration(seconds: 1),
+                                              content: const Text('データが存在するため削除できません'),
+                                            ),
+                                          );
+                                        }
+                                      },
+                                    )
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                          icon: Icon(Icons.delete_forever),
+                        ),
+                      ],
                     ),
                   ],
                 ),

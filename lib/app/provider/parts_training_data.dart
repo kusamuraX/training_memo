@@ -20,6 +20,12 @@ class PartsTrainingData extends _$PartsTrainingData {
     database.into(database.partsTrainingInfo).insert(newPartsTrainingInfo);
   }
 
+  void editMenu(trainingId, newName) {
+    // 変更
+    (database.update(database.partsTrainingInfo)..where((tbl) => tbl.partsTrainingId.equals(trainingId)))
+        .write(PartsTrainingInfoCompanion(trainingName: Value(newName)));
+  }
+
   Future<bool> deleteMenu(trainingId) async {
     // 削除
     final trainingData = await ((database.select(database.trainingDataInfo))

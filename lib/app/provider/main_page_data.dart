@@ -36,7 +36,6 @@ Future<MainPageModel> mainPageData(MainPageDataRef ref, AppDataBase database, Da
     final endDayOfWeek = startDayOfWeek.add(Duration(days: 6));
     final stDate = startDayOfWeek.copyWith(hour: 0, minute: 0, second: 0, millisecond: 0, microsecond: 0);
     final edDate = endDayOfWeek.copyWith(hour: 23, minute: 59, second: 59, millisecond: 999, microsecond: 999);
-    print('get $stDate - $edDate');
     final trainingDataList = await (database.select(database.trainingDataInfo)
           ..where((tbl) => tbl.trainingDate.isBiggerOrEqualValue(stDate) & tbl.trainingDate.isSmallerOrEqualValue(edDate)))
         .get();
@@ -89,4 +88,4 @@ Future<MainPageModel> mainPageData(MainPageDataRef ref, AppDataBase database, Da
   return MainPageModel(today: tgtDate, bodyPartsList: bodyPartsList, weekWeightList: weekData, maxScale: graphMaxScale);
 }
 
-DateTime getStartDayOfWeek(DateTime date, {int prevNumber = 0}) => date.subtract(Duration(days: date.weekday + (prevNumber * 7)));
+DateTime getStartDayOfWeek(DateTime date, {int prevNumber = 0}) => date.subtract(Duration(days: (date.weekday - 1) + (prevNumber * 7)));
