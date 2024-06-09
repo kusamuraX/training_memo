@@ -188,7 +188,21 @@ class HistoryBody extends ConsumerWidget {
                 } else {
                   return SizedBox();
                 }
-              }).toList()
+              }).toList(),
+              Container(
+                padding: EdgeInsets.only(left: 8, right: 8),
+                child: OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                    padding: EdgeInsets.all(8),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(4.0),
+                    ),
+                    side: BorderSide(width: 1, color: Colors.white),
+                  ),
+                  child: Text('トレーニング編集'),
+                  onPressed: () => GoRouter.of(context).push('/parts-select', extra: {'date': trainingHistoryData.selectDate}),
+                ),
+              ),
             ],
           ),
         ),

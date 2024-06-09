@@ -6,6 +6,7 @@ import 'package:training_memo/app/repository/body_parts_mst_repository.dart';
 import 'package:training_memo/app/repository/parts_training_info_repository.dart';
 import 'package:training_memo/app/settings_page.dart';
 import 'package:training_memo/app/view/main_page/main_page.dart';
+import 'package:training_memo/app/view/parts_select_page.dart';
 import 'package:training_memo/app/view/training_data_page/training_page.dart';
 import 'package:training_memo/app/view/training_select_page/training_select_page.dart';
 
@@ -30,6 +31,17 @@ class MainPageRouteData extends GoRouteData {
   }
 }
 
+@TypedGoRoute<PartsSelectPageData>(path: '/parts-select')
+class PartsSelectPageData extends GoRouteData {
+  const PartsSelectPageData();
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    Map<String, Object> argMap = state.extra as Map<String, Object>;
+    return PartsSelectPage(argMap['date'] as DateTime);
+  }
+}
+
+
 @TypedGoRoute<TrainingSelectPageData>(path: '/tselect')
 class TrainingSelectPageData extends GoRouteData {
   const TrainingSelectPageData();
@@ -37,7 +49,15 @@ class TrainingSelectPageData extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     Map<String, Object> argMap = state.extra as Map<String, Object>;
-    return TrainingSelectPage(argMap['parts'] as BodyPartsMst, argMap['date'] as DateTime);
+    BodyPartsMst bodyPartsMst;
+    if (argMap['parts'] is BodyPartsInfoData) {
+      BodyPartsInfoData bodyPartsInfo = argMap['parts'] as BodyPartsInfoData;
+      bodyPartsMst = BodyPartsMst(partsId: bodyPartsInfo.partsId, partsName: bodyPartsInfo.partsName);
+    } else {
+      bodyPartsMst = argMap['parts'] as BodyPartsMst;
+    }
+    DateTime date = argMap['date'] as DateTime;
+    return TrainingSelectPage(bodyPartsMst, date);
   }
 }
 
