@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:training_memo/app/data/database.dart';
 import 'package:training_memo/app/provider/parts_data.dart';
 
@@ -18,18 +19,20 @@ class PartsSelectPage extends StatelessWidget {
       body: _PartsSelect(date),
     );
   }
+  
 }
 
 class _PartsSelectPageAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   final DateTime date;
-
+  
   const _PartsSelectPageAppBar(this.date);
 
   @override
   Widget build(BuildContext context) {
+    DateFormat outputFormat = DateFormat('yyyy-MM-dd');
     return AppBar(
-      title: Text('部位選択 [ $date ]', style: TextStyle(fontSize: 12),),
+      title: Text('部位選択 [ ${outputFormat.format(date)} ]', style: TextStyle(fontSize: 12),),
       bottomOpacity: 0.0,
       elevation: 0.0,
     );

@@ -66,7 +66,7 @@ class _TrainingSelectWidget extends ConsumerWidget {
                     children: [
                       Text(menuList[index].trainingName, style: TextStyle(fontSize: 18), overflow: TextOverflow.ellipsis),
                       Text(
-                        "最大RM：${menuList[index].maxRm ?? "-"} ㎏",
+                        "最大RM : ${menuList[index].maxRm ?? "-"} ㎏",
                         style: TextStyle(fontSize: 12),
                       ),
                     ],
