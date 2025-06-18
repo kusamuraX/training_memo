@@ -9,10 +9,10 @@ part of 'parts_training_info_repository.dart';
 _$PartsTrainingInfoImpl _$$PartsTrainingInfoImplFromJson(
         Map<String, dynamic> json) =>
     _$PartsTrainingInfoImpl(
-      partsId: json['partsId'] as int,
-      partsTrainingId: json['partsTrainingId'] as int,
+      partsId: (json['partsId'] as num).toInt(),
+      partsTrainingId: (json['partsTrainingId'] as num).toInt(),
       trainingName: json['trainingName'] as String,
-      maxRm: json['maxRm'] as int?,
+      maxRm: (json['maxRm'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$PartsTrainingInfoImplToJson(

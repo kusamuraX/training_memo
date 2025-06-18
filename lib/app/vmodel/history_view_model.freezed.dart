@@ -20,7 +20,9 @@ mixin _$HistoryDataViewModel {
   LinkedHashMap<DateTime, List> get historyDataMap =>
       throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of HistoryDataViewModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $HistoryDataViewModelCopyWith<HistoryDataViewModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -46,6 +48,8 @@ class _$HistoryDataViewModelCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of HistoryDataViewModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -85,6 +89,8 @@ class __$$HistoryDataViewModelImplCopyWithImpl<$Res>
       $Res Function(_$HistoryDataViewModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of HistoryDataViewModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -135,7 +141,9 @@ class _$HistoryDataViewModelImpl implements _HistoryDataViewModel {
   int get hashCode => Object.hash(runtimeType, selectDate,
       const DeepCollectionEquality().hash(historyDataMap));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of HistoryDataViewModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$HistoryDataViewModelImplCopyWith<_$HistoryDataViewModelImpl>
@@ -154,8 +162,11 @@ abstract class _HistoryDataViewModel implements HistoryDataViewModel {
   DateTime get selectDate;
   @override
   LinkedHashMap<DateTime, List> get historyDataMap;
+
+  /// Create a copy of HistoryDataViewModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$HistoryDataViewModelImplCopyWith<_$HistoryDataViewModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

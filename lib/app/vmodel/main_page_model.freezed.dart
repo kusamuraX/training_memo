@@ -21,7 +21,9 @@ mixin _$MainPageModel {
   List<BodyPartsMst> get bodyPartsList => throw _privateConstructorUsedError;
   List<PartsWeight> get weekWeightList => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of MainPageModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $MainPageModelCopyWith<MainPageModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -49,6 +51,8 @@ class _$MainPageModelCopyWithImpl<$Res, $Val extends MainPageModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of MainPageModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -101,6 +105,8 @@ class __$$MainPageModelImplCopyWithImpl<$Res>
       _$MainPageModelImpl _value, $Res Function(_$MainPageModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of MainPageModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -188,7 +194,9 @@ class _$MainPageModelImpl implements _MainPageModel {
       const DeepCollectionEquality().hash(_bodyPartsList),
       const DeepCollectionEquality().hash(_weekWeightList));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of MainPageModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$MainPageModelImplCopyWith<_$MainPageModelImpl> get copyWith =>
@@ -210,8 +218,11 @@ abstract class _MainPageModel implements MainPageModel {
   List<BodyPartsMst> get bodyPartsList;
   @override
   List<PartsWeight> get weekWeightList;
+
+  /// Create a copy of MainPageModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$MainPageModelImplCopyWith<_$MainPageModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

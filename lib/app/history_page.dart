@@ -13,7 +13,6 @@ import 'package:training_memo/app/widget/title_container.dart';
 class HistoryBody extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    print('build history');
     final db = ref.watch(appDataBaseProvider);
     final trainingHistoryData = ref.watch(trainingHistoryDataProvider.call(db));
     return Column(

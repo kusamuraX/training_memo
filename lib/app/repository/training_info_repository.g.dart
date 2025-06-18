@@ -8,13 +8,13 @@ part of 'training_info_repository.dart';
 
 _$TrainingInfoImpl _$$TrainingInfoImplFromJson(Map<String, dynamic> json) =>
     _$TrainingInfoImpl(
-      partsId: json['partsId'] as int,
-      partsTrainingId: json['partsTrainingId'] as int,
-      trainingId: json['trainingId'] as int,
+      partsId: (json['partsId'] as num).toInt(),
+      partsTrainingId: (json['partsTrainingId'] as num).toInt(),
+      trainingId: (json['trainingId'] as num).toInt(),
       date: DateTime.parse(json['date'] as String),
       weight: (json['weight'] as num?)?.toDouble(),
-      count: json['count'] as int?,
-      rm: json['rm'] as int?,
+      count: (json['count'] as num?)?.toInt(),
+      rm: (json['rm'] as num?)?.toInt(),
       memo: json['memo'] as String?,
     );
 

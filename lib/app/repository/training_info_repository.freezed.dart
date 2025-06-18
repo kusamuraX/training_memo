@@ -29,8 +29,12 @@ mixin _$TrainingInfo {
   int? get rm => throw _privateConstructorUsedError;
   String? get memo => throw _privateConstructorUsedError;
 
+  /// Serializes this TrainingInfo to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TrainingInfo
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TrainingInfoCopyWith<TrainingInfo> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -62,6 +66,8 @@ class _$TrainingInfoCopyWithImpl<$Res, $Val extends TrainingInfo>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TrainingInfo
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -138,6 +144,8 @@ class __$$TrainingInfoImplCopyWithImpl<$Res>
       _$TrainingInfoImpl _value, $Res Function(_$TrainingInfoImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TrainingInfo
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -242,12 +250,14 @@ class _$TrainingInfoImpl implements _TrainingInfo {
             (identical(other.memo, memo) || other.memo == memo));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, partsId, partsTrainingId,
       trainingId, date, weight, count, rm, memo);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TrainingInfo
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TrainingInfoImplCopyWith<_$TrainingInfoImpl> get copyWith =>
@@ -291,8 +301,11 @@ abstract class _TrainingInfo implements TrainingInfo {
   int? get rm;
   @override
   String? get memo;
+
+  /// Create a copy of TrainingInfo
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TrainingInfoImplCopyWith<_$TrainingInfoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

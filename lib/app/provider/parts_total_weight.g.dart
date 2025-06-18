@@ -7,7 +7,7 @@ part of 'parts_total_weight.dart';
 // **************************************************************************
 
 String _$partsTotalWeightDataHash() =>
-    r'6563c7517e7c3e1dc1511bee3f8e28e424e2f6bc';
+    r'1c62f33eb69b28dde9a8659c9cf84da04312c6f2';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -192,6 +192,8 @@ class PartsTotalWeightDataProvider
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin PartsTotalWeightDataRef on AutoDisposeStreamNotifierProviderRef<double> {
   /// The parameter `database` of this provider.
   AppDataBase get database;
@@ -216,4 +218,4 @@ class _PartsTotalWeightDataProviderElement
   DateTime get date => (origin as PartsTotalWeightDataProvider).date;
 }
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

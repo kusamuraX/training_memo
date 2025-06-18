@@ -24,8 +24,12 @@ mixin _$BodyPartsMst {
   String get partsName => throw _privateConstructorUsedError;
   String? get lastTrainingDate => throw _privateConstructorUsedError;
 
+  /// Serializes this BodyPartsMst to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of BodyPartsMst
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $BodyPartsMstCopyWith<BodyPartsMst> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -49,6 +53,8 @@ class _$BodyPartsMstCopyWithImpl<$Res, $Val extends BodyPartsMst>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of BodyPartsMst
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -92,6 +98,8 @@ class __$$BodyPartsMstImplCopyWithImpl<$Res>
       _$BodyPartsMstImpl _value, $Res Function(_$BodyPartsMstImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of BodyPartsMst
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -149,12 +157,14 @@ class _$BodyPartsMstImpl implements _BodyPartsMst {
                 other.lastTrainingDate == lastTrainingDate));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, partsId, partsName, lastTrainingDate);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of BodyPartsMst
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$BodyPartsMstImplCopyWith<_$BodyPartsMstImpl> get copyWith =>
@@ -183,8 +193,11 @@ abstract class _BodyPartsMst implements BodyPartsMst {
   String get partsName;
   @override
   String? get lastTrainingDate;
+
+  /// Create a copy of BodyPartsMst
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$BodyPartsMstImplCopyWith<_$BodyPartsMstImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -8,7 +8,7 @@ part of 'body_parts_mst_repository.dart';
 
 _$BodyPartsMstImpl _$$BodyPartsMstImplFromJson(Map<String, dynamic> json) =>
     _$BodyPartsMstImpl(
-      partsId: json['partsId'] as int,
+      partsId: (json['partsId'] as num).toInt(),
       partsName: json['partsName'] as String,
       lastTrainingDate: json['lastTrainingDate'] as String?,
     );

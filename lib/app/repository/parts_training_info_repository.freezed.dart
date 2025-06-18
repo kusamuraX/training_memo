@@ -26,8 +26,12 @@ mixin _$PartsTrainingMenuInfo {
   String get trainingName => throw _privateConstructorUsedError;
   int? get maxRm => throw _privateConstructorUsedError;
 
+  /// Serializes this PartsTrainingMenuInfo to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PartsTrainingMenuInfo
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PartsTrainingMenuInfoCopyWith<PartsTrainingMenuInfo> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -53,6 +57,8 @@ class _$PartsTrainingMenuInfoCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PartsTrainingMenuInfo
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -102,6 +108,8 @@ class __$$PartsTrainingInfoImplCopyWithImpl<$Res>
       $Res Function(_$PartsTrainingInfoImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PartsTrainingMenuInfo
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -170,12 +178,14 @@ class _$PartsTrainingInfoImpl implements _PartsTrainingInfo {
             (identical(other.maxRm, maxRm) || other.maxRm == maxRm));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, partsId, partsTrainingId, trainingName, maxRm);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PartsTrainingMenuInfo
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PartsTrainingInfoImplCopyWith<_$PartsTrainingInfoImpl> get copyWith =>
@@ -208,8 +218,11 @@ abstract class _PartsTrainingInfo implements PartsTrainingMenuInfo {
   String get trainingName;
   @override
   int? get maxRm;
+
+  /// Create a copy of PartsTrainingMenuInfo
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PartsTrainingInfoImplCopyWith<_$PartsTrainingInfoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -20,7 +20,9 @@ mixin _$EventModel {
   String get partsName => throw _privateConstructorUsedError;
   Map<String, List> get trainingMap => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of EventModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $EventModelCopyWith<EventModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -44,6 +46,8 @@ class _$EventModelCopyWithImpl<$Res, $Val extends EventModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of EventModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -87,6 +91,8 @@ class __$$EventModelImplCopyWithImpl<$Res>
       _$EventModelImpl _value, $Res Function(_$EventModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of EventModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -153,7 +159,9 @@ class _$EventModelImpl implements _EventModel {
   int get hashCode => Object.hash(runtimeType, partsId, partsName,
       const DeepCollectionEquality().hash(_trainingMap));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of EventModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$EventModelImplCopyWith<_$EventModelImpl> get copyWith =>
@@ -172,8 +180,11 @@ abstract class _EventModel implements EventModel {
   String get partsName;
   @override
   Map<String, List> get trainingMap;
+
+  /// Create a copy of EventModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$EventModelImplCopyWith<_$EventModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

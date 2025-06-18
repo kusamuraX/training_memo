@@ -39,8 +39,8 @@ class CurrentTrainingWidget extends ConsumerWidget {
                     Expanded(
                       child: TextFormField(
                         decoration: const InputDecoration(
-                          labelText: '重量',
-                          suffix: Text('㎏'),
+                          labelText: "重量",
+                          suffix: Text("㎏"),
                           contentPadding: EdgeInsets.only(top: 4, bottom: 4, left: 2, right: 2),
                           isDense: true,
                         ),
@@ -85,13 +85,13 @@ class CurrentTrainingWidget extends ConsumerWidget {
                               title: const Text("削除しますか？"),
                               actions: <Widget>[
                                 TextButton(
-                                  child: const Text('キャンセル'),
+                                  child: const Text("キャンセル"),
                                   onPressed: () {
                                     Navigator.of(context).pop();
                                   },
                                 ),
                                 TextButton(
-                                  child: const Text('削除'),
+                                  child: const Text("削除"),
                                   onPressed: () {
                                     ref.read(trainingDataProvider.call(db, partsId, partsTrainingId, date).notifier).delete(dataList[index]);
                                     Navigator.of(context).pop();
@@ -123,7 +123,7 @@ class CurrentTrainingWidget extends ConsumerWidget {
               onPressed: () => ref.read(trainingDataProvider.call(db, partsId, partsTrainingId, date).notifier).addTraining(),
               icon: Icon(Icons.add_circle_outline),
             ),
-          )
+          ),
         ],
       ),
       loading: () => Center(
