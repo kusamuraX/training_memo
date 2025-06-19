@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$HistoryDataViewModel {
   DateTime get selectDate => throw _privateConstructorUsedError;
+  DateTime get focusedDay => throw _privateConstructorUsedError;
   LinkedHashMap<DateTime, List> get historyDataMap =>
       throw _privateConstructorUsedError;
 
@@ -34,7 +35,9 @@ abstract class $HistoryDataViewModelCopyWith<$Res> {
       _$HistoryDataViewModelCopyWithImpl<$Res, HistoryDataViewModel>;
   @useResult
   $Res call(
-      {DateTime selectDate, LinkedHashMap<DateTime, List> historyDataMap});
+      {DateTime selectDate,
+      DateTime focusedDay,
+      LinkedHashMap<DateTime, List> historyDataMap});
 }
 
 /// @nodoc
@@ -54,12 +57,17 @@ class _$HistoryDataViewModelCopyWithImpl<$Res,
   @override
   $Res call({
     Object? selectDate = null,
+    Object? focusedDay = null,
     Object? historyDataMap = null,
   }) {
     return _then(_value.copyWith(
       selectDate: null == selectDate
           ? _value.selectDate
           : selectDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      focusedDay: null == focusedDay
+          ? _value.focusedDay
+          : focusedDay // ignore: cast_nullable_to_non_nullable
               as DateTime,
       historyDataMap: null == historyDataMap
           ? _value.historyDataMap
@@ -78,7 +86,9 @@ abstract class _$$HistoryDataViewModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {DateTime selectDate, LinkedHashMap<DateTime, List> historyDataMap});
+      {DateTime selectDate,
+      DateTime focusedDay,
+      LinkedHashMap<DateTime, List> historyDataMap});
 }
 
 /// @nodoc
@@ -95,12 +105,17 @@ class __$$HistoryDataViewModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? selectDate = null,
+    Object? focusedDay = null,
     Object? historyDataMap = null,
   }) {
     return _then(_$HistoryDataViewModelImpl(
       selectDate: null == selectDate
           ? _value.selectDate
           : selectDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      focusedDay: null == focusedDay
+          ? _value.focusedDay
+          : focusedDay // ignore: cast_nullable_to_non_nullable
               as DateTime,
       historyDataMap: null == historyDataMap
           ? _value.historyDataMap
@@ -114,16 +129,20 @@ class __$$HistoryDataViewModelImplCopyWithImpl<$Res>
 
 class _$HistoryDataViewModelImpl implements _HistoryDataViewModel {
   const _$HistoryDataViewModelImpl(
-      {required this.selectDate, required this.historyDataMap});
+      {required this.selectDate,
+      required this.focusedDay,
+      required this.historyDataMap});
 
   @override
   final DateTime selectDate;
+  @override
+  final DateTime focusedDay;
   @override
   final LinkedHashMap<DateTime, List> historyDataMap;
 
   @override
   String toString() {
-    return 'HistoryDataViewModel(selectDate: $selectDate, historyDataMap: $historyDataMap)';
+    return 'HistoryDataViewModel(selectDate: $selectDate, focusedDay: $focusedDay, historyDataMap: $historyDataMap)';
   }
 
   @override
@@ -133,12 +152,14 @@ class _$HistoryDataViewModelImpl implements _HistoryDataViewModel {
             other is _$HistoryDataViewModelImpl &&
             (identical(other.selectDate, selectDate) ||
                 other.selectDate == selectDate) &&
+            (identical(other.focusedDay, focusedDay) ||
+                other.focusedDay == focusedDay) &&
             const DeepCollectionEquality()
                 .equals(other.historyDataMap, historyDataMap));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, selectDate,
+  int get hashCode => Object.hash(runtimeType, selectDate, focusedDay,
       const DeepCollectionEquality().hash(historyDataMap));
 
   /// Create a copy of HistoryDataViewModel
@@ -155,11 +176,14 @@ class _$HistoryDataViewModelImpl implements _HistoryDataViewModel {
 abstract class _HistoryDataViewModel implements HistoryDataViewModel {
   const factory _HistoryDataViewModel(
           {required final DateTime selectDate,
+          required final DateTime focusedDay,
           required final LinkedHashMap<DateTime, List> historyDataMap}) =
       _$HistoryDataViewModelImpl;
 
   @override
   DateTime get selectDate;
+  @override
+  DateTime get focusedDay;
   @override
   LinkedHashMap<DateTime, List> get historyDataMap;
 

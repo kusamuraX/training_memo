@@ -11,8 +11,7 @@ class PartsWeight {
   final double absTotalWeight;
   final double legTotalWeight;
 
-  double totalWeight() =>
-      double.parse((chestTotalWeight + backTotalWeight + shoulderTotalWeight + armTotalWeight + absTotalWeight + legTotalWeight).toStringAsFixed(2));
+  double totalWeight() => double.parse((chestTotalWeight + backTotalWeight + shoulderTotalWeight + armTotalWeight + absTotalWeight + legTotalWeight).toStringAsFixed(2));
 
   double valueOfindex(int index) {
     switch (index) {
@@ -50,5 +49,7 @@ class MainPageModel with _$MainPageModel {
     required double maxScale,
     required List<BodyPartsMst> bodyPartsList,
     required List<PartsWeight> weekWeightList,
+    required PartsWeight todayData,
+    required List<PartsWeight> past5WeeksData,
   }) = _MainPageModel;
 }

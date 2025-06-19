@@ -21,7 +21,7 @@ class TrainingHistoryData extends _$TrainingHistoryData {
       hashCode: getHashCode,
     );
     getInitHistory(today);
-    return HistoryDataViewModel(historyDataMap: historyMap, selectDate: today);
+    return HistoryDataViewModel(historyDataMap: historyMap, selectDate: today, focusedDay: today);
   }
 
   Future<void> getInitHistory(DateTime date) async {
@@ -35,13 +35,10 @@ class TrainingHistoryData extends _$TrainingHistoryData {
       innerJoin(database.partsTrainingInfo, database.partsTrainingInfo.partsTrainingId.equalsExp(database.trainingDataInfo.partsTrainingInfo)),
       innerJoin(database.bodyPartsInfo, database.bodyPartsInfo.partsId.equalsExp(database.trainingDataInfo.bodyPartsInfo)),
     ])
-      ..where(database.trainingDataInfo.trainingDate.isBiggerOrEqualValue(stDate) &
-          database.trainingDataInfo.trainingDate.isSmallerOrEqualValue(edDate) &
-          database.trainingDataInfo.rm.isNotNull());
+      ..where(database.trainingDataInfo.trainingDate.isBiggerOrEqualValue(stDate) & database.trainingDataInfo.trainingDate.isSmallerOrEqualValue(edDate) & database.trainingDataInfo.rm.isNotNull());
     final historyDataList = await query.get().then((rows) {
       return rows.map((row) {
-        return TrainingDataWithAll(
-            row.readTable(database.bodyPartsInfo), row.readTable(database.partsTrainingInfo), row.readTable(database.trainingDataInfo));
+        return TrainingDataWithAll(row.readTable(database.bodyPartsInfo), row.readTable(database.partsTrainingInfo), row.readTable(database.trainingDataInfo));
       }).toList();
     });
     while (stDate.compareTo(edDate) <= 0) {
@@ -66,8 +63,7 @@ class TrainingHistoryData extends _$TrainingHistoryData {
             final trainingMap = {
               historyData.partsTrainingInfo.trainingName: [historyData.trainingDataInfo]
             };
-            eventDataList.add(EventModel(
-                partsId: historyData.trainingDataInfo.bodyPartsInfo, partsName: historyData.bodyPartsInfo.partsName, trainingMap: trainingMap));
+            eventDataList.add(EventModel(partsId: historyData.trainingDataInfo.bodyPartsInfo, partsName: historyData.bodyPartsInfo.partsName, trainingMap: trainingMap));
           }
         }
       }
@@ -76,8 +72,7 @@ class TrainingHistoryData extends _$TrainingHistoryData {
         newHistoryMap[stDate] = eventDataList;
       }
       // 既にみた日付のものは削除
-      historyDataList.removeWhere(
-          (element) => element.trainingDataInfo.trainingDate.month == stDate.month && element.trainingDataInfo.trainingDate.day == stDate.day);
+      historyDataList.removeWhere((element) => element.trainingDataInfo.trainingDate.month == stDate.month && element.trainingDataInfo.trainingDate.day == stDate.day);
       stDate = stDate.add(Duration(days: 1));
     }
     state = state.copyWith(historyDataMap: newHistoryMap);
@@ -93,13 +88,10 @@ class TrainingHistoryData extends _$TrainingHistoryData {
         innerJoin(database.partsTrainingInfo, database.partsTrainingInfo.partsTrainingId.equalsExp(database.trainingDataInfo.partsTrainingInfo)),
         innerJoin(database.bodyPartsInfo, database.bodyPartsInfo.partsId.equalsExp(database.trainingDataInfo.bodyPartsInfo)),
       ])
-        ..where(database.trainingDataInfo.trainingDate.isBiggerOrEqualValue(stDate) &
-            database.trainingDataInfo.trainingDate.isSmallerOrEqualValue(edDate) &
-            database.trainingDataInfo.rm.isNotNull());
+        ..where(database.trainingDataInfo.trainingDate.isBiggerOrEqualValue(stDate) & database.trainingDataInfo.trainingDate.isSmallerOrEqualValue(edDate) & database.trainingDataInfo.rm.isNotNull());
       final historyDataList = await query.get().then((rows) {
         return rows.map((row) {
-          return TrainingDataWithAll(
-              row.readTable(database.bodyPartsInfo), row.readTable(database.partsTrainingInfo), row.readTable(database.trainingDataInfo));
+          return TrainingDataWithAll(row.readTable(database.bodyPartsInfo), row.readTable(database.partsTrainingInfo), row.readTable(database.trainingDataInfo));
         }).toList();
       });
       // final historyDataList = await (database.select(database.trainingDataInfo).join([
@@ -146,8 +138,7 @@ class TrainingHistoryData extends _$TrainingHistoryData {
               final trainingMap = {
                 historyData.partsTrainingInfo.trainingName: [historyData.trainingDataInfo]
               };
-              eventDataList.add(EventModel(
-                  partsId: historyData.trainingDataInfo.bodyPartsInfo, partsName: historyData.bodyPartsInfo.partsName, trainingMap: trainingMap));
+              eventDataList.add(EventModel(partsId: historyData.trainingDataInfo.bodyPartsInfo, partsName: historyData.bodyPartsInfo.partsName, trainingMap: trainingMap));
             }
           }
         }
@@ -156,8 +147,7 @@ class TrainingHistoryData extends _$TrainingHistoryData {
           newHistoryMap[stDate] = eventDataList;
         }
         // 既にみた日付のものは削除
-        historyDataList.removeWhere(
-            (element) => element.trainingDataInfo.trainingDate.month == stDate.month && element.trainingDataInfo.trainingDate.day == stDate.day);
+        historyDataList.removeWhere((element) => element.trainingDataInfo.trainingDate.month == stDate.month && element.trainingDataInfo.trainingDate.day == stDate.day);
         stDate = stDate.add(Duration(days: 1));
       }
       if (!mapEquals(newHistoryMap, state.historyDataMap)) {
@@ -168,6 +158,11 @@ class TrainingHistoryData extends _$TrainingHistoryData {
 
   Future<void> changeDate(DateTime newDate) async {
     state = state.copyWith(selectDate: newDate);
+  }
+
+  Future<void> changeFocusedDay(DateTime newFocusedDay) async {
+    await getHistory(newFocusedDay);
+    state = state.copyWith(focusedDay: newFocusedDay);
   }
 
   int getHashCode(DateTime key) {

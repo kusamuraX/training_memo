@@ -21,7 +21,7 @@ class HistoryBody extends ConsumerWidget {
           locale: 'ja_JP',
           firstDay: DateTime.utc(2023, 1, 1),
           lastDay: DateTime.utc(2030, 12, 31),
-          focusedDay: trainingHistoryData.selectDate,
+          focusedDay: trainingHistoryData.focusedDay,
           selectedDayPredicate: (day) {
             return isSameDay(trainingHistoryData.selectDate, day);
           },
@@ -37,7 +37,7 @@ class HistoryBody extends ConsumerWidget {
           },
           onPageChanged: (focusedDay) {
             // 月の変更
-            ref.read(trainingHistoryDataProvider.call(db).notifier).getHistory(focusedDay);
+            ref.read(trainingHistoryDataProvider.call(db).notifier).changeFocusedDay(focusedDay);
           },
           calendarBuilders: CalendarBuilders(
             dowBuilder: (context, day) {
@@ -97,10 +97,8 @@ class HistoryBody extends ConsumerWidget {
                             .map(
                               (t) => GestureDetector(
                                 onDoubleTap: () {
-                                  final partsTrainingMenuInfo =
-                                      PartsTrainingMenuInfo(partsId: e.partsId, partsTrainingId: t.value[0].partsTrainingInfo, trainingName: t.key);
-                                  GoRouter.of(context)
-                                      .push('/training', extra: {'training': partsTrainingMenuInfo, 'date': trainingHistoryData.selectDate});
+                                  final partsTrainingMenuInfo = PartsTrainingMenuInfo(partsId: e.partsId, partsTrainingId: t.value[0].partsTrainingInfo, trainingName: t.key);
+                                  GoRouter.of(context).push('/training', extra: {'training': partsTrainingMenuInfo, 'date': trainingHistoryData.selectDate});
                                 },
                                 child: TitleContaier(
                                   title: t.key,
@@ -125,53 +123,37 @@ class HistoryBody extends ConsumerWidget {
                                         Align(
                                           alignment: Alignment.centerRight,
                                           child: RichText(
-                                            text: TextSpan(
-                                                style: TextStyle(color: Theme.of(context).colorScheme.onBackground, fontSize: 10),
-                                                children: [
-                                                  TextSpan(
-                                                      text: index.toString().padLeft(3, " "),
-                                                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
-                                                  const TextSpan(text: ' Set'),
-                                                ]),
+                                            text: TextSpan(style: TextStyle(color: Theme.of(context).colorScheme.onBackground, fontSize: 10), children: [
+                                              TextSpan(text: index.toString().padLeft(3, " "), style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+                                              const TextSpan(text: ' Set'),
+                                            ]),
                                           ),
                                         ),
                                         Align(
                                           alignment: Alignment.centerRight,
                                           child: RichText(
-                                            text: TextSpan(
-                                                style: TextStyle(color: Theme.of(context).colorScheme.onBackground, fontSize: 10),
-                                                children: [
-                                                  TextSpan(
-                                                      text: tdata.weight.toString().padLeft(6, " "),
-                                                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
-                                                  const TextSpan(text: ' kg'),
-                                                ]),
+                                            text: TextSpan(style: TextStyle(color: Theme.of(context).colorScheme.onBackground, fontSize: 10), children: [
+                                              TextSpan(text: tdata.weight.toString().padLeft(6, " "), style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+                                              const TextSpan(text: ' kg'),
+                                            ]),
                                           ),
                                         ),
                                         Align(
                                           alignment: Alignment.centerRight,
                                           child: RichText(
-                                            text: TextSpan(
-                                                style: TextStyle(color: Theme.of(context).colorScheme.onBackground, fontSize: 10),
-                                                children: [
-                                                  TextSpan(
-                                                      text: tdata.rep.toString().padLeft(3, " "),
-                                                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
-                                                  const TextSpan(text: ' 回'),
-                                                ]),
+                                            text: TextSpan(style: TextStyle(color: Theme.of(context).colorScheme.onBackground, fontSize: 10), children: [
+                                              TextSpan(text: tdata.rep.toString().padLeft(3, " "), style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+                                              const TextSpan(text: ' 回'),
+                                            ]),
                                           ),
                                         ),
                                         Align(
                                           alignment: Alignment.centerRight,
                                           child: RichText(
-                                            text: TextSpan(
-                                                style: TextStyle(color: Theme.of(context).colorScheme.onBackground, fontSize: 10),
-                                                children: [
-                                                  TextSpan(
-                                                      text: tdata.rm.toString().padLeft(6, " "),
-                                                      style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
-                                                  const TextSpan(text: ' kg/RM'),
-                                                ]),
+                                            text: TextSpan(style: TextStyle(color: Theme.of(context).colorScheme.onBackground, fontSize: 10), children: [
+                                              TextSpan(text: tdata.rm.toString().padLeft(6, " "), style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+                                              const TextSpan(text: ' kg/RM'),
+                                            ]),
                                           ),
                                         ),
                                       ]);

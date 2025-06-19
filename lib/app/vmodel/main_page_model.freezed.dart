@@ -20,6 +20,8 @@ mixin _$MainPageModel {
   double get maxScale => throw _privateConstructorUsedError;
   List<BodyPartsMst> get bodyPartsList => throw _privateConstructorUsedError;
   List<PartsWeight> get weekWeightList => throw _privateConstructorUsedError;
+  PartsWeight get todayData => throw _privateConstructorUsedError;
+  List<PartsWeight> get past5WeeksData => throw _privateConstructorUsedError;
 
   /// Create a copy of MainPageModel
   /// with the given fields replaced by the non-null parameter values.
@@ -38,7 +40,9 @@ abstract class $MainPageModelCopyWith<$Res> {
       {DateTime today,
       double maxScale,
       List<BodyPartsMst> bodyPartsList,
-      List<PartsWeight> weekWeightList});
+      List<PartsWeight> weekWeightList,
+      PartsWeight todayData,
+      List<PartsWeight> past5WeeksData});
 }
 
 /// @nodoc
@@ -60,6 +64,8 @@ class _$MainPageModelCopyWithImpl<$Res, $Val extends MainPageModel>
     Object? maxScale = null,
     Object? bodyPartsList = null,
     Object? weekWeightList = null,
+    Object? todayData = null,
+    Object? past5WeeksData = null,
   }) {
     return _then(_value.copyWith(
       today: null == today
@@ -78,6 +84,14 @@ class _$MainPageModelCopyWithImpl<$Res, $Val extends MainPageModel>
           ? _value.weekWeightList
           : weekWeightList // ignore: cast_nullable_to_non_nullable
               as List<PartsWeight>,
+      todayData: null == todayData
+          ? _value.todayData
+          : todayData // ignore: cast_nullable_to_non_nullable
+              as PartsWeight,
+      past5WeeksData: null == past5WeeksData
+          ? _value.past5WeeksData
+          : past5WeeksData // ignore: cast_nullable_to_non_nullable
+              as List<PartsWeight>,
     ) as $Val);
   }
 }
@@ -94,7 +108,9 @@ abstract class _$$MainPageModelImplCopyWith<$Res>
       {DateTime today,
       double maxScale,
       List<BodyPartsMst> bodyPartsList,
-      List<PartsWeight> weekWeightList});
+      List<PartsWeight> weekWeightList,
+      PartsWeight todayData,
+      List<PartsWeight> past5WeeksData});
 }
 
 /// @nodoc
@@ -114,6 +130,8 @@ class __$$MainPageModelImplCopyWithImpl<$Res>
     Object? maxScale = null,
     Object? bodyPartsList = null,
     Object? weekWeightList = null,
+    Object? todayData = null,
+    Object? past5WeeksData = null,
   }) {
     return _then(_$MainPageModelImpl(
       today: null == today
@@ -132,6 +150,14 @@ class __$$MainPageModelImplCopyWithImpl<$Res>
           ? _value._weekWeightList
           : weekWeightList // ignore: cast_nullable_to_non_nullable
               as List<PartsWeight>,
+      todayData: null == todayData
+          ? _value.todayData
+          : todayData // ignore: cast_nullable_to_non_nullable
+              as PartsWeight,
+      past5WeeksData: null == past5WeeksData
+          ? _value._past5WeeksData
+          : past5WeeksData // ignore: cast_nullable_to_non_nullable
+              as List<PartsWeight>,
     ));
   }
 }
@@ -143,9 +169,12 @@ class _$MainPageModelImpl implements _MainPageModel {
       {required this.today,
       required this.maxScale,
       required final List<BodyPartsMst> bodyPartsList,
-      required final List<PartsWeight> weekWeightList})
+      required final List<PartsWeight> weekWeightList,
+      required this.todayData,
+      required final List<PartsWeight> past5WeeksData})
       : _bodyPartsList = bodyPartsList,
-        _weekWeightList = weekWeightList;
+        _weekWeightList = weekWeightList,
+        _past5WeeksData = past5WeeksData;
 
   @override
   final DateTime today;
@@ -168,8 +197,18 @@ class _$MainPageModelImpl implements _MainPageModel {
   }
 
   @override
+  final PartsWeight todayData;
+  final List<PartsWeight> _past5WeeksData;
+  @override
+  List<PartsWeight> get past5WeeksData {
+    if (_past5WeeksData is EqualUnmodifiableListView) return _past5WeeksData;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_past5WeeksData);
+  }
+
+  @override
   String toString() {
-    return 'MainPageModel(today: $today, maxScale: $maxScale, bodyPartsList: $bodyPartsList, weekWeightList: $weekWeightList)';
+    return 'MainPageModel(today: $today, maxScale: $maxScale, bodyPartsList: $bodyPartsList, weekWeightList: $weekWeightList, todayData: $todayData, past5WeeksData: $past5WeeksData)';
   }
 
   @override
@@ -183,7 +222,11 @@ class _$MainPageModelImpl implements _MainPageModel {
             const DeepCollectionEquality()
                 .equals(other._bodyPartsList, _bodyPartsList) &&
             const DeepCollectionEquality()
-                .equals(other._weekWeightList, _weekWeightList));
+                .equals(other._weekWeightList, _weekWeightList) &&
+            (identical(other.todayData, todayData) ||
+                other.todayData == todayData) &&
+            const DeepCollectionEquality()
+                .equals(other._past5WeeksData, _past5WeeksData));
   }
 
   @override
@@ -192,7 +235,9 @@ class _$MainPageModelImpl implements _MainPageModel {
       today,
       maxScale,
       const DeepCollectionEquality().hash(_bodyPartsList),
-      const DeepCollectionEquality().hash(_weekWeightList));
+      const DeepCollectionEquality().hash(_weekWeightList),
+      todayData,
+      const DeepCollectionEquality().hash(_past5WeeksData));
 
   /// Create a copy of MainPageModel
   /// with the given fields replaced by the non-null parameter values.
@@ -208,7 +253,9 @@ abstract class _MainPageModel implements MainPageModel {
       {required final DateTime today,
       required final double maxScale,
       required final List<BodyPartsMst> bodyPartsList,
-      required final List<PartsWeight> weekWeightList}) = _$MainPageModelImpl;
+      required final List<PartsWeight> weekWeightList,
+      required final PartsWeight todayData,
+      required final List<PartsWeight> past5WeeksData}) = _$MainPageModelImpl;
 
   @override
   DateTime get today;
@@ -218,6 +265,10 @@ abstract class _MainPageModel implements MainPageModel {
   List<BodyPartsMst> get bodyPartsList;
   @override
   List<PartsWeight> get weekWeightList;
+  @override
+  PartsWeight get todayData;
+  @override
+  List<PartsWeight> get past5WeeksData;
 
   /// Create a copy of MainPageModel
   /// with the given fields replaced by the non-null parameter values.

@@ -8,6 +8,7 @@ import 'package:training_memo/app/history_page.dart';
 import 'package:training_memo/app/provider/main_page_data.dart';
 import 'package:training_memo/app/provider/tab_index.dart';
 import 'package:training_memo/app/settings_page.dart';
+import 'package:training_memo/app/vmodel/main_page_model.dart';
 
 class MainPage extends ConsumerWidget {
   @override
@@ -82,77 +83,105 @@ class _PartsSelectWidget extends ConsumerWidget {
           child: Container(
             padding: EdgeInsets.all(8),
             color: Theme.of(context).primaryColor,
-            // color: Colors.blueAccent,
             width: double.infinity,
             child: mainPageDataAsyncValue.when(
               data: (data) {
-                return Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  Text(
-                    "今週の総挙上重量：${data.weekWeightList[0].totalWeight()} t",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  Text(
-                    "先週の総挙上重量：${data.weekWeightList[1].totalWeight()} t",
-                    style: TextStyle(color: Colors.white70, fontSize: 12),
-                  ),
-                  SizedBox(
-                    height: 12,
-                  ),
-                  Container(
-                    height: 200,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.white, width: 1),
-                      borderRadius: BorderRadius.circular(4.0),
-                    ),
-                    child: BarChart(
-                      BarChartData(
-                        maxY: data.maxScale,
-                        titlesData: titlesData,
-                        borderData: FlBorderData(show: false),
-                        gridData: const FlGridData(show: true),
-                        alignment: BarChartAlignment.spaceAround,
-                        barGroups: List.generate(
-                          bodyPartsList.length,
-                          (index) {
-                            return BarChartGroupData(
-                              x: index,
-                              barRods: [
-                                BarChartRodData(toY: data.weekWeightList[1].valueOfindex(index), color: Colors.blue),
-                                BarChartRodData(toY: data.weekWeightList[0].valueOfindex(index), color: Colors.cyanAccent, width: 14),
-                              ],
-                              showingTooltipIndicators: [1],
-                            );
-                          },
+                // 先週比の計算
+                final thisWeekTotal = data.weekWeightList[0].totalWeight();
+                final lastWeekTotal = data.weekWeightList[1].totalWeight();
+                final weeklyChangePercent = lastWeekTotal > 0 ? ((thisWeekTotal - lastWeekTotal) / lastWeekTotal * 100) : 0.0;
+
+                return SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // 今週の総負荷重量と先週比
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.grey[800],
+                          borderRadius: BorderRadius.circular(4.0),
                         ),
-                        barTouchData: BarTouchData(
-                          enabled: true,
-                          touchTooltipData: BarTouchTooltipData(
-                            tooltipBgColor: Colors.transparent,
-                            tooltipPadding: const EdgeInsets.only(left: 4, right: 4, top: 4),
-                            tooltipMargin: 2,
-                            getTooltipItem: (group, groupIndex, rod, rodIndex) {
-                              return BarTooltipItem(
-                                '${rod.toY.toString()} t',
-                                const TextStyle(fontSize: 12),
-                              );
-                            },
+                        padding: EdgeInsets.all(8),
+                        width: double.infinity,
+                        alignment: Alignment.center,
+                        child: RichText(
+                          text: TextSpan(
+                            style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
+                            children: [
+                              TextSpan(text: "今週の総負荷重量：$thisWeekTotal t "),
+                              TextSpan(
+                                text: "(先週比：${weeklyChangePercent >= 0 ? '+' : ''}${weeklyChangePercent.toStringAsFixed(1)}%)",
+                                style: TextStyle(
+                                  color: weeklyChangePercent >= 0 ? Colors.green : Colors.red,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
-                    ),
+
+                      SizedBox(height: 8),
+
+                      // 当日の各部位の総負荷重量
+                      Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.white, width: 1),
+                          borderRadius: BorderRadius.circular(4.0),
+                        ),
+                        padding: EdgeInsets.all(8),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "本日(${today.toString().split(' ')[0]})の総負荷重量：${data.todayData.totalWeight()} t",
+                              style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(height: 8),
+                            GridView.count(
+                              crossAxisCount: 3,
+                              shrinkWrap: true,
+                              physics: NeverScrollableScrollPhysics(),
+                              childAspectRatio: 4,
+                              crossAxisSpacing: 8,
+                              mainAxisSpacing: 4,
+                              children: [
+                                _buildTodayPartsWeightItem("胸", data.todayData.chestTotalWeight, 0),
+                                _buildTodayPartsWeightItem("背中", data.todayData.backTotalWeight, 1),
+                                _buildTodayPartsWeightItem("肩", data.todayData.shoulderTotalWeight, 2),
+                                _buildTodayPartsWeightItem("腕", data.todayData.armTotalWeight, 3),
+                                _buildTodayPartsWeightItem("腹", data.todayData.absTotalWeight, 4),
+                                _buildTodayPartsWeightItem("脚", data.todayData.legTotalWeight, 5),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      SizedBox(height: 16),
+
+                      // 過去5週の部位別総負荷重量グラフ
+                      SizedBox(
+                        height: 220,
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 10, right: 18, top: 12, bottom: 8),
+                          child: _buildSimpleLineChart(data.past5WeeksData),
+                        ),
+                      ),
+                    ],
                   ),
-                ]);
+                );
               },
               error: (error, stackTrace) => Text('Error: $error'),
               loading: () => Text(
-                "今週の総重量 0 t",
+                "データを読み込み中...",
                 style: TextStyle(color: Colors.white),
               ),
             ),
           ),
         ),
         Container(
-          height: 300,
+          height: 240,
           padding: EdgeInsets.all(4),
           child: mainPageDataAsyncValue.when(
             data: (mainPageData) {
@@ -207,36 +236,188 @@ class _PartsSelectWidget extends ConsumerWidget {
     );
   }
 
-  FlTitlesData get titlesData => FlTitlesData(
-        show: true,
-        bottomTitles: AxisTitles(
-          sideTitles: SideTitles(
-            showTitles: true,
-            reservedSize: 30,
-            getTitlesWidget: getTitles,
+  Widget _buildTodayPartsWeightItem(String partsName, double weight, int partsId) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 2),
+      child: Row(
+        children: [
+          Container(
+            width: 12,
+            height: 12,
+            decoration: BoxDecoration(
+              color: PartsColors.getColor(partsId),
+              borderRadius: BorderRadius.circular(2),
+            ),
           ),
-        ),
-        leftTitles: const AxisTitles(
-          sideTitles: SideTitles(showTitles: false),
-        ),
-        topTitles: const AxisTitles(
-          sideTitles: SideTitles(showTitles: false),
-        ),
-        rightTitles: const AxisTitles(
-          sideTitles: SideTitles(showTitles: false),
+          SizedBox(width: 8),
+          Text(
+            "$partsName : $weight t",
+            style: TextStyle(color: Colors.white, fontSize: 14),
+          ),
+        ],
+      ),
+    );
+  }
+
+  double _getMaxYValue(List<PartsWeight> data) {
+    double maxValue = 0;
+    for (var weekData in data) {
+      final values = [
+        weekData.chestTotalWeight,
+        weekData.backTotalWeight,
+        weekData.shoulderTotalWeight,
+        weekData.armTotalWeight,
+        weekData.absTotalWeight,
+        weekData.legTotalWeight,
+      ];
+      final weekMax = values.reduce((a, b) => a > b ? a : b);
+      if (weekMax > maxValue) maxValue = weekMax;
+    }
+    if (maxValue <= 0) return 10.0;
+
+    final adjustedMax = maxValue * 1.2;
+    final magnitude = (adjustedMax / 10).ceil() * 10;
+    return magnitude.toDouble();
+  }
+
+  Widget _buildSimpleLineChart(List<PartsWeight> data) {
+    if (data.isEmpty) {
+      return Center(
+        child: Text(
+          'データがありません',
+          style: TextStyle(color: Colors.white, fontSize: 14),
         ),
       );
+    }
 
-  Widget getTitles(double value, TitleMeta meta) {
-    final style = TextStyle(
-      fontWeight: FontWeight.bold,
-      fontSize: 14,
+    final List<Color> colors = [
+      PartsColors.getColor(0),
+      PartsColors.getColor(1),
+      PartsColors.getColor(2),
+      PartsColors.getColor(3),
+      PartsColors.getColor(4),
+      PartsColors.getColor(5),
+    ];
+
+    return LineChart(
+      LineChartData(
+        gridData: FlGridData(
+          show: true,
+          drawVerticalLine: false,
+          horizontalInterval: 1,
+          getDrawingHorizontalLine: (value) {
+            return FlLine(
+              color: Colors.white24,
+              strokeWidth: 0.5,
+            );
+          },
+        ),
+        titlesData: FlTitlesData(
+          show: true,
+          rightTitles: AxisTitles(
+            sideTitles: SideTitles(showTitles: false),
+          ),
+          topTitles: AxisTitles(
+            sideTitles: SideTitles(showTitles: false),
+          ),
+          bottomTitles: AxisTitles(
+            sideTitles: SideTitles(
+              showTitles: true,
+              reservedSize: 20,
+              interval: 1,
+              getTitlesWidget: (double value, TitleMeta meta) {
+                const style = TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 10,
+                );
+                String text = '';
+                switch (value.toInt()) {
+                  case 0:
+                    text = '5週前';
+                    break;
+                  case 1:
+                    text = '4週前';
+                    break;
+                  case 2:
+                    text = '3週前';
+                    break;
+                  case 3:
+                    text = '2週前';
+                    break;
+                  case 4:
+                    text = '今週';
+                    break;
+                }
+                return SideTitleWidget(
+                  meta: meta,
+                  space: 4,
+                  child: Text(text, style: style),
+                );
+              },
+            ),
+          ),
+          leftTitles: AxisTitles(
+            sideTitles: SideTitles(
+              showTitles: true,
+              interval: 10,
+              getTitlesWidget: (double value, TitleMeta meta) {
+                return Text(
+                  '${value.toInt()}t',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 8,
+                  ),
+                );
+              },
+              reservedSize: 20,
+            ),
+          ),
+        ),
+        borderData: FlBorderData(show: false),
+        minX: 0,
+        maxX: 4,
+        minY: 0,
+        maxY: _getMaxYValue(data),
+        lineBarsData: _buildLineChartBars(data, colors),
+      ),
     );
-    String text = bodyPartsList[value.toInt()];
-    return SideTitleWidget(
-      axisSide: meta.axisSide,
-      space: 4,
-      child: Text(text, style: style),
-    );
+  }
+
+  List<LineChartBarData> _buildLineChartBars(List<PartsWeight> data, List<Color> colors) {
+    List<LineChartBarData> lines = [];
+
+    for (int partIndex = 0; partIndex < 6; partIndex++) {
+      List<FlSpot> spots = [];
+      for (int weekIndex = 0; weekIndex < data.length; weekIndex++) {
+        double value = data[weekIndex].valueOfindex(partIndex);
+        spots.add(FlSpot(weekIndex.toDouble(), value));
+      }
+
+      lines.add(
+        LineChartBarData(
+          spots: spots,
+          isCurved: false,
+          color: colors[partIndex],
+          barWidth: 2,
+          isStrokeCapRound: true,
+          dotData: FlDotData(
+            show: true,
+            getDotPainter: (spot, percent, barData, index) {
+              return FlDotCirclePainter(
+                radius: 3,
+                color: colors[partIndex],
+                strokeWidth: 1,
+                strokeColor: Colors.white,
+              );
+            },
+          ),
+          belowBarData: BarAreaData(show: false),
+        ),
+      );
+    }
+
+    return lines;
   }
 }
