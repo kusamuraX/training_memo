@@ -32,6 +32,27 @@ class SettingBody extends StatelessWidget {
           ),
           onTap: () => GoRouter.of(context).push('/setting-parts-select'),
         ),
+        GestureDetector(
+          child: Container(
+            padding: EdgeInsets.only(top: 12, bottom: 12),
+            decoration: BoxDecoration(
+              border: Border(
+                bottom: BorderSide(width: 1.0, color: Colors.grey),
+              ),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(Icons.sync),
+                const Text(
+                  'データ引継ぎ',
+                  style: TextStyle(fontSize: 24),
+                ),
+              ],
+            ),
+          ),
+          onTap: () => GoRouter.of(context).push('/data-transfer'),
+        ),
       ],
     );
   }
@@ -206,9 +227,7 @@ class _SettingTrainingPage extends ConsumerWidget {
                                       child: Text('変更'),
                                       onPressed: () {
                                         if (form.valid) {
-                                          ref
-                                              .read(partsTrainingDataProvider.call(db, partsId).notifier)
-                                              .editMenu(dataList[index].partsTrainingId, form.control('menu').value);
+                                          ref.read(partsTrainingDataProvider.call(db, partsId).notifier).editMenu(dataList[index].partsTrainingId, form.control('menu').value);
                                           form.control('menu').value = '';
                                           Navigator.pop(context);
                                         }
@@ -240,9 +259,7 @@ class _SettingTrainingPage extends ConsumerWidget {
                                     TextButton(
                                       child: Text('削除'),
                                       onPressed: () async {
-                                        final result = await ref
-                                            .read(partsTrainingDataProvider.call(db, partsId).notifier)
-                                            .deleteMenu(dataList[index].partsTrainingId);
+                                        final result = await ref.read(partsTrainingDataProvider.call(db, partsId).notifier).deleteMenu(dataList[index].partsTrainingId);
                                         if (context.mounted) {
                                           Navigator.pop(context);
                                         }

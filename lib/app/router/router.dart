@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:training_memo/app/data/database.dart';
+import 'package:training_memo/app/data_transfer_page.dart';
 import 'package:training_memo/app/repository/body_parts_mst_repository.dart';
 import 'package:training_memo/app/repository/parts_training_info_repository.dart';
 import 'package:training_memo/app/settings_page.dart';
@@ -21,14 +22,25 @@ GoRouter router(RouterRef ref) => GoRouter(
     );
 
 // ROUTE定義
-@TypedGoRoute<MainPageRouteData>(path: '/')
-class MainPageRouteData extends GoRouteData {
-  const MainPageRouteData();
+@TypedGoRoute<MainPageData>(
+  path: '/',
+  routes: [
+    TypedGoRoute<SettingPartsSelectPageData>(
+      path: 'setting-parts-select',
+    ),
+    TypedGoRoute<SettingTrainingPageData>(
+      path: 'edit-training',
+    ),
+    TypedGoRoute<DataTransferPageData>(
+      path: 'data-transfer',
+    ),
+  ],
+)
+class MainPageData extends GoRouteData {
+  const MainPageData();
 
   @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return MainPage();
-  }
+  Widget build(BuildContext context, GoRouterState state) => MainPage();
 }
 
 @TypedGoRoute<PartsSelectPageData>(path: '/parts-select')
@@ -40,7 +52,6 @@ class PartsSelectPageData extends GoRouteData {
     return PartsSelectPage(argMap['date'] as DateTime);
   }
 }
-
 
 @TypedGoRoute<TrainingSelectPageData>(path: '/tselect')
 class TrainingSelectPageData extends GoRouteData {
@@ -72,7 +83,6 @@ class TrainingPageData extends GoRouteData {
   }
 }
 
-@TypedGoRoute<SettingPartsSelectPageData>(path: '/setting-parts-select')
 class SettingPartsSelectPageData extends GoRouteData {
   const SettingPartsSelectPageData();
   // 設定 - 部位選択
@@ -82,7 +92,6 @@ class SettingPartsSelectPageData extends GoRouteData {
   }
 }
 
-@TypedGoRoute<SettingTrainingPageData>(path: '/edit-training')
 class SettingTrainingPageData extends GoRouteData {
   const SettingTrainingPageData();
   // 設定 - トレーニング編集
@@ -92,4 +101,11 @@ class SettingTrainingPageData extends GoRouteData {
     final partsInfo = argMap['partsInfo'] as BodyPartsInfoData;
     return EditTrainingPage(partsInfo.partsId, partsInfo.partsName);
   }
+}
+
+class DataTransferPageData extends GoRouteData {
+  const DataTransferPageData();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) => DataTransferPage();
 }

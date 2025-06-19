@@ -38,6 +38,7 @@ class CurrentTrainingWidget extends ConsumerWidget {
                     SizedBox(width: 10),
                     Expanded(
                       child: TextFormField(
+                        key: ValueKey('weight_${dataList[index].trainingId}'),
                         decoration: const InputDecoration(
                           labelText: "重量",
                           suffix: Text("㎏"),
@@ -49,13 +50,13 @@ class CurrentTrainingWidget extends ConsumerWidget {
                         initialValue: dataList[index].weight?.toString() ?? "",
                         keyboardType: TextInputType.number,
                         inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^\d+(\.\d*)?'))],
-                        onChanged: (value) =>
-                            ref.read(trainingDataProvider.call(db, partsId, partsTrainingId, date).notifier).updateWeight(dataList[index], value),
+                        onChanged: (value) => ref.read(trainingDataProvider.call(db, partsId, partsTrainingId, date).notifier).updateWeight(dataList[index], value),
                       ),
                     ),
                     SizedBox(width: 10),
                     Expanded(
                       child: TextFormField(
+                        key: ValueKey('count_${dataList[index].trainingId}'),
                         decoration: const InputDecoration(
                           labelText: "回数",
                           suffix: Text("回"),
@@ -66,8 +67,7 @@ class CurrentTrainingWidget extends ConsumerWidget {
                         initialValue: dataList[index].count?.toString() ?? "",
                         keyboardType: TextInputType.number,
                         inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                        onChanged: (value) =>
-                            ref.read(trainingDataProvider.call(db, partsId, partsTrainingId, date).notifier).updateCount(dataList[index], value),
+                        onChanged: (value) => ref.read(trainingDataProvider.call(db, partsId, partsTrainingId, date).notifier).updateCount(dataList[index], value),
                       ),
                     ),
                     SizedBox(width: 10),
