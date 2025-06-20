@@ -121,7 +121,7 @@ class _PartsSelectWidget extends ConsumerWidget {
                         ),
                       ),
 
-                      SizedBox(height: 8),
+                      SizedBox(height: 16),
 
                       // 当日の各部位の総負荷重量
                       Container(
@@ -158,11 +158,11 @@ class _PartsSelectWidget extends ConsumerWidget {
                         ),
                       ),
 
-                      SizedBox(height: 16),
+                      SizedBox(height: 32),
 
                       // 過去5週の部位別総負荷重量グラフ
                       SizedBox(
-                        height: 220,
+                        height: 250,
                         child: Padding(
                           padding: EdgeInsets.only(left: 10, right: 18, top: 12, bottom: 8),
                           child: _buildSimpleLineChart(data.past5WeeksData),
@@ -181,7 +181,7 @@ class _PartsSelectWidget extends ConsumerWidget {
           ),
         ),
         Container(
-          height: 240,
+          height: 300,
           padding: EdgeInsets.all(4),
           child: mainPageDataAsyncValue.when(
             data: (mainPageData) {
