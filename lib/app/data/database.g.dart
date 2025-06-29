@@ -3,28 +3,18 @@
 part of 'database.dart';
 
 // ignore_for_file: type=lint
-class $BodyPartsInfoTable extends BodyPartsInfo
-    with TableInfo<$BodyPartsInfoTable, BodyPartsInfoData> {
+class $BodyPartsInfoTable extends BodyPartsInfo with TableInfo<$BodyPartsInfoTable, BodyPartsInfoData> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
   $BodyPartsInfoTable(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _partsIdMeta =
-      const VerificationMeta('partsId');
+  static const VerificationMeta _partsIdMeta = const VerificationMeta('partsId');
   @override
-  late final GeneratedColumn<int> partsId = GeneratedColumn<int>(
-      'parts_id', aliasedName, false,
-      hasAutoIncrement: true,
-      type: DriftSqlType.int,
-      requiredDuringInsert: false,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
-  static const VerificationMeta _partsNameMeta =
-      const VerificationMeta('partsName');
+  late final GeneratedColumn<int> partsId = GeneratedColumn<int>('parts_id', aliasedName, false,
+      hasAutoIncrement: true, type: DriftSqlType.int, requiredDuringInsert: false, defaultConstraints: GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
+  static const VerificationMeta _partsNameMeta = const VerificationMeta('partsName');
   @override
-  late final GeneratedColumn<String> partsName = GeneratedColumn<String>(
-      'parts_name', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
+  late final GeneratedColumn<String> partsName = GeneratedColumn<String>('parts_name', aliasedName, false, type: DriftSqlType.string, requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns => [partsId, partsName];
   @override
@@ -33,17 +23,14 @@ class $BodyPartsInfoTable extends BodyPartsInfo
   String get actualTableName => $name;
   static const String $name = 'body_parts_info';
   @override
-  VerificationContext validateIntegrity(Insertable<BodyPartsInfoData> instance,
-      {bool isInserting = false}) {
+  VerificationContext validateIntegrity(Insertable<BodyPartsInfoData> instance, {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('parts_id')) {
-      context.handle(_partsIdMeta,
-          partsId.isAcceptableOrUnknown(data['parts_id']!, _partsIdMeta));
+      context.handle(_partsIdMeta, partsId.isAcceptableOrUnknown(data['parts_id']!, _partsIdMeta));
     }
     if (data.containsKey('parts_name')) {
-      context.handle(_partsNameMeta,
-          partsName.isAcceptableOrUnknown(data['parts_name']!, _partsNameMeta));
+      context.handle(_partsNameMeta, partsName.isAcceptableOrUnknown(data['parts_name']!, _partsNameMeta));
     } else if (isInserting) {
       context.missing(_partsNameMeta);
     }
@@ -56,10 +43,8 @@ class $BodyPartsInfoTable extends BodyPartsInfo
   BodyPartsInfoData map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return BodyPartsInfoData(
-      partsId: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}parts_id'])!,
-      partsName: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}parts_name'])!,
+      partsId: attachedDatabase.typeMapping.read(DriftSqlType.int, data['${effectivePrefix}parts_id'])!,
+      partsName: attachedDatabase.typeMapping.read(DriftSqlType.string, data['${effectivePrefix}parts_name'])!,
     );
   }
 
@@ -69,8 +54,7 @@ class $BodyPartsInfoTable extends BodyPartsInfo
   }
 }
 
-class BodyPartsInfoData extends DataClass
-    implements Insertable<BodyPartsInfoData> {
+class BodyPartsInfoData extends DataClass implements Insertable<BodyPartsInfoData> {
   final int partsId;
   final String partsName;
   const BodyPartsInfoData({required this.partsId, required this.partsName});
@@ -89,8 +73,7 @@ class BodyPartsInfoData extends DataClass
     );
   }
 
-  factory BodyPartsInfoData.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
+  factory BodyPartsInfoData.fromJson(Map<String, dynamic> json, {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return BodyPartsInfoData(
       partsId: serializer.fromJson<int>(json['partsId']),
@@ -106,8 +89,7 @@ class BodyPartsInfoData extends DataClass
     };
   }
 
-  BodyPartsInfoData copyWith({int? partsId, String? partsName}) =>
-      BodyPartsInfoData(
+  BodyPartsInfoData copyWith({int? partsId, String? partsName}) => BodyPartsInfoData(
         partsId: partsId ?? this.partsId,
         partsName: partsName ?? this.partsName,
       );
@@ -130,11 +112,7 @@ class BodyPartsInfoData extends DataClass
   @override
   int get hashCode => Object.hash(partsId, partsName);
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      (other is BodyPartsInfoData &&
-          other.partsId == this.partsId &&
-          other.partsName == this.partsName);
+  bool operator ==(Object other) => identical(this, other) || (other is BodyPartsInfoData && other.partsId == this.partsId && other.partsName == this.partsName);
 }
 
 class BodyPartsInfoCompanion extends UpdateCompanion<BodyPartsInfoData> {
@@ -158,8 +136,7 @@ class BodyPartsInfoCompanion extends UpdateCompanion<BodyPartsInfoData> {
     });
   }
 
-  BodyPartsInfoCompanion copyWith(
-      {Value<int>? partsId, Value<String>? partsName}) {
+  BodyPartsInfoCompanion copyWith({Value<int>? partsId, Value<String>? partsName}) {
     return BodyPartsInfoCompanion(
       partsId: partsId ?? this.partsId,
       partsName: partsName ?? this.partsName,
@@ -188,70 +165,43 @@ class BodyPartsInfoCompanion extends UpdateCompanion<BodyPartsInfoData> {
   }
 }
 
-class $PartsTrainingInfoTable extends PartsTrainingInfo
-    with TableInfo<$PartsTrainingInfoTable, PartsTrainingInfoData> {
+class $PartsTrainingInfoTable extends PartsTrainingInfo with TableInfo<$PartsTrainingInfoTable, PartsTrainingInfoData> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
   $PartsTrainingInfoTable(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _bodyPartsInfoMeta =
-      const VerificationMeta('bodyPartsInfo');
+  static const VerificationMeta _bodyPartsInfoMeta = const VerificationMeta('bodyPartsInfo');
   @override
-  late final GeneratedColumn<int> bodyPartsInfo = GeneratedColumn<int>(
-      'body_parts_info', aliasedName, false,
-      type: DriftSqlType.int,
-      requiredDuringInsert: true,
-      defaultConstraints: GeneratedColumn.constraintIsAlways(
-          'REFERENCES body_parts_info (parts_id)'));
-  static const VerificationMeta _partsTrainingIdMeta =
-      const VerificationMeta('partsTrainingId');
+  late final GeneratedColumn<int> bodyPartsInfo = GeneratedColumn<int>('body_parts_info', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true, defaultConstraints: GeneratedColumn.constraintIsAlways('REFERENCES body_parts_info (parts_id)'));
+  static const VerificationMeta _partsTrainingIdMeta = const VerificationMeta('partsTrainingId');
   @override
-  late final GeneratedColumn<int> partsTrainingId = GeneratedColumn<int>(
-      'parts_training_id', aliasedName, false,
-      hasAutoIncrement: true,
-      type: DriftSqlType.int,
-      requiredDuringInsert: false,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
-  static const VerificationMeta _trainingNameMeta =
-      const VerificationMeta('trainingName');
+  late final GeneratedColumn<int> partsTrainingId = GeneratedColumn<int>('parts_training_id', aliasedName, false,
+      hasAutoIncrement: true, type: DriftSqlType.int, requiredDuringInsert: false, defaultConstraints: GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
+  static const VerificationMeta _trainingNameMeta = const VerificationMeta('trainingName');
   @override
-  late final GeneratedColumn<String> trainingName = GeneratedColumn<String>(
-      'training_name', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
+  late final GeneratedColumn<String> trainingName = GeneratedColumn<String>('training_name', aliasedName, false, type: DriftSqlType.string, requiredDuringInsert: true);
   @override
-  List<GeneratedColumn> get $columns =>
-      [bodyPartsInfo, partsTrainingId, trainingName];
+  List<GeneratedColumn> get $columns => [bodyPartsInfo, partsTrainingId, trainingName];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
   String get actualTableName => $name;
   static const String $name = 'parts_training_info';
   @override
-  VerificationContext validateIntegrity(
-      Insertable<PartsTrainingInfoData> instance,
-      {bool isInserting = false}) {
+  VerificationContext validateIntegrity(Insertable<PartsTrainingInfoData> instance, {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('body_parts_info')) {
-      context.handle(
-          _bodyPartsInfoMeta,
-          bodyPartsInfo.isAcceptableOrUnknown(
-              data['body_parts_info']!, _bodyPartsInfoMeta));
+      context.handle(_bodyPartsInfoMeta, bodyPartsInfo.isAcceptableOrUnknown(data['body_parts_info']!, _bodyPartsInfoMeta));
     } else if (isInserting) {
       context.missing(_bodyPartsInfoMeta);
     }
     if (data.containsKey('parts_training_id')) {
-      context.handle(
-          _partsTrainingIdMeta,
-          partsTrainingId.isAcceptableOrUnknown(
-              data['parts_training_id']!, _partsTrainingIdMeta));
+      context.handle(_partsTrainingIdMeta, partsTrainingId.isAcceptableOrUnknown(data['parts_training_id']!, _partsTrainingIdMeta));
     }
     if (data.containsKey('training_name')) {
-      context.handle(
-          _trainingNameMeta,
-          trainingName.isAcceptableOrUnknown(
-              data['training_name']!, _trainingNameMeta));
+      context.handle(_trainingNameMeta, trainingName.isAcceptableOrUnknown(data['training_name']!, _trainingNameMeta));
     } else if (isInserting) {
       context.missing(_trainingNameMeta);
     }
@@ -264,12 +214,9 @@ class $PartsTrainingInfoTable extends PartsTrainingInfo
   PartsTrainingInfoData map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return PartsTrainingInfoData(
-      bodyPartsInfo: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}body_parts_info'])!,
-      partsTrainingId: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}parts_training_id'])!,
-      trainingName: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}training_name'])!,
+      bodyPartsInfo: attachedDatabase.typeMapping.read(DriftSqlType.int, data['${effectivePrefix}body_parts_info'])!,
+      partsTrainingId: attachedDatabase.typeMapping.read(DriftSqlType.int, data['${effectivePrefix}parts_training_id'])!,
+      trainingName: attachedDatabase.typeMapping.read(DriftSqlType.string, data['${effectivePrefix}training_name'])!,
     );
   }
 
@@ -279,15 +226,11 @@ class $PartsTrainingInfoTable extends PartsTrainingInfo
   }
 }
 
-class PartsTrainingInfoData extends DataClass
-    implements Insertable<PartsTrainingInfoData> {
+class PartsTrainingInfoData extends DataClass implements Insertable<PartsTrainingInfoData> {
   final int bodyPartsInfo;
   final int partsTrainingId;
   final String trainingName;
-  const PartsTrainingInfoData(
-      {required this.bodyPartsInfo,
-      required this.partsTrainingId,
-      required this.trainingName});
+  const PartsTrainingInfoData({required this.bodyPartsInfo, required this.partsTrainingId, required this.trainingName});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -305,8 +248,7 @@ class PartsTrainingInfoData extends DataClass
     );
   }
 
-  factory PartsTrainingInfoData.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
+  factory PartsTrainingInfoData.fromJson(Map<String, dynamic> json, {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return PartsTrainingInfoData(
       bodyPartsInfo: serializer.fromJson<int>(json['bodyPartsInfo']),
@@ -324,24 +266,16 @@ class PartsTrainingInfoData extends DataClass
     };
   }
 
-  PartsTrainingInfoData copyWith(
-          {int? bodyPartsInfo, int? partsTrainingId, String? trainingName}) =>
-      PartsTrainingInfoData(
+  PartsTrainingInfoData copyWith({int? bodyPartsInfo, int? partsTrainingId, String? trainingName}) => PartsTrainingInfoData(
         bodyPartsInfo: bodyPartsInfo ?? this.bodyPartsInfo,
         partsTrainingId: partsTrainingId ?? this.partsTrainingId,
         trainingName: trainingName ?? this.trainingName,
       );
   PartsTrainingInfoData copyWithCompanion(PartsTrainingInfoCompanion data) {
     return PartsTrainingInfoData(
-      bodyPartsInfo: data.bodyPartsInfo.present
-          ? data.bodyPartsInfo.value
-          : this.bodyPartsInfo,
-      partsTrainingId: data.partsTrainingId.present
-          ? data.partsTrainingId.value
-          : this.partsTrainingId,
-      trainingName: data.trainingName.present
-          ? data.trainingName.value
-          : this.trainingName,
+      bodyPartsInfo: data.bodyPartsInfo.present ? data.bodyPartsInfo.value : this.bodyPartsInfo,
+      partsTrainingId: data.partsTrainingId.present ? data.partsTrainingId.value : this.partsTrainingId,
+      trainingName: data.trainingName.present ? data.trainingName.value : this.trainingName,
     );
   }
 
@@ -360,14 +294,10 @@ class PartsTrainingInfoData extends DataClass
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is PartsTrainingInfoData &&
-          other.bodyPartsInfo == this.bodyPartsInfo &&
-          other.partsTrainingId == this.partsTrainingId &&
-          other.trainingName == this.trainingName);
+      (other is PartsTrainingInfoData && other.bodyPartsInfo == this.bodyPartsInfo && other.partsTrainingId == this.partsTrainingId && other.trainingName == this.trainingName);
 }
 
-class PartsTrainingInfoCompanion
-    extends UpdateCompanion<PartsTrainingInfoData> {
+class PartsTrainingInfoCompanion extends UpdateCompanion<PartsTrainingInfoData> {
   final Value<int> bodyPartsInfo;
   final Value<int> partsTrainingId;
   final Value<String> trainingName;
@@ -394,10 +324,7 @@ class PartsTrainingInfoCompanion
     });
   }
 
-  PartsTrainingInfoCompanion copyWith(
-      {Value<int>? bodyPartsInfo,
-      Value<int>? partsTrainingId,
-      Value<String>? trainingName}) {
+  PartsTrainingInfoCompanion copyWith({Value<int>? bodyPartsInfo, Value<int>? partsTrainingId, Value<String>? trainingName}) {
     return PartsTrainingInfoCompanion(
       bodyPartsInfo: bodyPartsInfo ?? this.bodyPartsInfo,
       partsTrainingId: partsTrainingId ?? this.partsTrainingId,
@@ -431,132 +358,77 @@ class PartsTrainingInfoCompanion
   }
 }
 
-class $TrainingDataInfoTable extends TrainingDataInfo
-    with TableInfo<$TrainingDataInfoTable, TrainingDataInfoData> {
+class $TrainingDataInfoTable extends TrainingDataInfo with TableInfo<$TrainingDataInfoTable, TrainingDataInfoData> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
   $TrainingDataInfoTable(this.attachedDatabase, [this._alias]);
-  static const VerificationMeta _bodyPartsInfoMeta =
-      const VerificationMeta('bodyPartsInfo');
+  static const VerificationMeta _bodyPartsInfoMeta = const VerificationMeta('bodyPartsInfo');
   @override
-  late final GeneratedColumn<int> bodyPartsInfo = GeneratedColumn<int>(
-      'body_parts_info', aliasedName, false,
-      type: DriftSqlType.int,
-      requiredDuringInsert: true,
-      defaultConstraints: GeneratedColumn.constraintIsAlways(
-          'REFERENCES body_parts_info (parts_id)'));
-  static const VerificationMeta _partsTrainingInfoMeta =
-      const VerificationMeta('partsTrainingInfo');
+  late final GeneratedColumn<int> bodyPartsInfo = GeneratedColumn<int>('body_parts_info', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true, defaultConstraints: GeneratedColumn.constraintIsAlways('REFERENCES body_parts_info (parts_id)'));
+  static const VerificationMeta _partsTrainingInfoMeta = const VerificationMeta('partsTrainingInfo');
   @override
-  late final GeneratedColumn<int> partsTrainingInfo = GeneratedColumn<int>(
-      'parts_training_info', aliasedName, false,
-      type: DriftSqlType.int,
-      requiredDuringInsert: true,
-      defaultConstraints: GeneratedColumn.constraintIsAlways(
-          'REFERENCES parts_training_info (parts_training_id)'));
-  static const VerificationMeta _trainingIdMeta =
-      const VerificationMeta('trainingId');
+  late final GeneratedColumn<int> partsTrainingInfo = GeneratedColumn<int>('parts_training_info', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true, defaultConstraints: GeneratedColumn.constraintIsAlways('REFERENCES parts_training_info (parts_training_id)'));
+  static const VerificationMeta _trainingIdMeta = const VerificationMeta('trainingId');
   @override
-  late final GeneratedColumn<int> trainingId = GeneratedColumn<int>(
-      'training_id', aliasedName, false,
-      hasAutoIncrement: true,
-      type: DriftSqlType.int,
-      requiredDuringInsert: false,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
-  static const VerificationMeta _trainingDateMeta =
-      const VerificationMeta('trainingDate');
+  late final GeneratedColumn<int> trainingId = GeneratedColumn<int>('training_id', aliasedName, false,
+      hasAutoIncrement: true, type: DriftSqlType.int, requiredDuringInsert: false, defaultConstraints: GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
+  static const VerificationMeta _trainingDateMeta = const VerificationMeta('trainingDate');
   @override
-  late final GeneratedColumn<DateTime> trainingDate = GeneratedColumn<DateTime>(
-      'training_date', aliasedName, false,
-      type: DriftSqlType.dateTime,
-      requiredDuringInsert: false,
-      defaultValue: Constant(DateTime.now()));
+  late final GeneratedColumn<DateTime> trainingDate =
+      GeneratedColumn<DateTime>('training_date', aliasedName, false, type: DriftSqlType.dateTime, requiredDuringInsert: false, defaultValue: Constant(DateTime.now()));
   static const VerificationMeta _weightMeta = const VerificationMeta('weight');
   @override
-  late final GeneratedColumn<double> weight = GeneratedColumn<double>(
-      'weight', aliasedName, true,
-      type: DriftSqlType.double, requiredDuringInsert: false);
+  late final GeneratedColumn<double> weight = GeneratedColumn<double>('weight', aliasedName, true, type: DriftSqlType.double, requiredDuringInsert: false);
   static const VerificationMeta _repMeta = const VerificationMeta('rep');
   @override
-  late final GeneratedColumn<int> rep = GeneratedColumn<int>(
-      'rep', aliasedName, true,
-      type: DriftSqlType.int, requiredDuringInsert: false);
+  late final GeneratedColumn<int> rep = GeneratedColumn<int>('rep', aliasedName, true, type: DriftSqlType.int, requiredDuringInsert: false);
   static const VerificationMeta _rmMeta = const VerificationMeta('rm');
   @override
-  late final GeneratedColumn<int> rm = GeneratedColumn<int>(
-      'rm', aliasedName, true,
-      type: DriftSqlType.int, requiredDuringInsert: false);
+  late final GeneratedColumn<int> rm = GeneratedColumn<int>('rm', aliasedName, true, type: DriftSqlType.int, requiredDuringInsert: false);
   static const VerificationMeta _memoMeta = const VerificationMeta('memo');
   @override
-  late final GeneratedColumn<String> memo = GeneratedColumn<String>(
-      'memo', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
+  late final GeneratedColumn<String> memo = GeneratedColumn<String>('memo', aliasedName, true, type: DriftSqlType.string, requiredDuringInsert: false);
   @override
-  List<GeneratedColumn> get $columns => [
-        bodyPartsInfo,
-        partsTrainingInfo,
-        trainingId,
-        trainingDate,
-        weight,
-        rep,
-        rm,
-        memo
-      ];
+  List<GeneratedColumn> get $columns => [bodyPartsInfo, partsTrainingInfo, trainingId, trainingDate, weight, rep, rm, memo];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
   String get actualTableName => $name;
   static const String $name = 'training_data_info';
   @override
-  VerificationContext validateIntegrity(
-      Insertable<TrainingDataInfoData> instance,
-      {bool isInserting = false}) {
+  VerificationContext validateIntegrity(Insertable<TrainingDataInfoData> instance, {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('body_parts_info')) {
-      context.handle(
-          _bodyPartsInfoMeta,
-          bodyPartsInfo.isAcceptableOrUnknown(
-              data['body_parts_info']!, _bodyPartsInfoMeta));
+      context.handle(_bodyPartsInfoMeta, bodyPartsInfo.isAcceptableOrUnknown(data['body_parts_info']!, _bodyPartsInfoMeta));
     } else if (isInserting) {
       context.missing(_bodyPartsInfoMeta);
     }
     if (data.containsKey('parts_training_info')) {
-      context.handle(
-          _partsTrainingInfoMeta,
-          partsTrainingInfo.isAcceptableOrUnknown(
-              data['parts_training_info']!, _partsTrainingInfoMeta));
+      context.handle(_partsTrainingInfoMeta, partsTrainingInfo.isAcceptableOrUnknown(data['parts_training_info']!, _partsTrainingInfoMeta));
     } else if (isInserting) {
       context.missing(_partsTrainingInfoMeta);
     }
     if (data.containsKey('training_id')) {
-      context.handle(
-          _trainingIdMeta,
-          trainingId.isAcceptableOrUnknown(
-              data['training_id']!, _trainingIdMeta));
+      context.handle(_trainingIdMeta, trainingId.isAcceptableOrUnknown(data['training_id']!, _trainingIdMeta));
     }
     if (data.containsKey('training_date')) {
-      context.handle(
-          _trainingDateMeta,
-          trainingDate.isAcceptableOrUnknown(
-              data['training_date']!, _trainingDateMeta));
+      context.handle(_trainingDateMeta, trainingDate.isAcceptableOrUnknown(data['training_date']!, _trainingDateMeta));
     }
     if (data.containsKey('weight')) {
-      context.handle(_weightMeta,
-          weight.isAcceptableOrUnknown(data['weight']!, _weightMeta));
+      context.handle(_weightMeta, weight.isAcceptableOrUnknown(data['weight']!, _weightMeta));
     }
     if (data.containsKey('rep')) {
-      context.handle(
-          _repMeta, rep.isAcceptableOrUnknown(data['rep']!, _repMeta));
+      context.handle(_repMeta, rep.isAcceptableOrUnknown(data['rep']!, _repMeta));
     }
     if (data.containsKey('rm')) {
       context.handle(_rmMeta, rm.isAcceptableOrUnknown(data['rm']!, _rmMeta));
     }
     if (data.containsKey('memo')) {
-      context.handle(
-          _memoMeta, memo.isAcceptableOrUnknown(data['memo']!, _memoMeta));
+      context.handle(_memoMeta, memo.isAcceptableOrUnknown(data['memo']!, _memoMeta));
     }
     return context;
   }
@@ -567,22 +439,14 @@ class $TrainingDataInfoTable extends TrainingDataInfo
   TrainingDataInfoData map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return TrainingDataInfoData(
-      bodyPartsInfo: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}body_parts_info'])!,
-      partsTrainingInfo: attachedDatabase.typeMapping.read(
-          DriftSqlType.int, data['${effectivePrefix}parts_training_info'])!,
-      trainingId: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}training_id'])!,
-      trainingDate: attachedDatabase.typeMapping.read(
-          DriftSqlType.dateTime, data['${effectivePrefix}training_date'])!,
-      weight: attachedDatabase.typeMapping
-          .read(DriftSqlType.double, data['${effectivePrefix}weight']),
-      rep: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}rep']),
-      rm: attachedDatabase.typeMapping
-          .read(DriftSqlType.int, data['${effectivePrefix}rm']),
-      memo: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}memo']),
+      bodyPartsInfo: attachedDatabase.typeMapping.read(DriftSqlType.int, data['${effectivePrefix}body_parts_info'])!,
+      partsTrainingInfo: attachedDatabase.typeMapping.read(DriftSqlType.int, data['${effectivePrefix}parts_training_info'])!,
+      trainingId: attachedDatabase.typeMapping.read(DriftSqlType.int, data['${effectivePrefix}training_id'])!,
+      trainingDate: attachedDatabase.typeMapping.read(DriftSqlType.dateTime, data['${effectivePrefix}training_date'])!,
+      weight: attachedDatabase.typeMapping.read(DriftSqlType.double, data['${effectivePrefix}weight']),
+      rep: attachedDatabase.typeMapping.read(DriftSqlType.int, data['${effectivePrefix}rep']),
+      rm: attachedDatabase.typeMapping.read(DriftSqlType.int, data['${effectivePrefix}rm']),
+      memo: attachedDatabase.typeMapping.read(DriftSqlType.string, data['${effectivePrefix}memo']),
     );
   }
 
@@ -592,8 +456,7 @@ class $TrainingDataInfoTable extends TrainingDataInfo
   }
 }
 
-class TrainingDataInfoData extends DataClass
-    implements Insertable<TrainingDataInfoData> {
+class TrainingDataInfoData extends DataClass implements Insertable<TrainingDataInfoData> {
   final int bodyPartsInfo;
   final int partsTrainingInfo;
   final int trainingId;
@@ -602,15 +465,7 @@ class TrainingDataInfoData extends DataClass
   final int? rep;
   final int? rm;
   final String? memo;
-  const TrainingDataInfoData(
-      {required this.bodyPartsInfo,
-      required this.partsTrainingInfo,
-      required this.trainingId,
-      required this.trainingDate,
-      this.weight,
-      this.rep,
-      this.rm,
-      this.memo});
+  const TrainingDataInfoData({required this.bodyPartsInfo, required this.partsTrainingInfo, required this.trainingId, required this.trainingDate, this.weight, this.rep, this.rm, this.memo});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -639,16 +494,14 @@ class TrainingDataInfoData extends DataClass
       partsTrainingInfo: Value(partsTrainingInfo),
       trainingId: Value(trainingId),
       trainingDate: Value(trainingDate),
-      weight:
-          weight == null && nullToAbsent ? const Value.absent() : Value(weight),
+      weight: weight == null && nullToAbsent ? const Value.absent() : Value(weight),
       rep: rep == null && nullToAbsent ? const Value.absent() : Value(rep),
       rm: rm == null && nullToAbsent ? const Value.absent() : Value(rm),
       memo: memo == null && nullToAbsent ? const Value.absent() : Value(memo),
     );
   }
 
-  factory TrainingDataInfoData.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
+  factory TrainingDataInfoData.fromJson(Map<String, dynamic> json, {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return TrainingDataInfoData(
       bodyPartsInfo: serializer.fromJson<int>(json['bodyPartsInfo']),
@@ -697,17 +550,10 @@ class TrainingDataInfoData extends DataClass
       );
   TrainingDataInfoData copyWithCompanion(TrainingDataInfoCompanion data) {
     return TrainingDataInfoData(
-      bodyPartsInfo: data.bodyPartsInfo.present
-          ? data.bodyPartsInfo.value
-          : this.bodyPartsInfo,
-      partsTrainingInfo: data.partsTrainingInfo.present
-          ? data.partsTrainingInfo.value
-          : this.partsTrainingInfo,
-      trainingId:
-          data.trainingId.present ? data.trainingId.value : this.trainingId,
-      trainingDate: data.trainingDate.present
-          ? data.trainingDate.value
-          : this.trainingDate,
+      bodyPartsInfo: data.bodyPartsInfo.present ? data.bodyPartsInfo.value : this.bodyPartsInfo,
+      partsTrainingInfo: data.partsTrainingInfo.present ? data.partsTrainingInfo.value : this.partsTrainingInfo,
+      trainingId: data.trainingId.present ? data.trainingId.value : this.trainingId,
+      trainingDate: data.trainingDate.present ? data.trainingDate.value : this.trainingDate,
       weight: data.weight.present ? data.weight.value : this.weight,
       rep: data.rep.present ? data.rep.value : this.rep,
       rm: data.rm.present ? data.rm.value : this.rm,
@@ -731,8 +577,7 @@ class TrainingDataInfoData extends DataClass
   }
 
   @override
-  int get hashCode => Object.hash(bodyPartsInfo, partsTrainingInfo, trainingId,
-      trainingDate, weight, rep, rm, memo);
+  int get hashCode => Object.hash(bodyPartsInfo, partsTrainingInfo, trainingId, trainingDate, weight, rep, rm, memo);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -870,74 +715,48 @@ abstract class _$AppDataBase extends GeneratedDatabase {
   _$AppDataBase(QueryExecutor e) : super(e);
   $AppDataBaseManager get managers => $AppDataBaseManager(this);
   late final $BodyPartsInfoTable bodyPartsInfo = $BodyPartsInfoTable(this);
-  late final $PartsTrainingInfoTable partsTrainingInfo =
-      $PartsTrainingInfoTable(this);
-  late final $TrainingDataInfoTable trainingDataInfo =
-      $TrainingDataInfoTable(this);
+  late final $PartsTrainingInfoTable partsTrainingInfo = $PartsTrainingInfoTable(this);
+  late final $TrainingDataInfoTable trainingDataInfo = $TrainingDataInfoTable(this);
   @override
-  Iterable<TableInfo<Table, Object?>> get allTables =>
-      allSchemaEntities.whereType<TableInfo<Table, Object?>>();
+  Iterable<TableInfo<Table, Object?>> get allTables => allSchemaEntities.whereType<TableInfo<Table, Object?>>();
   @override
-  List<DatabaseSchemaEntity> get allSchemaEntities =>
-      [bodyPartsInfo, partsTrainingInfo, trainingDataInfo];
+  List<DatabaseSchemaEntity> get allSchemaEntities => [bodyPartsInfo, partsTrainingInfo, trainingDataInfo];
 }
 
-typedef $$BodyPartsInfoTableCreateCompanionBuilder = BodyPartsInfoCompanion
-    Function({
+typedef $$BodyPartsInfoTableCreateCompanionBuilder = BodyPartsInfoCompanion Function({
   Value<int> partsId,
   required String partsName,
 });
-typedef $$BodyPartsInfoTableUpdateCompanionBuilder = BodyPartsInfoCompanion
-    Function({
+typedef $$BodyPartsInfoTableUpdateCompanionBuilder = BodyPartsInfoCompanion Function({
   Value<int> partsId,
   Value<String> partsName,
 });
 
-final class $$BodyPartsInfoTableReferences extends BaseReferences<_$AppDataBase,
-    $BodyPartsInfoTable, BodyPartsInfoData> {
-  $$BodyPartsInfoTableReferences(
-      super.$_db, super.$_table, super.$_typedResult);
+final class $$BodyPartsInfoTableReferences extends BaseReferences<_$AppDataBase, $BodyPartsInfoTable, BodyPartsInfoData> {
+  $$BodyPartsInfoTableReferences(super.$_db, super.$_table, super.$_typedResult);
 
-  static MultiTypedResultKey<$PartsTrainingInfoTable,
-      List<PartsTrainingInfoData>> _partsTrainingInfoRefsTable(
-          _$AppDataBase db) =>
-      MultiTypedResultKey.fromTable(db.partsTrainingInfo,
-          aliasName: $_aliasNameGenerator(
-              db.bodyPartsInfo.partsId, db.partsTrainingInfo.bodyPartsInfo));
+  static MultiTypedResultKey<$PartsTrainingInfoTable, List<PartsTrainingInfoData>> _partsTrainingInfoRefsTable(_$AppDataBase db) =>
+      MultiTypedResultKey.fromTable(db.partsTrainingInfo, aliasName: $_aliasNameGenerator(db.bodyPartsInfo.partsId, db.partsTrainingInfo.bodyPartsInfo));
 
   $$PartsTrainingInfoTableProcessedTableManager get partsTrainingInfoRefs {
-    final manager = $$PartsTrainingInfoTableTableManager(
-            $_db, $_db.partsTrainingInfo)
-        .filter((f) =>
-            f.bodyPartsInfo.partsId.sqlEquals($_itemColumn<int>('parts_id')!));
+    final manager = $$PartsTrainingInfoTableTableManager($_db, $_db.partsTrainingInfo).filter((f) => f.bodyPartsInfo.partsId.sqlEquals($_itemColumn<int>('parts_id')!));
 
-    final cache =
-        $_typedResult.readTableOrNull(_partsTrainingInfoRefsTable($_db));
-    return ProcessedTableManager(
-        manager.$state.copyWith(prefetchedData: cache));
+    final cache = $_typedResult.readTableOrNull(_partsTrainingInfoRefsTable($_db));
+    return ProcessedTableManager(manager.$state.copyWith(prefetchedData: cache));
   }
 
-  static MultiTypedResultKey<$TrainingDataInfoTable, List<TrainingDataInfoData>>
-      _trainingDataInfoRefsTable(_$AppDataBase db) =>
-          MultiTypedResultKey.fromTable(db.trainingDataInfo,
-              aliasName: $_aliasNameGenerator(
-                  db.bodyPartsInfo.partsId, db.trainingDataInfo.bodyPartsInfo));
+  static MultiTypedResultKey<$TrainingDataInfoTable, List<TrainingDataInfoData>> _trainingDataInfoRefsTable(_$AppDataBase db) =>
+      MultiTypedResultKey.fromTable(db.trainingDataInfo, aliasName: $_aliasNameGenerator(db.bodyPartsInfo.partsId, db.trainingDataInfo.bodyPartsInfo));
 
   $$TrainingDataInfoTableProcessedTableManager get trainingDataInfoRefs {
-    final manager = $$TrainingDataInfoTableTableManager(
-            $_db, $_db.trainingDataInfo)
-        .filter((f) =>
-            f.bodyPartsInfo.partsId.sqlEquals($_itemColumn<int>('parts_id')!));
+    final manager = $$TrainingDataInfoTableTableManager($_db, $_db.trainingDataInfo).filter((f) => f.bodyPartsInfo.partsId.sqlEquals($_itemColumn<int>('parts_id')!));
 
-    final cache =
-        $_typedResult.readTableOrNull(_trainingDataInfoRefsTable($_db));
-    return ProcessedTableManager(
-        manager.$state.copyWith(prefetchedData: cache));
+    final cache = $_typedResult.readTableOrNull(_trainingDataInfoRefsTable($_db));
+    return ProcessedTableManager(manager.$state.copyWith(prefetchedData: cache));
   }
 }
 
-class $$BodyPartsInfoTableFilterComposer
-    extends Composer<_$AppDataBase, $BodyPartsInfoTable> {
+class $$BodyPartsInfoTableFilterComposer extends Composer<_$AppDataBase, $BodyPartsInfoTable> {
   $$BodyPartsInfoTableFilterComposer({
     required super.$db,
     required super.$table,
@@ -945,57 +764,44 @@ class $$BodyPartsInfoTableFilterComposer
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  ColumnFilters<int> get partsId => $composableBuilder(
-      column: $table.partsId, builder: (column) => ColumnFilters(column));
+  ColumnFilters<int> get partsId => $composableBuilder(column: $table.partsId, builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<String> get partsName => $composableBuilder(
-      column: $table.partsName, builder: (column) => ColumnFilters(column));
+  ColumnFilters<String> get partsName => $composableBuilder(column: $table.partsName, builder: (column) => ColumnFilters(column));
 
-  Expression<bool> partsTrainingInfoRefs(
-      Expression<bool> Function($$PartsTrainingInfoTableFilterComposer f) f) {
+  Expression<bool> partsTrainingInfoRefs(Expression<bool> Function($$PartsTrainingInfoTableFilterComposer f) f) {
     final $$PartsTrainingInfoTableFilterComposer composer = $composerBuilder(
         composer: this,
         getCurrentColumn: (t) => t.partsId,
         referencedTable: $db.partsTrainingInfo,
         getReferencedColumn: (t) => t.bodyPartsInfo,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$PartsTrainingInfoTableFilterComposer(
+        builder: (joinBuilder, {$addJoinBuilderToRootComposer, $removeJoinBuilderFromRootComposer}) => $$PartsTrainingInfoTableFilterComposer(
               $db: $db,
               $table: $db.partsTrainingInfo,
               $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
               joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
+              $removeJoinBuilderFromRootComposer: $removeJoinBuilderFromRootComposer,
             ));
     return f(composer);
   }
 
-  Expression<bool> trainingDataInfoRefs(
-      Expression<bool> Function($$TrainingDataInfoTableFilterComposer f) f) {
+  Expression<bool> trainingDataInfoRefs(Expression<bool> Function($$TrainingDataInfoTableFilterComposer f) f) {
     final $$TrainingDataInfoTableFilterComposer composer = $composerBuilder(
         composer: this,
         getCurrentColumn: (t) => t.partsId,
         referencedTable: $db.trainingDataInfo,
         getReferencedColumn: (t) => t.bodyPartsInfo,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$TrainingDataInfoTableFilterComposer(
+        builder: (joinBuilder, {$addJoinBuilderToRootComposer, $removeJoinBuilderFromRootComposer}) => $$TrainingDataInfoTableFilterComposer(
               $db: $db,
               $table: $db.trainingDataInfo,
               $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
               joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
+              $removeJoinBuilderFromRootComposer: $removeJoinBuilderFromRootComposer,
             ));
     return f(composer);
   }
 }
 
-class $$BodyPartsInfoTableOrderingComposer
-    extends Composer<_$AppDataBase, $BodyPartsInfoTable> {
+class $$BodyPartsInfoTableOrderingComposer extends Composer<_$AppDataBase, $BodyPartsInfoTable> {
   $$BodyPartsInfoTableOrderingComposer({
     required super.$db,
     required super.$table,
@@ -1003,15 +809,12 @@ class $$BodyPartsInfoTableOrderingComposer
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  ColumnOrderings<int> get partsId => $composableBuilder(
-      column: $table.partsId, builder: (column) => ColumnOrderings(column));
+  ColumnOrderings<int> get partsId => $composableBuilder(column: $table.partsId, builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<String> get partsName => $composableBuilder(
-      column: $table.partsName, builder: (column) => ColumnOrderings(column));
+  ColumnOrderings<String> get partsName => $composableBuilder(column: $table.partsName, builder: (column) => ColumnOrderings(column));
 }
 
-class $$BodyPartsInfoTableAnnotationComposer
-    extends Composer<_$AppDataBase, $BodyPartsInfoTable> {
+class $$BodyPartsInfoTableAnnotationComposer extends Composer<_$AppDataBase, $BodyPartsInfoTable> {
   $$BodyPartsInfoTableAnnotationComposer({
     required super.$db,
     required super.$table,
@@ -1019,51 +822,38 @@ class $$BodyPartsInfoTableAnnotationComposer
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  GeneratedColumn<int> get partsId =>
-      $composableBuilder(column: $table.partsId, builder: (column) => column);
+  GeneratedColumn<int> get partsId => $composableBuilder(column: $table.partsId, builder: (column) => column);
 
-  GeneratedColumn<String> get partsName =>
-      $composableBuilder(column: $table.partsName, builder: (column) => column);
+  GeneratedColumn<String> get partsName => $composableBuilder(column: $table.partsName, builder: (column) => column);
 
-  Expression<T> partsTrainingInfoRefs<T extends Object>(
-      Expression<T> Function($$PartsTrainingInfoTableAnnotationComposer a) f) {
-    final $$PartsTrainingInfoTableAnnotationComposer composer =
-        $composerBuilder(
-            composer: this,
-            getCurrentColumn: (t) => t.partsId,
-            referencedTable: $db.partsTrainingInfo,
-            getReferencedColumn: (t) => t.bodyPartsInfo,
-            builder: (joinBuilder,
-                    {$addJoinBuilderToRootComposer,
-                    $removeJoinBuilderFromRootComposer}) =>
-                $$PartsTrainingInfoTableAnnotationComposer(
-                  $db: $db,
-                  $table: $db.partsTrainingInfo,
-                  $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-                  joinBuilder: joinBuilder,
-                  $removeJoinBuilderFromRootComposer:
-                      $removeJoinBuilderFromRootComposer,
-                ));
+  Expression<T> partsTrainingInfoRefs<T extends Object>(Expression<T> Function($$PartsTrainingInfoTableAnnotationComposer a) f) {
+    final $$PartsTrainingInfoTableAnnotationComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.partsId,
+        referencedTable: $db.partsTrainingInfo,
+        getReferencedColumn: (t) => t.bodyPartsInfo,
+        builder: (joinBuilder, {$addJoinBuilderToRootComposer, $removeJoinBuilderFromRootComposer}) => $$PartsTrainingInfoTableAnnotationComposer(
+              $db: $db,
+              $table: $db.partsTrainingInfo,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer: $removeJoinBuilderFromRootComposer,
+            ));
     return f(composer);
   }
 
-  Expression<T> trainingDataInfoRefs<T extends Object>(
-      Expression<T> Function($$TrainingDataInfoTableAnnotationComposer a) f) {
+  Expression<T> trainingDataInfoRefs<T extends Object>(Expression<T> Function($$TrainingDataInfoTableAnnotationComposer a) f) {
     final $$TrainingDataInfoTableAnnotationComposer composer = $composerBuilder(
         composer: this,
         getCurrentColumn: (t) => t.partsId,
         referencedTable: $db.trainingDataInfo,
         getReferencedColumn: (t) => t.bodyPartsInfo,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$TrainingDataInfoTableAnnotationComposer(
+        builder: (joinBuilder, {$addJoinBuilderToRootComposer, $removeJoinBuilderFromRootComposer}) => $$TrainingDataInfoTableAnnotationComposer(
               $db: $db,
               $table: $db.trainingDataInfo,
               $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
               joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
+              $removeJoinBuilderFromRootComposer: $removeJoinBuilderFromRootComposer,
             ));
     return f(composer);
   }
@@ -1080,18 +870,14 @@ class $$BodyPartsInfoTableTableManager extends RootTableManager<
     $$BodyPartsInfoTableUpdateCompanionBuilder,
     (BodyPartsInfoData, $$BodyPartsInfoTableReferences),
     BodyPartsInfoData,
-    PrefetchHooks Function(
-        {bool partsTrainingInfoRefs, bool trainingDataInfoRefs})> {
+    PrefetchHooks Function({bool partsTrainingInfoRefs, bool trainingDataInfoRefs})> {
   $$BodyPartsInfoTableTableManager(_$AppDataBase db, $BodyPartsInfoTable table)
       : super(TableManagerState(
           db: db,
           table: table,
-          createFilteringComposer: () =>
-              $$BodyPartsInfoTableFilterComposer($db: db, $table: table),
-          createOrderingComposer: () =>
-              $$BodyPartsInfoTableOrderingComposer($db: db, $table: table),
-          createComputedFieldComposer: () =>
-              $$BodyPartsInfoTableAnnotationComposer($db: db, $table: table),
+          createFilteringComposer: () => $$BodyPartsInfoTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () => $$BodyPartsInfoTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () => $$BodyPartsInfoTableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback: ({
             Value<int> partsId = const Value.absent(),
             Value<String> partsName = const Value.absent(),
@@ -1108,48 +894,27 @@ class $$BodyPartsInfoTableTableManager extends RootTableManager<
             partsId: partsId,
             partsName: partsName,
           ),
-          withReferenceMapper: (p0) => p0
-              .map((e) => (
-                    e.readTable(table),
-                    $$BodyPartsInfoTableReferences(db, table, e)
-                  ))
-              .toList(),
-          prefetchHooksCallback: (
-              {partsTrainingInfoRefs = false, trainingDataInfoRefs = false}) {
+          withReferenceMapper: (p0) => p0.map((e) => (e.readTable(table), $$BodyPartsInfoTableReferences(db, table, e))).toList(),
+          prefetchHooksCallback: ({partsTrainingInfoRefs = false, trainingDataInfoRefs = false}) {
             return PrefetchHooks(
               db: db,
-              explicitlyWatchedTables: [
-                if (partsTrainingInfoRefs) db.partsTrainingInfo,
-                if (trainingDataInfoRefs) db.trainingDataInfo
-              ],
+              explicitlyWatchedTables: [if (partsTrainingInfoRefs) db.partsTrainingInfo, if (trainingDataInfoRefs) db.trainingDataInfo],
               addJoins: null,
               getPrefetchedDataCallback: (items) async {
                 return [
                   if (partsTrainingInfoRefs)
-                    await $_getPrefetchedData<BodyPartsInfoData,
-                            $BodyPartsInfoTable, PartsTrainingInfoData>(
+                    await $_getPrefetchedData<BodyPartsInfoData, $BodyPartsInfoTable, PartsTrainingInfoData>(
                         currentTable: table,
-                        referencedTable: $$BodyPartsInfoTableReferences
-                            ._partsTrainingInfoRefsTable(db),
-                        managerFromTypedResult: (p0) =>
-                            $$BodyPartsInfoTableReferences(db, table, p0)
-                                .partsTrainingInfoRefs,
-                        referencedItemsForCurrentItem:
-                            (item, referencedItems) => referencedItems
-                                .where((e) => e.bodyPartsInfo == item.partsId),
+                        referencedTable: $$BodyPartsInfoTableReferences._partsTrainingInfoRefsTable(db),
+                        managerFromTypedResult: (p0) => $$BodyPartsInfoTableReferences(db, table, p0).partsTrainingInfoRefs,
+                        referencedItemsForCurrentItem: (item, referencedItems) => referencedItems.where((e) => e.bodyPartsInfo == item.partsId),
                         typedResults: items),
                   if (trainingDataInfoRefs)
-                    await $_getPrefetchedData<BodyPartsInfoData,
-                            $BodyPartsInfoTable, TrainingDataInfoData>(
+                    await $_getPrefetchedData<BodyPartsInfoData, $BodyPartsInfoTable, TrainingDataInfoData>(
                         currentTable: table,
-                        referencedTable: $$BodyPartsInfoTableReferences
-                            ._trainingDataInfoRefsTable(db),
-                        managerFromTypedResult: (p0) =>
-                            $$BodyPartsInfoTableReferences(db, table, p0)
-                                .trainingDataInfoRefs,
-                        referencedItemsForCurrentItem:
-                            (item, referencedItems) => referencedItems
-                                .where((e) => e.bodyPartsInfo == item.partsId),
+                        referencedTable: $$BodyPartsInfoTableReferences._trainingDataInfoRefsTable(db),
+                        managerFromTypedResult: (p0) => $$BodyPartsInfoTableReferences(db, table, p0).trainingDataInfoRefs,
+                        referencedItemsForCurrentItem: (item, referencedItems) => referencedItems.where((e) => e.bodyPartsInfo == item.partsId),
                         typedResults: items)
                 ];
               },
@@ -1169,63 +934,44 @@ typedef $$BodyPartsInfoTableProcessedTableManager = ProcessedTableManager<
     $$BodyPartsInfoTableUpdateCompanionBuilder,
     (BodyPartsInfoData, $$BodyPartsInfoTableReferences),
     BodyPartsInfoData,
-    PrefetchHooks Function(
-        {bool partsTrainingInfoRefs, bool trainingDataInfoRefs})>;
-typedef $$PartsTrainingInfoTableCreateCompanionBuilder
-    = PartsTrainingInfoCompanion Function({
+    PrefetchHooks Function({bool partsTrainingInfoRefs, bool trainingDataInfoRefs})>;
+typedef $$PartsTrainingInfoTableCreateCompanionBuilder = PartsTrainingInfoCompanion Function({
   required int bodyPartsInfo,
   Value<int> partsTrainingId,
   required String trainingName,
 });
-typedef $$PartsTrainingInfoTableUpdateCompanionBuilder
-    = PartsTrainingInfoCompanion Function({
+typedef $$PartsTrainingInfoTableUpdateCompanionBuilder = PartsTrainingInfoCompanion Function({
   Value<int> bodyPartsInfo,
   Value<int> partsTrainingId,
   Value<String> trainingName,
 });
 
-final class $$PartsTrainingInfoTableReferences extends BaseReferences<
-    _$AppDataBase, $PartsTrainingInfoTable, PartsTrainingInfoData> {
-  $$PartsTrainingInfoTableReferences(
-      super.$_db, super.$_table, super.$_typedResult);
+final class $$PartsTrainingInfoTableReferences extends BaseReferences<_$AppDataBase, $PartsTrainingInfoTable, PartsTrainingInfoData> {
+  $$PartsTrainingInfoTableReferences(super.$_db, super.$_table, super.$_typedResult);
 
-  static $BodyPartsInfoTable _bodyPartsInfoTable(_$AppDataBase db) =>
-      db.bodyPartsInfo.createAlias($_aliasNameGenerator(
-          db.partsTrainingInfo.bodyPartsInfo, db.bodyPartsInfo.partsId));
+  static $BodyPartsInfoTable _bodyPartsInfoTable(_$AppDataBase db) => db.bodyPartsInfo.createAlias($_aliasNameGenerator(db.partsTrainingInfo.bodyPartsInfo, db.bodyPartsInfo.partsId));
 
   $$BodyPartsInfoTableProcessedTableManager get bodyPartsInfo {
     final $_column = $_itemColumn<int>('body_parts_info')!;
 
-    final manager = $$BodyPartsInfoTableTableManager($_db, $_db.bodyPartsInfo)
-        .filter((f) => f.partsId.sqlEquals($_column));
+    final manager = $$BodyPartsInfoTableTableManager($_db, $_db.bodyPartsInfo).filter((f) => f.partsId.sqlEquals($_column));
     final item = $_typedResult.readTableOrNull(_bodyPartsInfoTable($_db));
     if (item == null) return manager;
-    return ProcessedTableManager(
-        manager.$state.copyWith(prefetchedData: [item]));
+    return ProcessedTableManager(manager.$state.copyWith(prefetchedData: [item]));
   }
 
-  static MultiTypedResultKey<$TrainingDataInfoTable, List<TrainingDataInfoData>>
-      _trainingDataInfoRefsTable(_$AppDataBase db) =>
-          MultiTypedResultKey.fromTable(db.trainingDataInfo,
-              aliasName: $_aliasNameGenerator(
-                  db.partsTrainingInfo.partsTrainingId,
-                  db.trainingDataInfo.partsTrainingInfo));
+  static MultiTypedResultKey<$TrainingDataInfoTable, List<TrainingDataInfoData>> _trainingDataInfoRefsTable(_$AppDataBase db) =>
+      MultiTypedResultKey.fromTable(db.trainingDataInfo, aliasName: $_aliasNameGenerator(db.partsTrainingInfo.partsTrainingId, db.trainingDataInfo.partsTrainingInfo));
 
   $$TrainingDataInfoTableProcessedTableManager get trainingDataInfoRefs {
-    final manager =
-        $$TrainingDataInfoTableTableManager($_db, $_db.trainingDataInfo).filter(
-            (f) => f.partsTrainingInfo.partsTrainingId
-                .sqlEquals($_itemColumn<int>('parts_training_id')!));
+    final manager = $$TrainingDataInfoTableTableManager($_db, $_db.trainingDataInfo).filter((f) => f.partsTrainingInfo.partsTrainingId.sqlEquals($_itemColumn<int>('parts_training_id')!));
 
-    final cache =
-        $_typedResult.readTableOrNull(_trainingDataInfoRefsTable($_db));
-    return ProcessedTableManager(
-        manager.$state.copyWith(prefetchedData: cache));
+    final cache = $_typedResult.readTableOrNull(_trainingDataInfoRefsTable($_db));
+    return ProcessedTableManager(manager.$state.copyWith(prefetchedData: cache));
   }
 }
 
-class $$PartsTrainingInfoTableFilterComposer
-    extends Composer<_$AppDataBase, $PartsTrainingInfoTable> {
+class $$PartsTrainingInfoTableFilterComposer extends Composer<_$AppDataBase, $PartsTrainingInfoTable> {
   $$PartsTrainingInfoTableFilterComposer({
     required super.$db,
     required super.$table,
@@ -1233,12 +979,9 @@ class $$PartsTrainingInfoTableFilterComposer
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  ColumnFilters<int> get partsTrainingId => $composableBuilder(
-      column: $table.partsTrainingId,
-      builder: (column) => ColumnFilters(column));
+  ColumnFilters<int> get partsTrainingId => $composableBuilder(column: $table.partsTrainingId, builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<String> get trainingName => $composableBuilder(
-      column: $table.trainingName, builder: (column) => ColumnFilters(column));
+  ColumnFilters<String> get trainingName => $composableBuilder(column: $table.trainingName, builder: (column) => ColumnFilters(column));
 
   $$BodyPartsInfoTableFilterComposer get bodyPartsInfo {
     final $$BodyPartsInfoTableFilterComposer composer = $composerBuilder(
@@ -1246,44 +989,34 @@ class $$PartsTrainingInfoTableFilterComposer
         getCurrentColumn: (t) => t.bodyPartsInfo,
         referencedTable: $db.bodyPartsInfo,
         getReferencedColumn: (t) => t.partsId,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$BodyPartsInfoTableFilterComposer(
+        builder: (joinBuilder, {$addJoinBuilderToRootComposer, $removeJoinBuilderFromRootComposer}) => $$BodyPartsInfoTableFilterComposer(
               $db: $db,
               $table: $db.bodyPartsInfo,
               $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
               joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
+              $removeJoinBuilderFromRootComposer: $removeJoinBuilderFromRootComposer,
             ));
     return composer;
   }
 
-  Expression<bool> trainingDataInfoRefs(
-      Expression<bool> Function($$TrainingDataInfoTableFilterComposer f) f) {
+  Expression<bool> trainingDataInfoRefs(Expression<bool> Function($$TrainingDataInfoTableFilterComposer f) f) {
     final $$TrainingDataInfoTableFilterComposer composer = $composerBuilder(
         composer: this,
         getCurrentColumn: (t) => t.partsTrainingId,
         referencedTable: $db.trainingDataInfo,
         getReferencedColumn: (t) => t.partsTrainingInfo,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$TrainingDataInfoTableFilterComposer(
+        builder: (joinBuilder, {$addJoinBuilderToRootComposer, $removeJoinBuilderFromRootComposer}) => $$TrainingDataInfoTableFilterComposer(
               $db: $db,
               $table: $db.trainingDataInfo,
               $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
               joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
+              $removeJoinBuilderFromRootComposer: $removeJoinBuilderFromRootComposer,
             ));
     return f(composer);
   }
 }
 
-class $$PartsTrainingInfoTableOrderingComposer
-    extends Composer<_$AppDataBase, $PartsTrainingInfoTable> {
+class $$PartsTrainingInfoTableOrderingComposer extends Composer<_$AppDataBase, $PartsTrainingInfoTable> {
   $$PartsTrainingInfoTableOrderingComposer({
     required super.$db,
     required super.$table,
@@ -1291,13 +1024,9 @@ class $$PartsTrainingInfoTableOrderingComposer
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  ColumnOrderings<int> get partsTrainingId => $composableBuilder(
-      column: $table.partsTrainingId,
-      builder: (column) => ColumnOrderings(column));
+  ColumnOrderings<int> get partsTrainingId => $composableBuilder(column: $table.partsTrainingId, builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<String> get trainingName => $composableBuilder(
-      column: $table.trainingName,
-      builder: (column) => ColumnOrderings(column));
+  ColumnOrderings<String> get trainingName => $composableBuilder(column: $table.trainingName, builder: (column) => ColumnOrderings(column));
 
   $$BodyPartsInfoTableOrderingComposer get bodyPartsInfo {
     final $$BodyPartsInfoTableOrderingComposer composer = $composerBuilder(
@@ -1305,23 +1034,18 @@ class $$PartsTrainingInfoTableOrderingComposer
         getCurrentColumn: (t) => t.bodyPartsInfo,
         referencedTable: $db.bodyPartsInfo,
         getReferencedColumn: (t) => t.partsId,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$BodyPartsInfoTableOrderingComposer(
+        builder: (joinBuilder, {$addJoinBuilderToRootComposer, $removeJoinBuilderFromRootComposer}) => $$BodyPartsInfoTableOrderingComposer(
               $db: $db,
               $table: $db.bodyPartsInfo,
               $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
               joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
+              $removeJoinBuilderFromRootComposer: $removeJoinBuilderFromRootComposer,
             ));
     return composer;
   }
 }
 
-class $$PartsTrainingInfoTableAnnotationComposer
-    extends Composer<_$AppDataBase, $PartsTrainingInfoTable> {
+class $$PartsTrainingInfoTableAnnotationComposer extends Composer<_$AppDataBase, $PartsTrainingInfoTable> {
   $$PartsTrainingInfoTableAnnotationComposer({
     required super.$db,
     required super.$table,
@@ -1329,11 +1053,9 @@ class $$PartsTrainingInfoTableAnnotationComposer
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  GeneratedColumn<int> get partsTrainingId => $composableBuilder(
-      column: $table.partsTrainingId, builder: (column) => column);
+  GeneratedColumn<int> get partsTrainingId => $composableBuilder(column: $table.partsTrainingId, builder: (column) => column);
 
-  GeneratedColumn<String> get trainingName => $composableBuilder(
-      column: $table.trainingName, builder: (column) => column);
+  GeneratedColumn<String> get trainingName => $composableBuilder(column: $table.trainingName, builder: (column) => column);
 
   $$BodyPartsInfoTableAnnotationComposer get bodyPartsInfo {
     final $$BodyPartsInfoTableAnnotationComposer composer = $composerBuilder(
@@ -1341,37 +1063,28 @@ class $$PartsTrainingInfoTableAnnotationComposer
         getCurrentColumn: (t) => t.bodyPartsInfo,
         referencedTable: $db.bodyPartsInfo,
         getReferencedColumn: (t) => t.partsId,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$BodyPartsInfoTableAnnotationComposer(
+        builder: (joinBuilder, {$addJoinBuilderToRootComposer, $removeJoinBuilderFromRootComposer}) => $$BodyPartsInfoTableAnnotationComposer(
               $db: $db,
               $table: $db.bodyPartsInfo,
               $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
               joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
+              $removeJoinBuilderFromRootComposer: $removeJoinBuilderFromRootComposer,
             ));
     return composer;
   }
 
-  Expression<T> trainingDataInfoRefs<T extends Object>(
-      Expression<T> Function($$TrainingDataInfoTableAnnotationComposer a) f) {
+  Expression<T> trainingDataInfoRefs<T extends Object>(Expression<T> Function($$TrainingDataInfoTableAnnotationComposer a) f) {
     final $$TrainingDataInfoTableAnnotationComposer composer = $composerBuilder(
         composer: this,
         getCurrentColumn: (t) => t.partsTrainingId,
         referencedTable: $db.trainingDataInfo,
         getReferencedColumn: (t) => t.partsTrainingInfo,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$TrainingDataInfoTableAnnotationComposer(
+        builder: (joinBuilder, {$addJoinBuilderToRootComposer, $removeJoinBuilderFromRootComposer}) => $$TrainingDataInfoTableAnnotationComposer(
               $db: $db,
               $table: $db.trainingDataInfo,
               $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
               joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
+              $removeJoinBuilderFromRootComposer: $removeJoinBuilderFromRootComposer,
             ));
     return f(composer);
   }
@@ -1389,18 +1102,13 @@ class $$PartsTrainingInfoTableTableManager extends RootTableManager<
     (PartsTrainingInfoData, $$PartsTrainingInfoTableReferences),
     PartsTrainingInfoData,
     PrefetchHooks Function({bool bodyPartsInfo, bool trainingDataInfoRefs})> {
-  $$PartsTrainingInfoTableTableManager(
-      _$AppDataBase db, $PartsTrainingInfoTable table)
+  $$PartsTrainingInfoTableTableManager(_$AppDataBase db, $PartsTrainingInfoTable table)
       : super(TableManagerState(
           db: db,
           table: table,
-          createFilteringComposer: () =>
-              $$PartsTrainingInfoTableFilterComposer($db: db, $table: table),
-          createOrderingComposer: () =>
-              $$PartsTrainingInfoTableOrderingComposer($db: db, $table: table),
-          createComputedFieldComposer: () =>
-              $$PartsTrainingInfoTableAnnotationComposer(
-                  $db: db, $table: table),
+          createFilteringComposer: () => $$PartsTrainingInfoTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () => $$PartsTrainingInfoTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () => $$PartsTrainingInfoTableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback: ({
             Value<int> bodyPartsInfo = const Value.absent(),
             Value<int> partsTrainingId = const Value.absent(),
@@ -1421,41 +1129,18 @@ class $$PartsTrainingInfoTableTableManager extends RootTableManager<
             partsTrainingId: partsTrainingId,
             trainingName: trainingName,
           ),
-          withReferenceMapper: (p0) => p0
-              .map((e) => (
-                    e.readTable(table),
-                    $$PartsTrainingInfoTableReferences(db, table, e)
-                  ))
-              .toList(),
-          prefetchHooksCallback: (
-              {bodyPartsInfo = false, trainingDataInfoRefs = false}) {
+          withReferenceMapper: (p0) => p0.map((e) => (e.readTable(table), $$PartsTrainingInfoTableReferences(db, table, e))).toList(),
+          prefetchHooksCallback: ({bodyPartsInfo = false, trainingDataInfoRefs = false}) {
             return PrefetchHooks(
               db: db,
-              explicitlyWatchedTables: [
-                if (trainingDataInfoRefs) db.trainingDataInfo
-              ],
-              addJoins: <
-                  T extends TableManagerState<
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic>>(state) {
+              explicitlyWatchedTables: [if (trainingDataInfoRefs) db.trainingDataInfo],
+              addJoins: <T extends TableManagerState<dynamic, dynamic, dynamic, dynamic, dynamic, dynamic, dynamic, dynamic, dynamic, dynamic, dynamic>>(state) {
                 if (bodyPartsInfo) {
                   state = state.withJoin(
                     currentTable: table,
                     currentColumn: table.bodyPartsInfo,
-                    referencedTable: $$PartsTrainingInfoTableReferences
-                        ._bodyPartsInfoTable(db),
-                    referencedColumn: $$PartsTrainingInfoTableReferences
-                        ._bodyPartsInfoTable(db)
-                        .partsId,
+                    referencedTable: $$PartsTrainingInfoTableReferences._bodyPartsInfoTable(db),
+                    referencedColumn: $$PartsTrainingInfoTableReferences._bodyPartsInfoTable(db).partsId,
                   ) as T;
                 }
 
@@ -1464,18 +1149,11 @@ class $$PartsTrainingInfoTableTableManager extends RootTableManager<
               getPrefetchedDataCallback: (items) async {
                 return [
                   if (trainingDataInfoRefs)
-                    await $_getPrefetchedData<PartsTrainingInfoData,
-                            $PartsTrainingInfoTable, TrainingDataInfoData>(
+                    await $_getPrefetchedData<PartsTrainingInfoData, $PartsTrainingInfoTable, TrainingDataInfoData>(
                         currentTable: table,
-                        referencedTable: $$PartsTrainingInfoTableReferences
-                            ._trainingDataInfoRefsTable(db),
-                        managerFromTypedResult: (p0) =>
-                            $$PartsTrainingInfoTableReferences(db, table, p0)
-                                .trainingDataInfoRefs,
-                        referencedItemsForCurrentItem: (item,
-                                referencedItems) =>
-                            referencedItems.where((e) =>
-                                e.partsTrainingInfo == item.partsTrainingId),
+                        referencedTable: $$PartsTrainingInfoTableReferences._trainingDataInfoRefsTable(db),
+                        managerFromTypedResult: (p0) => $$PartsTrainingInfoTableReferences(db, table, p0).trainingDataInfoRefs,
+                        referencedItemsForCurrentItem: (item, referencedItems) => referencedItems.where((e) => e.partsTrainingInfo == item.partsTrainingId),
                         typedResults: items)
                 ];
               },
@@ -1496,8 +1174,7 @@ typedef $$PartsTrainingInfoTableProcessedTableManager = ProcessedTableManager<
     (PartsTrainingInfoData, $$PartsTrainingInfoTableReferences),
     PartsTrainingInfoData,
     PrefetchHooks Function({bool bodyPartsInfo, bool trainingDataInfoRefs})>;
-typedef $$TrainingDataInfoTableCreateCompanionBuilder
-    = TrainingDataInfoCompanion Function({
+typedef $$TrainingDataInfoTableCreateCompanionBuilder = TrainingDataInfoCompanion Function({
   required int bodyPartsInfo,
   required int partsTrainingInfo,
   Value<int> trainingId,
@@ -1507,8 +1184,7 @@ typedef $$TrainingDataInfoTableCreateCompanionBuilder
   Value<int?> rm,
   Value<String?> memo,
 });
-typedef $$TrainingDataInfoTableUpdateCompanionBuilder
-    = TrainingDataInfoCompanion Function({
+typedef $$TrainingDataInfoTableUpdateCompanionBuilder = TrainingDataInfoCompanion Function({
   Value<int> bodyPartsInfo,
   Value<int> partsTrainingInfo,
   Value<int> trainingId,
@@ -1519,46 +1195,34 @@ typedef $$TrainingDataInfoTableUpdateCompanionBuilder
   Value<String?> memo,
 });
 
-final class $$TrainingDataInfoTableReferences extends BaseReferences<
-    _$AppDataBase, $TrainingDataInfoTable, TrainingDataInfoData> {
-  $$TrainingDataInfoTableReferences(
-      super.$_db, super.$_table, super.$_typedResult);
+final class $$TrainingDataInfoTableReferences extends BaseReferences<_$AppDataBase, $TrainingDataInfoTable, TrainingDataInfoData> {
+  $$TrainingDataInfoTableReferences(super.$_db, super.$_table, super.$_typedResult);
 
-  static $BodyPartsInfoTable _bodyPartsInfoTable(_$AppDataBase db) =>
-      db.bodyPartsInfo.createAlias($_aliasNameGenerator(
-          db.trainingDataInfo.bodyPartsInfo, db.bodyPartsInfo.partsId));
+  static $BodyPartsInfoTable _bodyPartsInfoTable(_$AppDataBase db) => db.bodyPartsInfo.createAlias($_aliasNameGenerator(db.trainingDataInfo.bodyPartsInfo, db.bodyPartsInfo.partsId));
 
   $$BodyPartsInfoTableProcessedTableManager get bodyPartsInfo {
     final $_column = $_itemColumn<int>('body_parts_info')!;
 
-    final manager = $$BodyPartsInfoTableTableManager($_db, $_db.bodyPartsInfo)
-        .filter((f) => f.partsId.sqlEquals($_column));
+    final manager = $$BodyPartsInfoTableTableManager($_db, $_db.bodyPartsInfo).filter((f) => f.partsId.sqlEquals($_column));
     final item = $_typedResult.readTableOrNull(_bodyPartsInfoTable($_db));
     if (item == null) return manager;
-    return ProcessedTableManager(
-        manager.$state.copyWith(prefetchedData: [item]));
+    return ProcessedTableManager(manager.$state.copyWith(prefetchedData: [item]));
   }
 
   static $PartsTrainingInfoTable _partsTrainingInfoTable(_$AppDataBase db) =>
-      db.partsTrainingInfo.createAlias($_aliasNameGenerator(
-          db.trainingDataInfo.partsTrainingInfo,
-          db.partsTrainingInfo.partsTrainingId));
+      db.partsTrainingInfo.createAlias($_aliasNameGenerator(db.trainingDataInfo.partsTrainingInfo, db.partsTrainingInfo.partsTrainingId));
 
   $$PartsTrainingInfoTableProcessedTableManager get partsTrainingInfo {
     final $_column = $_itemColumn<int>('parts_training_info')!;
 
-    final manager =
-        $$PartsTrainingInfoTableTableManager($_db, $_db.partsTrainingInfo)
-            .filter((f) => f.partsTrainingId.sqlEquals($_column));
+    final manager = $$PartsTrainingInfoTableTableManager($_db, $_db.partsTrainingInfo).filter((f) => f.partsTrainingId.sqlEquals($_column));
     final item = $_typedResult.readTableOrNull(_partsTrainingInfoTable($_db));
     if (item == null) return manager;
-    return ProcessedTableManager(
-        manager.$state.copyWith(prefetchedData: [item]));
+    return ProcessedTableManager(manager.$state.copyWith(prefetchedData: [item]));
   }
 }
 
-class $$TrainingDataInfoTableFilterComposer
-    extends Composer<_$AppDataBase, $TrainingDataInfoTable> {
+class $$TrainingDataInfoTableFilterComposer extends Composer<_$AppDataBase, $TrainingDataInfoTable> {
   $$TrainingDataInfoTableFilterComposer({
     required super.$db,
     required super.$table,
@@ -1566,23 +1230,17 @@ class $$TrainingDataInfoTableFilterComposer
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  ColumnFilters<int> get trainingId => $composableBuilder(
-      column: $table.trainingId, builder: (column) => ColumnFilters(column));
+  ColumnFilters<int> get trainingId => $composableBuilder(column: $table.trainingId, builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<DateTime> get trainingDate => $composableBuilder(
-      column: $table.trainingDate, builder: (column) => ColumnFilters(column));
+  ColumnFilters<DateTime> get trainingDate => $composableBuilder(column: $table.trainingDate, builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<double> get weight => $composableBuilder(
-      column: $table.weight, builder: (column) => ColumnFilters(column));
+  ColumnFilters<double> get weight => $composableBuilder(column: $table.weight, builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<int> get rep => $composableBuilder(
-      column: $table.rep, builder: (column) => ColumnFilters(column));
+  ColumnFilters<int> get rep => $composableBuilder(column: $table.rep, builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<int> get rm => $composableBuilder(
-      column: $table.rm, builder: (column) => ColumnFilters(column));
+  ColumnFilters<int> get rm => $composableBuilder(column: $table.rm, builder: (column) => ColumnFilters(column));
 
-  ColumnFilters<String> get memo => $composableBuilder(
-      column: $table.memo, builder: (column) => ColumnFilters(column));
+  ColumnFilters<String> get memo => $composableBuilder(column: $table.memo, builder: (column) => ColumnFilters(column));
 
   $$BodyPartsInfoTableFilterComposer get bodyPartsInfo {
     final $$BodyPartsInfoTableFilterComposer composer = $composerBuilder(
@@ -1590,16 +1248,12 @@ class $$TrainingDataInfoTableFilterComposer
         getCurrentColumn: (t) => t.bodyPartsInfo,
         referencedTable: $db.bodyPartsInfo,
         getReferencedColumn: (t) => t.partsId,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$BodyPartsInfoTableFilterComposer(
+        builder: (joinBuilder, {$addJoinBuilderToRootComposer, $removeJoinBuilderFromRootComposer}) => $$BodyPartsInfoTableFilterComposer(
               $db: $db,
               $table: $db.bodyPartsInfo,
               $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
               joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
+              $removeJoinBuilderFromRootComposer: $removeJoinBuilderFromRootComposer,
             ));
     return composer;
   }
@@ -1610,23 +1264,18 @@ class $$TrainingDataInfoTableFilterComposer
         getCurrentColumn: (t) => t.partsTrainingInfo,
         referencedTable: $db.partsTrainingInfo,
         getReferencedColumn: (t) => t.partsTrainingId,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$PartsTrainingInfoTableFilterComposer(
+        builder: (joinBuilder, {$addJoinBuilderToRootComposer, $removeJoinBuilderFromRootComposer}) => $$PartsTrainingInfoTableFilterComposer(
               $db: $db,
               $table: $db.partsTrainingInfo,
               $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
               joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
+              $removeJoinBuilderFromRootComposer: $removeJoinBuilderFromRootComposer,
             ));
     return composer;
   }
 }
 
-class $$TrainingDataInfoTableOrderingComposer
-    extends Composer<_$AppDataBase, $TrainingDataInfoTable> {
+class $$TrainingDataInfoTableOrderingComposer extends Composer<_$AppDataBase, $TrainingDataInfoTable> {
   $$TrainingDataInfoTableOrderingComposer({
     required super.$db,
     required super.$table,
@@ -1634,24 +1283,17 @@ class $$TrainingDataInfoTableOrderingComposer
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  ColumnOrderings<int> get trainingId => $composableBuilder(
-      column: $table.trainingId, builder: (column) => ColumnOrderings(column));
+  ColumnOrderings<int> get trainingId => $composableBuilder(column: $table.trainingId, builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<DateTime> get trainingDate => $composableBuilder(
-      column: $table.trainingDate,
-      builder: (column) => ColumnOrderings(column));
+  ColumnOrderings<DateTime> get trainingDate => $composableBuilder(column: $table.trainingDate, builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<double> get weight => $composableBuilder(
-      column: $table.weight, builder: (column) => ColumnOrderings(column));
+  ColumnOrderings<double> get weight => $composableBuilder(column: $table.weight, builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<int> get rep => $composableBuilder(
-      column: $table.rep, builder: (column) => ColumnOrderings(column));
+  ColumnOrderings<int> get rep => $composableBuilder(column: $table.rep, builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<int> get rm => $composableBuilder(
-      column: $table.rm, builder: (column) => ColumnOrderings(column));
+  ColumnOrderings<int> get rm => $composableBuilder(column: $table.rm, builder: (column) => ColumnOrderings(column));
 
-  ColumnOrderings<String> get memo => $composableBuilder(
-      column: $table.memo, builder: (column) => ColumnOrderings(column));
+  ColumnOrderings<String> get memo => $composableBuilder(column: $table.memo, builder: (column) => ColumnOrderings(column));
 
   $$BodyPartsInfoTableOrderingComposer get bodyPartsInfo {
     final $$BodyPartsInfoTableOrderingComposer composer = $composerBuilder(
@@ -1659,16 +1301,12 @@ class $$TrainingDataInfoTableOrderingComposer
         getCurrentColumn: (t) => t.bodyPartsInfo,
         referencedTable: $db.bodyPartsInfo,
         getReferencedColumn: (t) => t.partsId,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$BodyPartsInfoTableOrderingComposer(
+        builder: (joinBuilder, {$addJoinBuilderToRootComposer, $removeJoinBuilderFromRootComposer}) => $$BodyPartsInfoTableOrderingComposer(
               $db: $db,
               $table: $db.bodyPartsInfo,
               $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
               joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
+              $removeJoinBuilderFromRootComposer: $removeJoinBuilderFromRootComposer,
             ));
     return composer;
   }
@@ -1679,23 +1317,18 @@ class $$TrainingDataInfoTableOrderingComposer
         getCurrentColumn: (t) => t.partsTrainingInfo,
         referencedTable: $db.partsTrainingInfo,
         getReferencedColumn: (t) => t.partsTrainingId,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$PartsTrainingInfoTableOrderingComposer(
+        builder: (joinBuilder, {$addJoinBuilderToRootComposer, $removeJoinBuilderFromRootComposer}) => $$PartsTrainingInfoTableOrderingComposer(
               $db: $db,
               $table: $db.partsTrainingInfo,
               $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
               joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
+              $removeJoinBuilderFromRootComposer: $removeJoinBuilderFromRootComposer,
             ));
     return composer;
   }
 }
 
-class $$TrainingDataInfoTableAnnotationComposer
-    extends Composer<_$AppDataBase, $TrainingDataInfoTable> {
+class $$TrainingDataInfoTableAnnotationComposer extends Composer<_$AppDataBase, $TrainingDataInfoTable> {
   $$TrainingDataInfoTableAnnotationComposer({
     required super.$db,
     required super.$table,
@@ -1703,23 +1336,17 @@ class $$TrainingDataInfoTableAnnotationComposer
     super.$addJoinBuilderToRootComposer,
     super.$removeJoinBuilderFromRootComposer,
   });
-  GeneratedColumn<int> get trainingId => $composableBuilder(
-      column: $table.trainingId, builder: (column) => column);
+  GeneratedColumn<int> get trainingId => $composableBuilder(column: $table.trainingId, builder: (column) => column);
 
-  GeneratedColumn<DateTime> get trainingDate => $composableBuilder(
-      column: $table.trainingDate, builder: (column) => column);
+  GeneratedColumn<DateTime> get trainingDate => $composableBuilder(column: $table.trainingDate, builder: (column) => column);
 
-  GeneratedColumn<double> get weight =>
-      $composableBuilder(column: $table.weight, builder: (column) => column);
+  GeneratedColumn<double> get weight => $composableBuilder(column: $table.weight, builder: (column) => column);
 
-  GeneratedColumn<int> get rep =>
-      $composableBuilder(column: $table.rep, builder: (column) => column);
+  GeneratedColumn<int> get rep => $composableBuilder(column: $table.rep, builder: (column) => column);
 
-  GeneratedColumn<int> get rm =>
-      $composableBuilder(column: $table.rm, builder: (column) => column);
+  GeneratedColumn<int> get rm => $composableBuilder(column: $table.rm, builder: (column) => column);
 
-  GeneratedColumn<String> get memo =>
-      $composableBuilder(column: $table.memo, builder: (column) => column);
+  GeneratedColumn<String> get memo => $composableBuilder(column: $table.memo, builder: (column) => column);
 
   $$BodyPartsInfoTableAnnotationComposer get bodyPartsInfo {
     final $$BodyPartsInfoTableAnnotationComposer composer = $composerBuilder(
@@ -1727,38 +1354,29 @@ class $$TrainingDataInfoTableAnnotationComposer
         getCurrentColumn: (t) => t.bodyPartsInfo,
         referencedTable: $db.bodyPartsInfo,
         getReferencedColumn: (t) => t.partsId,
-        builder: (joinBuilder,
-                {$addJoinBuilderToRootComposer,
-                $removeJoinBuilderFromRootComposer}) =>
-            $$BodyPartsInfoTableAnnotationComposer(
+        builder: (joinBuilder, {$addJoinBuilderToRootComposer, $removeJoinBuilderFromRootComposer}) => $$BodyPartsInfoTableAnnotationComposer(
               $db: $db,
               $table: $db.bodyPartsInfo,
               $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
               joinBuilder: joinBuilder,
-              $removeJoinBuilderFromRootComposer:
-                  $removeJoinBuilderFromRootComposer,
+              $removeJoinBuilderFromRootComposer: $removeJoinBuilderFromRootComposer,
             ));
     return composer;
   }
 
   $$PartsTrainingInfoTableAnnotationComposer get partsTrainingInfo {
-    final $$PartsTrainingInfoTableAnnotationComposer composer =
-        $composerBuilder(
-            composer: this,
-            getCurrentColumn: (t) => t.partsTrainingInfo,
-            referencedTable: $db.partsTrainingInfo,
-            getReferencedColumn: (t) => t.partsTrainingId,
-            builder: (joinBuilder,
-                    {$addJoinBuilderToRootComposer,
-                    $removeJoinBuilderFromRootComposer}) =>
-                $$PartsTrainingInfoTableAnnotationComposer(
-                  $db: $db,
-                  $table: $db.partsTrainingInfo,
-                  $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
-                  joinBuilder: joinBuilder,
-                  $removeJoinBuilderFromRootComposer:
-                      $removeJoinBuilderFromRootComposer,
-                ));
+    final $$PartsTrainingInfoTableAnnotationComposer composer = $composerBuilder(
+        composer: this,
+        getCurrentColumn: (t) => t.partsTrainingInfo,
+        referencedTable: $db.partsTrainingInfo,
+        getReferencedColumn: (t) => t.partsTrainingId,
+        builder: (joinBuilder, {$addJoinBuilderToRootComposer, $removeJoinBuilderFromRootComposer}) => $$PartsTrainingInfoTableAnnotationComposer(
+              $db: $db,
+              $table: $db.partsTrainingInfo,
+              $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+              joinBuilder: joinBuilder,
+              $removeJoinBuilderFromRootComposer: $removeJoinBuilderFromRootComposer,
+            ));
     return composer;
   }
 }
@@ -1775,17 +1393,13 @@ class $$TrainingDataInfoTableTableManager extends RootTableManager<
     (TrainingDataInfoData, $$TrainingDataInfoTableReferences),
     TrainingDataInfoData,
     PrefetchHooks Function({bool bodyPartsInfo, bool partsTrainingInfo})> {
-  $$TrainingDataInfoTableTableManager(
-      _$AppDataBase db, $TrainingDataInfoTable table)
+  $$TrainingDataInfoTableTableManager(_$AppDataBase db, $TrainingDataInfoTable table)
       : super(TableManagerState(
           db: db,
           table: table,
-          createFilteringComposer: () =>
-              $$TrainingDataInfoTableFilterComposer($db: db, $table: table),
-          createOrderingComposer: () =>
-              $$TrainingDataInfoTableOrderingComposer($db: db, $table: table),
-          createComputedFieldComposer: () =>
-              $$TrainingDataInfoTableAnnotationComposer($db: db, $table: table),
+          createFilteringComposer: () => $$TrainingDataInfoTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () => $$TrainingDataInfoTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () => $$TrainingDataInfoTableAnnotationComposer($db: db, $table: table),
           updateCompanionCallback: ({
             Value<int> bodyPartsInfo = const Value.absent(),
             Value<int> partsTrainingInfo = const Value.absent(),
@@ -1826,50 +1440,26 @@ class $$TrainingDataInfoTableTableManager extends RootTableManager<
             rm: rm,
             memo: memo,
           ),
-          withReferenceMapper: (p0) => p0
-              .map((e) => (
-                    e.readTable(table),
-                    $$TrainingDataInfoTableReferences(db, table, e)
-                  ))
-              .toList(),
-          prefetchHooksCallback: (
-              {bodyPartsInfo = false, partsTrainingInfo = false}) {
+          withReferenceMapper: (p0) => p0.map((e) => (e.readTable(table), $$TrainingDataInfoTableReferences(db, table, e))).toList(),
+          prefetchHooksCallback: ({bodyPartsInfo = false, partsTrainingInfo = false}) {
             return PrefetchHooks(
               db: db,
               explicitlyWatchedTables: [],
-              addJoins: <
-                  T extends TableManagerState<
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic,
-                      dynamic>>(state) {
+              addJoins: <T extends TableManagerState<dynamic, dynamic, dynamic, dynamic, dynamic, dynamic, dynamic, dynamic, dynamic, dynamic, dynamic>>(state) {
                 if (bodyPartsInfo) {
                   state = state.withJoin(
                     currentTable: table,
                     currentColumn: table.bodyPartsInfo,
-                    referencedTable: $$TrainingDataInfoTableReferences
-                        ._bodyPartsInfoTable(db),
-                    referencedColumn: $$TrainingDataInfoTableReferences
-                        ._bodyPartsInfoTable(db)
-                        .partsId,
+                    referencedTable: $$TrainingDataInfoTableReferences._bodyPartsInfoTable(db),
+                    referencedColumn: $$TrainingDataInfoTableReferences._bodyPartsInfoTable(db).partsId,
                   ) as T;
                 }
                 if (partsTrainingInfo) {
                   state = state.withJoin(
                     currentTable: table,
                     currentColumn: table.partsTrainingInfo,
-                    referencedTable: $$TrainingDataInfoTableReferences
-                        ._partsTrainingInfoTable(db),
-                    referencedColumn: $$TrainingDataInfoTableReferences
-                        ._partsTrainingInfoTable(db)
-                        .partsTrainingId,
+                    referencedTable: $$TrainingDataInfoTableReferences._partsTrainingInfoTable(db),
+                    referencedColumn: $$TrainingDataInfoTableReferences._partsTrainingInfoTable(db).partsTrainingId,
                   ) as T;
                 }
 
@@ -1899,12 +1489,9 @@ typedef $$TrainingDataInfoTableProcessedTableManager = ProcessedTableManager<
 class $AppDataBaseManager {
   final _$AppDataBase _db;
   $AppDataBaseManager(this._db);
-  $$BodyPartsInfoTableTableManager get bodyPartsInfo =>
-      $$BodyPartsInfoTableTableManager(_db, _db.bodyPartsInfo);
-  $$PartsTrainingInfoTableTableManager get partsTrainingInfo =>
-      $$PartsTrainingInfoTableTableManager(_db, _db.partsTrainingInfo);
-  $$TrainingDataInfoTableTableManager get trainingDataInfo =>
-      $$TrainingDataInfoTableTableManager(_db, _db.trainingDataInfo);
+  $$BodyPartsInfoTableTableManager get bodyPartsInfo => $$BodyPartsInfoTableTableManager(_db, _db.bodyPartsInfo);
+  $$PartsTrainingInfoTableTableManager get partsTrainingInfo => $$PartsTrainingInfoTableTableManager(_db, _db.partsTrainingInfo);
+  $$TrainingDataInfoTableTableManager get trainingDataInfo => $$TrainingDataInfoTableTableManager(_db, _db.trainingDataInfo);
 }
 
 // **************************************************************************
@@ -1918,8 +1505,7 @@ String _$appDataBaseHash() => r'16fa7fb2c837d14f4ee63b13fd2a871d72ea94e9';
 final appDataBaseProvider = AutoDisposeProvider<AppDataBase>.internal(
   appDataBase,
   name: r'appDataBaseProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$appDataBaseHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$appDataBaseHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
@@ -1927,5 +1513,4 @@ final appDataBaseProvider = AutoDisposeProvider<AppDataBase>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef AppDataBaseRef = AutoDisposeProviderRef<AppDataBase>;
-// ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

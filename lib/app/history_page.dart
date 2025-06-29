@@ -36,7 +36,7 @@ class HistoryBody extends ConsumerWidget {
             ref.read(trainingHistoryDataProvider.call(db).notifier).changeDate(selectedDay);
           },
           onPageChanged: (focusedDay) {
-            // 月の変更
+            // 月�E変更
             ref.read(trainingHistoryDataProvider.call(db).notifier).changeFocusedDay(focusedDay);
           },
           calendarBuilders: CalendarBuilders(
@@ -102,7 +102,7 @@ class HistoryBody extends ConsumerWidget {
                                 },
                                 child: TitleContaier(
                                   title: t.key,
-                                  titleTextColor: Theme.of(context).colorScheme.onBackground,
+                                  titleTextColor: Theme.of(context).colorScheme.onSurface,
                                   bgColor: Theme.of(context).primaryColor,
                                   padding: EdgeInsets.only(top: 8, bottom: 8, left: 16, right: 16),
                                   decoration: BoxDecoration(
@@ -123,7 +123,7 @@ class HistoryBody extends ConsumerWidget {
                                         Align(
                                           alignment: Alignment.centerRight,
                                           child: RichText(
-                                            text: TextSpan(style: TextStyle(color: Theme.of(context).colorScheme.onBackground, fontSize: 10), children: [
+                                            text: TextSpan(style: TextStyle(color: Theme.of(context).colorScheme.onSurface, fontSize: 10), children: [
                                               TextSpan(text: index.toString().padLeft(3, " "), style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
                                               const TextSpan(text: ' Set'),
                                             ]),
@@ -132,7 +132,7 @@ class HistoryBody extends ConsumerWidget {
                                         Align(
                                           alignment: Alignment.centerRight,
                                           child: RichText(
-                                            text: TextSpan(style: TextStyle(color: Theme.of(context).colorScheme.onBackground, fontSize: 10), children: [
+                                            text: TextSpan(style: TextStyle(color: Theme.of(context).colorScheme.onSurface, fontSize: 10), children: [
                                               TextSpan(text: tdata.weight.toString().padLeft(6, " "), style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
                                               const TextSpan(text: ' kg'),
                                             ]),
@@ -141,7 +141,7 @@ class HistoryBody extends ConsumerWidget {
                                         Align(
                                           alignment: Alignment.centerRight,
                                           child: RichText(
-                                            text: TextSpan(style: TextStyle(color: Theme.of(context).colorScheme.onBackground, fontSize: 10), children: [
+                                            text: TextSpan(style: TextStyle(color: Theme.of(context).colorScheme.onSurface, fontSize: 10), children: [
                                               TextSpan(text: tdata.rep.toString().padLeft(3, " "), style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
                                               const TextSpan(text: ' 回'),
                                             ]),
@@ -150,7 +150,7 @@ class HistoryBody extends ConsumerWidget {
                                         Align(
                                           alignment: Alignment.centerRight,
                                           child: RichText(
-                                            text: TextSpan(style: TextStyle(color: Theme.of(context).colorScheme.onBackground, fontSize: 10), children: [
+                                            text: TextSpan(style: TextStyle(color: Theme.of(context).colorScheme.onSurface, fontSize: 10), children: [
                                               TextSpan(text: tdata.rm.toString().padLeft(6, " "), style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
                                               const TextSpan(text: ' kg/RM'),
                                             ]),

@@ -21,33 +21,23 @@ mixin _$MainPageModel {
   List<BodyPartsMst> get bodyPartsList => throw _privateConstructorUsedError;
   List<PartsWeight> get weekWeightList => throw _privateConstructorUsedError;
   PartsWeight get todayData => throw _privateConstructorUsedError;
-  List<PartsWeight> get past5WeeksData => throw _privateConstructorUsedError;
+  List<PartsWeight> get past8WeeksData => throw _privateConstructorUsedError;
 
   /// Create a copy of MainPageModel
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $MainPageModelCopyWith<MainPageModel> get copyWith =>
-      throw _privateConstructorUsedError;
+  $MainPageModelCopyWith<MainPageModel> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $MainPageModelCopyWith<$Res> {
-  factory $MainPageModelCopyWith(
-          MainPageModel value, $Res Function(MainPageModel) then) =
-      _$MainPageModelCopyWithImpl<$Res, MainPageModel>;
+  factory $MainPageModelCopyWith(MainPageModel value, $Res Function(MainPageModel) then) = _$MainPageModelCopyWithImpl<$Res, MainPageModel>;
   @useResult
-  $Res call(
-      {DateTime today,
-      double maxScale,
-      List<BodyPartsMst> bodyPartsList,
-      List<PartsWeight> weekWeightList,
-      PartsWeight todayData,
-      List<PartsWeight> past5WeeksData});
+  $Res call({DateTime today, double maxScale, List<BodyPartsMst> bodyPartsList, List<PartsWeight> weekWeightList, PartsWeight todayData, List<PartsWeight> past8WeeksData});
 }
 
 /// @nodoc
-class _$MainPageModelCopyWithImpl<$Res, $Val extends MainPageModel>
-    implements $MainPageModelCopyWith<$Res> {
+class _$MainPageModelCopyWithImpl<$Res, $Val extends MainPageModel> implements $MainPageModelCopyWith<$Res> {
   _$MainPageModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
@@ -65,7 +55,7 @@ class _$MainPageModelCopyWithImpl<$Res, $Val extends MainPageModel>
     Object? bodyPartsList = null,
     Object? weekWeightList = null,
     Object? todayData = null,
-    Object? past5WeeksData = null,
+    Object? past8WeeksData = null,
   }) {
     return _then(_value.copyWith(
       today: null == today
@@ -88,38 +78,25 @@ class _$MainPageModelCopyWithImpl<$Res, $Val extends MainPageModel>
           ? _value.todayData
           : todayData // ignore: cast_nullable_to_non_nullable
               as PartsWeight,
-      past5WeeksData: null == past5WeeksData
-          ? _value.past5WeeksData
-          : past5WeeksData // ignore: cast_nullable_to_non_nullable
+      past8WeeksData: null == past8WeeksData
+          ? _value.past8WeeksData
+          : past8WeeksData // ignore: cast_nullable_to_non_nullable
               as List<PartsWeight>,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$MainPageModelImplCopyWith<$Res>
-    implements $MainPageModelCopyWith<$Res> {
-  factory _$$MainPageModelImplCopyWith(
-          _$MainPageModelImpl value, $Res Function(_$MainPageModelImpl) then) =
-      __$$MainPageModelImplCopyWithImpl<$Res>;
+abstract class _$$MainPageModelImplCopyWith<$Res> implements $MainPageModelCopyWith<$Res> {
+  factory _$$MainPageModelImplCopyWith(_$MainPageModelImpl value, $Res Function(_$MainPageModelImpl) then) = __$$MainPageModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {DateTime today,
-      double maxScale,
-      List<BodyPartsMst> bodyPartsList,
-      List<PartsWeight> weekWeightList,
-      PartsWeight todayData,
-      List<PartsWeight> past5WeeksData});
+  $Res call({DateTime today, double maxScale, List<BodyPartsMst> bodyPartsList, List<PartsWeight> weekWeightList, PartsWeight todayData, List<PartsWeight> past8WeeksData});
 }
 
 /// @nodoc
-class __$$MainPageModelImplCopyWithImpl<$Res>
-    extends _$MainPageModelCopyWithImpl<$Res, _$MainPageModelImpl>
-    implements _$$MainPageModelImplCopyWith<$Res> {
-  __$$MainPageModelImplCopyWithImpl(
-      _$MainPageModelImpl _value, $Res Function(_$MainPageModelImpl) _then)
-      : super(_value, _then);
+class __$$MainPageModelImplCopyWithImpl<$Res> extends _$MainPageModelCopyWithImpl<$Res, _$MainPageModelImpl> implements _$$MainPageModelImplCopyWith<$Res> {
+  __$$MainPageModelImplCopyWithImpl(_$MainPageModelImpl _value, $Res Function(_$MainPageModelImpl) _then) : super(_value, _then);
 
   /// Create a copy of MainPageModel
   /// with the given fields replaced by the non-null parameter values.
@@ -131,7 +108,7 @@ class __$$MainPageModelImplCopyWithImpl<$Res>
     Object? bodyPartsList = null,
     Object? weekWeightList = null,
     Object? todayData = null,
-    Object? past5WeeksData = null,
+    Object? past8WeeksData = null,
   }) {
     return _then(_$MainPageModelImpl(
       today: null == today
@@ -154,9 +131,9 @@ class __$$MainPageModelImplCopyWithImpl<$Res>
           ? _value.todayData
           : todayData // ignore: cast_nullable_to_non_nullable
               as PartsWeight,
-      past5WeeksData: null == past5WeeksData
-          ? _value._past5WeeksData
-          : past5WeeksData // ignore: cast_nullable_to_non_nullable
+      past8WeeksData: null == past8WeeksData
+          ? _value._past8WeeksData
+          : past8WeeksData // ignore: cast_nullable_to_non_nullable
               as List<PartsWeight>,
     ));
   }
@@ -171,10 +148,10 @@ class _$MainPageModelImpl implements _MainPageModel {
       required final List<BodyPartsMst> bodyPartsList,
       required final List<PartsWeight> weekWeightList,
       required this.todayData,
-      required final List<PartsWeight> past5WeeksData})
+      required final List<PartsWeight> past8WeeksData})
       : _bodyPartsList = bodyPartsList,
         _weekWeightList = weekWeightList,
-        _past5WeeksData = past5WeeksData;
+        _past8WeeksData = past8WeeksData;
 
   @override
   final DateTime today;
@@ -198,17 +175,17 @@ class _$MainPageModelImpl implements _MainPageModel {
 
   @override
   final PartsWeight todayData;
-  final List<PartsWeight> _past5WeeksData;
+  final List<PartsWeight> _past8WeeksData;
   @override
-  List<PartsWeight> get past5WeeksData {
-    if (_past5WeeksData is EqualUnmodifiableListView) return _past5WeeksData;
+  List<PartsWeight> get past8WeeksData {
+    if (_past8WeeksData is EqualUnmodifiableListView) return _past8WeeksData;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_past5WeeksData);
+    return EqualUnmodifiableListView(_past8WeeksData);
   }
 
   @override
   String toString() {
-    return 'MainPageModel(today: $today, maxScale: $maxScale, bodyPartsList: $bodyPartsList, weekWeightList: $weekWeightList, todayData: $todayData, past5WeeksData: $past5WeeksData)';
+    return 'MainPageModel(today: $today, maxScale: $maxScale, bodyPartsList: $bodyPartsList, weekWeightList: $weekWeightList, todayData: $todayData, past8WeeksData: $past8WeeksData)';
   }
 
   @override
@@ -217,35 +194,23 @@ class _$MainPageModelImpl implements _MainPageModel {
         (other.runtimeType == runtimeType &&
             other is _$MainPageModelImpl &&
             (identical(other.today, today) || other.today == today) &&
-            (identical(other.maxScale, maxScale) ||
-                other.maxScale == maxScale) &&
-            const DeepCollectionEquality()
-                .equals(other._bodyPartsList, _bodyPartsList) &&
-            const DeepCollectionEquality()
-                .equals(other._weekWeightList, _weekWeightList) &&
-            (identical(other.todayData, todayData) ||
-                other.todayData == todayData) &&
-            const DeepCollectionEquality()
-                .equals(other._past5WeeksData, _past5WeeksData));
+            (identical(other.maxScale, maxScale) || other.maxScale == maxScale) &&
+            const DeepCollectionEquality().equals(other._bodyPartsList, _bodyPartsList) &&
+            const DeepCollectionEquality().equals(other._weekWeightList, _weekWeightList) &&
+            (identical(other.todayData, todayData) || other.todayData == todayData) &&
+            const DeepCollectionEquality().equals(other._past8WeeksData, _past8WeeksData));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      today,
-      maxScale,
-      const DeepCollectionEquality().hash(_bodyPartsList),
-      const DeepCollectionEquality().hash(_weekWeightList),
-      todayData,
-      const DeepCollectionEquality().hash(_past5WeeksData));
+  int get hashCode => Object.hash(runtimeType, today, maxScale, const DeepCollectionEquality().hash(_bodyPartsList), const DeepCollectionEquality().hash(_weekWeightList), todayData,
+      const DeepCollectionEquality().hash(_past8WeeksData));
 
   /// Create a copy of MainPageModel
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$MainPageModelImplCopyWith<_$MainPageModelImpl> get copyWith =>
-      __$$MainPageModelImplCopyWithImpl<_$MainPageModelImpl>(this, _$identity);
+  _$$MainPageModelImplCopyWith<_$MainPageModelImpl> get copyWith => __$$MainPageModelImplCopyWithImpl<_$MainPageModelImpl>(this, _$identity);
 }
 
 abstract class _MainPageModel implements MainPageModel {
@@ -255,7 +220,7 @@ abstract class _MainPageModel implements MainPageModel {
       required final List<BodyPartsMst> bodyPartsList,
       required final List<PartsWeight> weekWeightList,
       required final PartsWeight todayData,
-      required final List<PartsWeight> past5WeeksData}) = _$MainPageModelImpl;
+      required final List<PartsWeight> past8WeeksData}) = _$MainPageModelImpl;
 
   @override
   DateTime get today;
@@ -268,12 +233,11 @@ abstract class _MainPageModel implements MainPageModel {
   @override
   PartsWeight get todayData;
   @override
-  List<PartsWeight> get past5WeeksData;
+  List<PartsWeight> get past8WeeksData;
 
   /// Create a copy of MainPageModel
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$MainPageModelImplCopyWith<_$MainPageModelImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$MainPageModelImplCopyWith<_$MainPageModelImpl> get copyWith => throw _privateConstructorUsedError;
 }

@@ -50,6 +50,6 @@ class MainPageModel with _$MainPageModel {
     required List<BodyPartsMst> bodyPartsList,
     required List<PartsWeight> weekWeightList,
     required PartsWeight todayData,
-    required List<PartsWeight> past5WeeksData,
+    required List<PartsWeight> past8WeeksData,
   }) = _MainPageModel;
 }

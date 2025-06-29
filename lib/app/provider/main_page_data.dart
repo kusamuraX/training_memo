@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:drift/drift.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:training_memo/app/data/database.dart';
 import 'package:training_memo/app/repository/body_parts_mst_repository.dart';
@@ -10,7 +11,7 @@ import 'package:training_memo/app/vmodel/main_page_model.dart';
 part 'main_page_data.g.dart';
 
 @riverpod
-Future<MainPageModel> mainPageData(MainPageDataRef ref, AppDataBase database, DateTime tgtDate) async {
+Future<MainPageModel> mainPageData(Ref ref, AppDataBase database, DateTime tgtDate) async {
   // 部位情報取得
   final partsList = await database.select(database.bodyPartsInfo).get();
   final List<BodyPartsMst> bodyPartsList = [];
@@ -82,10 +83,10 @@ Future<MainPageModel> mainPageData(MainPageDataRef ref, AppDataBase database, Da
       absTotalWeight: todayAbsTotal,
       legTotalWeight: todayLegTotal);
 
-  // 過去5週分の部位別データ取得（グラフ用）
-  List<PartsWeight> past5WeeksData = [];
-  for (var i = 0; i < 5; i++) {
-    // 0は今週、1は先週、...、4は5週前
+  // 過去8週分の部位別データ取得（グラフ用）
+  List<PartsWeight> past8WeeksData = [];
+  for (var i = 0; i < 8; i++) {
+    // 0は今週、1は先週、...、7は8週前
     final startDayOfWeek = getStartDayOfWeek(tgtDate, prevNumber: i);
     final endDayOfWeek = startDayOfWeek.add(Duration(days: 6));
     final stDate = startDayOfWeek.copyWith(hour: 0, minute: 0, second: 0, millisecond: 0, microsecond: 0);
@@ -131,7 +132,7 @@ Future<MainPageModel> mainPageData(MainPageDataRef ref, AppDataBase database, Da
     absTotal = double.parse((absTotal / 1000).toStringAsFixed(2));
     legTotal = double.parse((legTotal / 1000).toStringAsFixed(2));
 
-    past5WeeksData.insert(
+    past8WeeksData.insert(
         0, PartsWeight(chestTotalWeight: chestTotal, backTotalWeight: backTotal, shoulderTotalWeight: shoulderTotal, armTotalWeight: armTotal, absTotalWeight: absTotal, legTotalWeight: legTotal));
   }
 
@@ -186,7 +187,7 @@ Future<MainPageModel> mainPageData(MainPageDataRef ref, AppDataBase database, Da
         .add(PartsWeight(chestTotalWeight: chestTotal, backTotalWeight: backTotal, shoulderTotalWeight: shoulderTotal, armTotalWeight: armTotal, absTotalWeight: absTotal, legTotalWeight: legTotal));
   }
   double graphMaxScale = (maxValue + (maxValue * 0.3)).toDouble();
-  return MainPageModel(today: tgtDate, bodyPartsList: bodyPartsList, weekWeightList: weekData, todayData: todayData, past5WeeksData: past5WeeksData, maxScale: graphMaxScale);
+  return MainPageModel(today: tgtDate, bodyPartsList: bodyPartsList, weekWeightList: weekData, todayData: todayData, past8WeeksData: past8WeeksData, maxScale: graphMaxScale);
 }
 
 DateTime getStartDayOfWeek(DateTime date, {int prevNumber = 0}) => date.subtract(Duration(days: (date.weekday - 1) + (prevNumber * 7)));

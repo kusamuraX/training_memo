@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:training_memo/app/data/database.dart';
@@ -16,7 +17,7 @@ part 'router.g.dart';
 final rootNavigatorKey = GlobalKey<NavigatorState>();
 
 @riverpod
-GoRouter router(RouterRef ref) => GoRouter(
+GoRouter router(Ref ref) => GoRouter(
       navigatorKey: rootNavigatorKey,
       routes: $appRoutes,
     );

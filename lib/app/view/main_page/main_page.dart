@@ -160,12 +160,12 @@ class _PartsSelectWidget extends ConsumerWidget {
 
                       SizedBox(height: 32),
 
-                      // 過去5週の部位別総負荷重量グラフ
+                      // 過去8週の部位別総負荷重量グラフ
                       SizedBox(
                         height: 250,
                         child: Padding(
                           padding: EdgeInsets.only(left: 10, right: 18, top: 12, bottom: 8),
-                          child: _buildSimpleLineChart(data.past5WeeksData),
+                          child: _buildSimpleLineChart(data.past8WeeksData),
                         ),
                       ),
                     ],
@@ -197,7 +197,14 @@ class _PartsSelectWidget extends ConsumerWidget {
                         ),
                         side: BorderSide(width: 1, color: PartsColors.getColor(mainPageData.bodyPartsList[index].partsId)),
                       ),
-                      onPressed: () => GoRouter.of(context).push('/tselect', extra: {'parts': mainPageData.bodyPartsList[index], 'date': today}),
+                      onPressed: () async {
+                        // トレーニング選択ページに遷移
+                        await GoRouter.of(context).push('/tselect', extra: {'parts': mainPageData.bodyPartsList[index], 'date': today});
+
+                        // 戻ってきた時にメインページのデータを更新
+                        final db = ref.read(appDataBaseProvider);
+                        ref.invalidate(mainPageDataProvider.call(db, today));
+                      },
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -210,16 +217,16 @@ class _PartsSelectWidget extends ConsumerWidget {
                           Text(
                             "前回：${mainPageData.bodyPartsList[index].lastTrainingDate ?? "-"}",
                             style: TextStyle(
-                              fontSize: 10,
+                              fontSize: 12,
                             ),
                           ),
                         ],
                       ),
                     );
                   },
-                  gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: 150,
-                    childAspectRatio: 1.1,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    childAspectRatio: 1.5,
                     crossAxisSpacing: 4,
                     mainAxisSpacing: 4,
                   ),
@@ -334,18 +341,27 @@ class _PartsSelectWidget extends ConsumerWidget {
                 String text = '';
                 switch (value.toInt()) {
                   case 0:
-                    text = '5週前';
+                    text = '7週前';
                     break;
                   case 1:
-                    text = '4週前';
+                    text = '6週前';
                     break;
                   case 2:
-                    text = '3週前';
+                    text = '5週前';
                     break;
                   case 3:
-                    text = '2週前';
+                    text = '4週前';
                     break;
                   case 4:
+                    text = '3週前';
+                    break;
+                  case 5:
+                    text = '2週前';
+                    break;
+                  case 6:
+                    text = '先週';
+                    break;
+                  case 7:
                     text = '今週';
                     break;
                 }
@@ -367,7 +383,7 @@ class _PartsSelectWidget extends ConsumerWidget {
                   style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
-                    fontSize: 8,
+                    fontSize: 11,
                   ),
                 );
               },
@@ -377,7 +393,7 @@ class _PartsSelectWidget extends ConsumerWidget {
         ),
         borderData: FlBorderData(show: false),
         minX: 0,
-        maxX: 4,
+        maxX: 7,
         minY: 0,
         maxY: _getMaxYValue(data),
         lineBarsData: _buildLineChartBars(data, colors),
