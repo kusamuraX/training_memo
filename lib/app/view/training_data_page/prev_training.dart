@@ -26,47 +26,55 @@ class PrevTrainingWidget extends ConsumerWidget {
             border: Border(bottom: const BorderSide(width: 1, color: Colors.white)),
           ),
           width: double.infinity,
-          padding: EdgeInsets.only(top: 8, left: 4, right: 4, bottom: 16),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: List.generate(
-              prevTrainingInfoList.length,
-              (index) => TitleContaier(
-                title: '[ ${dateStrFormat.format(prevTrainingInfoList[index].trainingDate)} ]',
-                titleTextSize: 13,
-                padding: EdgeInsets.only(top: 8, left: 8, right: 8),
-                bgColor: Theme.of(context).primaryColor,
-                child: Table(columnWidths: <int, TableColumnWidth>{
-                  0: FixedColumnWidth(15),
-                  1: FixedColumnWidth(50),
-                  2: IntrinsicColumnWidth(),
-                }, children: [
-                  TableRow(
-                    decoration: BoxDecoration(border: Border(bottom: const BorderSide(width: 1, color: Colors.white))),
-                    children: [
-                      Text("", style: TextStyle(color: Colors.white, fontSize: 12)),
-                      Text("重量", style: TextStyle(color: Colors.white, fontSize: 12)),
-                      Text("回数", style: TextStyle(color: Colors.white, fontSize: 12)),
-                    ],
+          padding: EdgeInsets.only(top: 8, left: 16, right: 4, bottom: 16),
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: List.generate(
+                prevTrainingInfoList.length,
+                (index) => Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 4),
+                  child: SizedBox(
+                    width: 130, // 固定幅を設定してスクロールを有効にする
+                    child: TitleContaier(
+                      title: '[ ${dateStrFormat.format(prevTrainingInfoList[index].trainingDate)} ]',
+                      titleTextSize: 13,
+                      padding: EdgeInsets.only(top: 8, left: 8, right: 8),
+                      bgColor: Theme.of(context).primaryColor,
+                      child: Table(columnWidths: <int, TableColumnWidth>{
+                        0: FixedColumnWidth(15),
+                        1: FixedColumnWidth(45),
+                        2: FixedColumnWidth(35),
+                      }, children: [
+                        TableRow(
+                          decoration: BoxDecoration(border: Border(bottom: const BorderSide(width: 1, color: Colors.white))),
+                          children: [
+                            Text("", style: TextStyle(color: Colors.white, fontSize: 12)),
+                            Text("重量", style: TextStyle(color: Colors.white, fontSize: 12)),
+                            Text("回数", style: TextStyle(color: Colors.white, fontSize: 12)),
+                          ],
+                        ),
+                        ...List.generate(
+                          prevTrainingInfoList[index].trainingList.length,
+                          (tindex) => TableRow(children: [
+                            Text('${tindex + 1}', style: TextStyle(color: Colors.white, fontSize: 10)),
+                            Text('${prevTrainingInfoList[index].trainingList[tindex].weight} ㎏', style: TextStyle(color: Colors.white, fontSize: 10)),
+                            Text('${prevTrainingInfoList[index].trainingList[tindex].rep} 回', style: TextStyle(color: Colors.white, fontSize: 10)),
+                          ]),
+                        ),
+                        TableRow(
+                          decoration: BoxDecoration(border: Border(top: const BorderSide(width: 1, color: Colors.white))),
+                          children: [
+                            Text(""),
+                            Text("総重量", style: TextStyle(color: Colors.white, fontSize: 10)),
+                            Text("${prevTrainingInfoList[index].totalWeight} t", style: TextStyle(color: Colors.white, fontSize: 10)),
+                          ],
+                        ),
+                      ]),
+                    ),
                   ),
-                  ...List.generate(
-                    prevTrainingInfoList[index].trainingList.length,
-                    (tindex) => TableRow(children: [
-                      Text('${tindex + 1}', style: TextStyle(color: Colors.white, fontSize: 10)),
-                      Text('${prevTrainingInfoList[index].trainingList[tindex].weight} ㎏', style: TextStyle(color: Colors.white, fontSize: 10)),
-                      Text('${prevTrainingInfoList[index].trainingList[tindex].rep} 回', style: TextStyle(color: Colors.white, fontSize: 10)),
-                    ]),
-                  ),
-                  TableRow(
-                    decoration: BoxDecoration(border: Border(top: const BorderSide(width: 1, color: Colors.white))),
-                    children: [
-                      Text(""),
-                      Text("総重量", style: TextStyle(color: Colors.white, fontSize: 10)),
-                      Text("${prevTrainingInfoList[index].totalWeight} t", style: TextStyle(color: Colors.white, fontSize: 10)),
-                    ],
-                  ),
-                ]),
+                ),
               ),
             ),
           ),

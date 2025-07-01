@@ -12,7 +12,7 @@ Future<List<TrainingDateData>> prevTrainingData(Ref ref, AppDataBase database, i
   // 前回のトレーニングデータ
   List<TrainingDateData> trainingDateDataList = [];
   var startDate = date; // 起点の日付
-  for (var i = 0; i < 3; i++) {
+  for (var i = 0; i < 10; i++) {
     final lastTrainigInfo = await (database.select(database.trainingDataInfo)
           ..where((tbl) => tbl.bodyPartsInfo.equals(partsId) & tbl.partsTrainingInfo.equals(trainingId) & tbl.trainingDate.isSmallerThanValue(startDate) & tbl.rm.isNotNull())
           ..limit(1)
