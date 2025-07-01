@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class PartsColors {
-  static Color chestColor = Colors.purple;
+  static Color chestColor = Colors.cyanAccent;
   static Color backColor = Colors.blue;
   static Color shoulderColor = Colors.green;
   static Color armColor = Colors.pinkAccent;
@@ -11,7 +11,7 @@ class PartsColors {
   static Color getColor(int partsId) {
     switch (partsId) {
       case 0:
-        return legColor;
+        return chestColor;
       case 1:
         return backColor;
       case 2:
@@ -21,7 +21,7 @@ class PartsColors {
       case 4:
         return absColor;
       case 5:
-        return chestColor;
+        return legColor;
       default:
         return Colors.white;
     }

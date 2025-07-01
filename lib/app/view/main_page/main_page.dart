@@ -143,8 +143,8 @@ class _PartsSelectWidget extends ConsumerWidget {
                               shrinkWrap: true,
                               physics: NeverScrollableScrollPhysics(),
                               childAspectRatio: 4,
-                              crossAxisSpacing: 8,
-                              mainAxisSpacing: 4,
+                              crossAxisSpacing: 0,
+                              mainAxisSpacing: 0,
                               children: [
                                 _buildTodayPartsWeightItem("胸", data.todayData.chestTotalWeight, 0),
                                 _buildTodayPartsWeightItem("背中", data.todayData.backTotalWeight, 1),
@@ -161,12 +161,28 @@ class _PartsSelectWidget extends ConsumerWidget {
                       SizedBox(height: 32),
 
                       // 過去8週の部位別総負荷重量グラフ
-                      SizedBox(
-                        height: 250,
-                        child: Padding(
-                          padding: EdgeInsets.only(left: 10, right: 18, top: 12, bottom: 8),
-                          child: _buildSimpleLineChart(data.past8WeeksData),
-                        ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(left: 10, bottom: 8),
+                            child: Text(
+                              "過去8週間の部位別総負荷重量推移",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 250,
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 10, right: 18, top: 12, bottom: 8),
+                              child: _buildSimpleLineChart(data.past8WeeksData),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -181,7 +197,7 @@ class _PartsSelectWidget extends ConsumerWidget {
           ),
         ),
         Container(
-          height: 300,
+          height: 250,
           padding: EdgeInsets.all(4),
           child: mainPageDataAsyncValue.when(
             data: (mainPageData) {
@@ -226,7 +242,7 @@ class _PartsSelectWidget extends ConsumerWidget {
                   },
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3,
-                    childAspectRatio: 1.5,
+                    childAspectRatio: 1.2,
                     crossAxisSpacing: 4,
                     mainAxisSpacing: 4,
                   ),
@@ -311,7 +327,7 @@ class _PartsSelectWidget extends ConsumerWidget {
         gridData: FlGridData(
           show: true,
           drawVerticalLine: false,
-          horizontalInterval: 1,
+          horizontalInterval: 2,
           getDrawingHorizontalLine: (value) {
             return FlLine(
               color: Colors.white24,
@@ -367,7 +383,7 @@ class _PartsSelectWidget extends ConsumerWidget {
                 }
                 return SideTitleWidget(
                   meta: meta,
-                  space: 4,
+                  space: 5,
                   child: Text(text, style: style),
                 );
               },
@@ -387,7 +403,7 @@ class _PartsSelectWidget extends ConsumerWidget {
                   ),
                 );
               },
-              reservedSize: 20,
+              reservedSize: 25,
             ),
           ),
         ),
